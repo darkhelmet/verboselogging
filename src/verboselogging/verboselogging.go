@@ -72,6 +72,11 @@ func pageHandler(req *web.Request) {
     io.WriteString(w, "pageHandler")
 }
 
+func notFoundHandler(req *web.Request) {
+    w := req.Respond(web.StatusOK)
+    io.WriteString(w, "notFoundHandler")
+}
+
 func redirectHandler(req *web.Request) {
     url := req.URL
     url.Host = canonicalHost
@@ -87,21 +92,6 @@ func ShortLogger(lr *server.LogRecord) {
     }
 }
 
-/*
-      root            /                                     posts#main
-opensearch GET        /opensearch.xml(.:format)             application#opensearch {:format=>:xml}
-    search GET        /search(.:format)                     posts#search
-      feed GET        /feed(.:format)                       posts#feed {:format=>:xml}
-   sitemap GET        /sitemap.:format                      posts#sitemap {:format=>:xml}
-   archive GET        /archive/:archive(.:format)           posts#archive {:archive=>/full|category|month/}
-   monthly GET        /:year/:month(.:format)               posts#monthly {:year=>/\d{4}/, :month=>/\d{2}/}
-  category GET        /category/:category(.:format)         posts#category
- permalink GET        /:year/:month/:day/:slug(.:format)    posts#permalink {:year=>/\d{4}/, :month=>/\d{2}/, :day=>/\d{2}/}
-       tag GET        /tag/:tag(.:format)                   posts#tag
-      page GET        /:page(.:format)                      pages#show
-           GET        /*not_found(.:format)                 application#render_404
-*/
-
 func main() {
     router := web.NewRouter().
         Register("/", "GET", rootHandler).
@@ -114,7 +104,8 @@ func main() {
         Register("/category/<category>", "GET", categoryHandler).
         Register("/<year:\\d{4}>/<month:\\d{2}>/<day:\\d{2}>/<slug>", "GET", permalinkHandler).
         Register("/tag/<tag>", "GET", tagHandler).
-        Register("/<page>", "GET", pageHandler)
+        Register("/<page>", "GET", pageHandler).
+        Register("/<splat:.*>", "GET", notFoundHandler)
 
     redirector := web.NewRouter().
         Register("/", "GET", redirectHandler).

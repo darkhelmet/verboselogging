@@ -122,8 +122,8 @@ func main() {
         Register("/category/<category>", "GET", categoryHandler).
         Register("/<year:\\d{4}>/<month:\\d{2}>/<day:\\d{2}>/<slug>", "GET", permalinkHandler).
         Register("/tag/<tag>", "GET", tagHandler).
-        Register("/<page>", "GET", pageHandler).
-        Register("/<splat:.*>", "GET", notFoundHandler)
+        Register("/<page:\\w+>", "GET", pageHandler).
+        Register("/<path:.*>", "GET", web.DirectoryHandler("public", nil))
 
     redirector := web.NewRouter().
         Register("/<splat:.*>", "GET", redirectHandler)

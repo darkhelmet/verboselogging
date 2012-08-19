@@ -1,12 +1,12 @@
 <section id="search">
   <form action="/search">
     <input type="text" placeholder="Search Verbose Logging" id="query">
-    <input type="image" src="FIXME">
+    <input type="image" src="{{ImagePath "magnifier.png"}}">
   </form>
 </section>
 <p>
   <a href="http://creativecommons.org/licenses/by-sa/2.5/ca/" rel="license">
-    <img src="FIXME" alt="Creative Commons License">
+    <img src="{{ImagePath "license.png"}}" alt="Creative Commons License">
   </a>
   <br />
   This work is licensed under a
@@ -14,7 +14,8 @@
   <br />
   {{range .PageLinks}}
     {{if .Footer}}
-      <a href="{{.Path}}">{{.Name}}</a>{{if .After}}{{.After}}{{end}}
+      <a href="{{.Path}}">{{.Name}}</a>
+      {{if .After}}{{.After}}{{end}}
     {{end}}
   {{end}}
   <br />

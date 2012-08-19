@@ -1,19 +1,24 @@
 package view
 
 import (
+    "encoding/json"
     "fmt"
     "github.com/darkhelmet/env"
     T "html/template"
     "io"
+    "io/ioutil"
     "log"
     "os"
 )
 
 var (
-    templates *T.Template
-    logger    = log.New(os.Stdout, "[view] ", env.IntDefault("LOG_FLAGS", log.LstdFlags|log.Lmicroseconds))
-    middot    = T.HTML("&middot;")
-    pageLinks = []PageLink{
+    templates     *T.Template
+    port          = env.IntDefault("PORT", 8080)
+    canonicalHost = env.StringDefaultF("CANONICAL_HOST", func() string { return fmt.Sprintf("localhost:%d", port) })
+    assetHost     = env.StringDefaultF("ASSET_HOST", func() string { return fmt.Sprintf("http://%s", canonicalHost) })
+    logger        = log.New(os.Stdout, "[view] ", env.IntDefault("LOG_FLAGS", log.LstdFlags|log.Lmicroseconds))
+    middot        = T.HTML("&middot;")
+    pageLinks     = []PageLink{
         PageLink{Name: "Home", Path: "/", Icon: "H", Header: true, Footer: true, After: middot},
         PageLink{Name: "About", Path: "/about", Icon: "A", Header: true, Footer: true, After: middot},
         PageLink{Name: "Talks", Path: "/talks", Icon: "E", Header: true, Footer: true, After: middot},
@@ -22,6 +27,7 @@ var (
         PageLink{Name: "Disclaimer", Path: "/disclaimer", Icon: "D", Header: true, Footer: true, After: middot},
         PageLink{Name: "Sitemap", Path: "/sitemap.xml", Footer: true},
     }
+    assets = make(map[string]string)
 )
 
 type PageLink struct {
@@ -35,11 +41,53 @@ type TemplateData struct {
     PageLinks                            []PageLink
 }
 
+func setupAssets() {
+    manifest := make(map[string]interface{})
+    data, err := ioutil.ReadFile("public/assets/manifest.json")
+    if err != nil {
+        logger.Fatalf("failed to read asset manifest file: %s", err)
+    }
+    err = json.Unmarshal(data, &manifest)
+    if err != nil {
+        logger.Fatalf("failed parsing manifest file: %s", err)
+    }
+    pairs := manifest["assets"].(map[string]interface{})
+    for key, path := range pairs {
+        assets[key] = path.(string)
+    }
+}
+
 func init() {
     templates = T.Must(T.New("funcs").Funcs(T.FuncMap{
-        "ArchivePath": archivePath,
-        "FontTag":     fontTag,
+        "ArchivePath":    archivePath,
+        "FontTag":        fontTag,
+        "StylesheetPath": stylesheetPath,
+        "JavascriptPath": javascriptPath,
+        "ImagePath":      imagePath,
+        "AssetPath":      assetPath,
+        "Url":            urlFunction,
     }).ParseGlob("views/*.tmpl"))
+    setupAssets()
+}
+
+func urlFunction(path string) string {
+    return fmt.Sprintf("http://%s%s", canonicalHost, path)
+}
+
+func assetPath(name string) string {
+    return fmt.Sprintf("%s/assets/%s", assetHost, assets[name])
+}
+
+func stylesheetPath(name string) string {
+    return assetPath(fmt.Sprintf("stylesheets/%s.css", name))
+}
+
+func imagePath(name string) string {
+    return assetPath(fmt.Sprintf("images/%s", name))
+}
+
+func javascriptPath(name string) string {
+    return assetPath(fmt.Sprintf("javascripts/%s.js", name))
 }
 
 func archivePath(name string) string {

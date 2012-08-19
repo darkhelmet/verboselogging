@@ -1,14 +1,17 @@
 package main
 
 import (
+    "compress/gzip"
     "fmt"
     "github.com/darkhelmet/env"
     "io"
     "log"
     "net"
     "os"
+    "strings"
     "vendor/github.com/garyburd/twister/server"
     "vendor/github.com/garyburd/twister/web"
+    "view"
 )
 
 var (
@@ -17,9 +20,24 @@ var (
     logger        = log.New(os.Stdout, "[server] ", env.IntDefault("LOG_FLAGS", log.LstdFlags|log.Lmicroseconds))
 )
 
-func rootHandler(req *web.Request) {
-    w := req.Respond(web.StatusOK)
-    io.WriteString(w, "rootHandler")
+type h func(*web.Request, io.Writer)
+
+func withGzip(contentType string, f h) func(*web.Request) {
+    return func(req *web.Request) {
+        if strings.Contains(req.Header.Get("Accept-Encoding"), "gzip") {
+            w := req.Respond(web.StatusOK, web.HeaderContentType, contentType, web.HeaderContentEncoding, "gzip")
+            gz := gzip.NewWriter(w)
+            defer gz.Close()
+            f(req, gz)
+        } else {
+            w := req.Respond(web.StatusOK, web.HeaderContentType, contentType)
+            f(req, w)
+        }
+    }
+}
+
+func rootHandler(req *web.Request, w io.Writer) {
+    view.RenderLayout(w, "rootHandler", "Verbose Logging", "software development with some really amazing hair")
 }
 
 func opensearchHandler(req *web.Request) {
@@ -94,7 +112,7 @@ func ShortLogger(lr *server.LogRecord) {
 
 func main() {
     router := web.NewRouter().
-        Register("/", "GET", rootHandler).
+        Register("/", "GET", withGzip("text/html; charset=utf-8", rootHandler)).
         Register("/opensearch.xml", "GET", opensearchHandler).
         Register("/search", "GET", searchHandler).
         Register("/feed", "GET", feedHandler).
@@ -108,8 +126,7 @@ func main() {
         Register("/<splat:.*>", "GET", notFoundHandler)
 
     redirector := web.NewRouter().
-        Register("/", "GET", redirectHandler).
-        Register("/<splat>", "GET", redirectHandler)
+        Register("/<splat:.*>", "GET", redirectHandler)
 
     hostRouter := web.NewHostRouter(redirector).
         Register(canonicalHost, router)

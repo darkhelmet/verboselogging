@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    {{template "head.tmpl" .}}
+  </head>
+  <body>
+    <!-- = javascript_include_tag('body') -->
+    <div class="content">
+      <header class="clear">
+        {{template "header.tmpl" .}}
+      </header>
+      <section class="clear" id="content">
+        {{.Yield}}
+      </section>
+      <footer>
+        {{template "footer.tmpl" .}}
+      </footer>
+    </div>
+    <script type="text/javascript">
+      //<![CDATA[
+        (function() {
+          var t   = document.createElement('script');
+          t.type  = 'text/javascript';
+          t.async = true;
+          t.id    = 'gauges-tracker';
+          t.setAttribute('data-site-id', '4df19698613f5d6616000003');
+          t.src = '//secure.gaug.es/track.js';
+          var s = document.getElementsByTagName('script')[0];
+          s.parentNode.insertBefore(t, s);
+        })();
+      //]]>
+    </script>
+  </body>
+</html>

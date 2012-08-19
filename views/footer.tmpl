@@ -1,0 +1,23 @@
+<section id="search">
+  <form action="/search">
+    <input type="text" placeholder="Search Verbose Logging" id="query">
+    <input type="image" src="FIXME">
+  </form>
+</section>
+<p>
+  <a href="http://creativecommons.org/licenses/by-sa/2.5/ca/" rel="license">
+    <img src="FIXME" alt="Creative Commons License">
+  </a>
+  <br />
+  This work is licensed under a
+  <a href="http://creativecommons.org/licenses/by-sa/2.5/ca/">Creative Commons Licence</a>
+  <br />
+  {{range .PageLinks}}
+    {{if .Footer}}
+      <a href="{{.Path}}">{{.Name}}</a>{{if .After}}{{.After}}{{end}}
+    {{end}}
+  {{end}}
+  <br />
+  Design by Daniel Huckstep
+</p>
+<!-- = javascript_include_tag('application', async: :async) -->

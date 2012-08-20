@@ -37,8 +37,9 @@ type PageLink struct {
 }
 
 type TemplateData struct {
-    Title, Yield, Description, Canonical string
-    PageLinks                            []PageLink
+    Yield                         interface{}
+    Title, Description, Canonical string
+    PageLinks                     []PageLink
 }
 
 func setupAssets() {
@@ -98,14 +99,22 @@ func fontTag(family string) T.HTML {
     return T.HTML(fmt.Sprintf(`<link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=%s">`, family))
 }
 
-func RenderLayout(w io.Writer, yield, title, description string) {
+func RenderLayout(w io.Writer, yield interface{}, path, title, description string) {
     err := templates.ExecuteTemplate(w, "layout.tmpl", TemplateData{
         Yield:       yield,
         Title:       title,
         Description: description,
         PageLinks:   pageLinks,
+        Canonical:   path,
     })
     if err != nil {
         logger.Printf("error rendering template: %s", err)
+    }
+}
+
+func RenderPartial(w io.Writer, name string, data interface{}) {
+    err := templates.ExecuteTemplate(w, name, data)
+    if err != nil {
+        logger.Printf("error rendering partial: %s", err)
     }
 }

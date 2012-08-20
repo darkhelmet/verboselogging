@@ -1,6 +1,7 @@
 package main
 
 import (
+    "bytes"
     "compress/gzip"
     "fmt"
     "github.com/darkhelmet/env"
@@ -8,6 +9,7 @@ import (
     "log"
     "net"
     "os"
+    Page "page"
     "strings"
     "vendor/github.com/garyburd/twister/server"
     "vendor/github.com/garyburd/twister/web"
@@ -22,77 +24,83 @@ var (
 
 type h func(*web.Request, io.Writer)
 
-func withGzip(contentType string, f h) func(*web.Request) {
-    return func(req *web.Request) {
-        if strings.Contains(req.Header.Get("Accept-Encoding"), "gzip") {
-            w := req.Respond(web.StatusOK, web.HeaderContentType, contentType, web.HeaderContentEncoding, "gzip")
-            gz := gzip.NewWriter(w)
-            defer gz.Close()
-            f(req, gz)
-        } else {
-            w := req.Respond(web.StatusOK, web.HeaderContentType, contentType)
-            f(req, w)
-        }
+func withGzip(req *web.Request, status int, contentType string, f func(io.Writer)) {
+    if strings.Contains(req.Header.Get("Accept-Encoding"), "gzip") {
+        w := req.Respond(status, web.HeaderContentType, contentType,
+            web.HeaderContentEncoding, "gzip",
+            web.HeaderVary, "Accept-Encoding")
+        gz := gzip.NewWriter(w)
+        defer gz.Close()
+        f(gz)
+    } else {
+        w := req.Respond(status, web.HeaderContentType, contentType)
+        f(w)
     }
 }
 
-func rootHandler(req *web.Request, w io.Writer) {
-    view.RenderLayout(w, "rootHandler", "Verbose Logging", "software development with some really amazing hair")
+func rootHandler(req *web.Request) {
+    withGzip(req, web.StatusOK, "text/html; charset=utf-8", func(w io.Writer) {
+        view.RenderLayout(w, "rootHandler", "/", "Verbose Logging", "software development with some really amazing hair")
+    })
 }
 
 func opensearchHandler(req *web.Request) {
-    w := req.Respond(web.StatusOK)
-    io.WriteString(w, "opensearchHandler")
+    withGzip(req, web.StatusOK, "application/xml; charset=utf-8", func(w io.Writer) {
+        view.RenderPartial(w, "opensearch.tmpl", nil)
+    })
 }
 
 func searchHandler(req *web.Request) {
-    w := req.Respond(web.StatusOK)
-    io.WriteString(w, "searchHandler")
+    withGzip(req, web.StatusOK, "text/html; charset=utf-8", func(w io.Writer) {
+        io.WriteString(w, "searchHandler")
+    })
 }
 
 func feedHandler(req *web.Request) {
-    w := req.Respond(web.StatusOK)
-    io.WriteString(w, "feedHandler")
+    withGzip(req, web.StatusOK, "application/rss+xml; charset=utf-8", func(w io.Writer) {
+        io.WriteString(w, "feedHandler")
+    })
 }
 
 func sitemapHandler(req *web.Request) {
-    w := req.Respond(web.StatusOK)
-    io.WriteString(w, "sitemapHandler")
+    withGzip(req, web.StatusOK, "application/xml; charset=utf-8", func(w io.Writer) {
+        view.RenderPartial(w, "sitemapHandler", nil)
+    })
 }
 
 func archiveHandler(req *web.Request) {
-    w := req.Respond(web.StatusOK)
     io.WriteString(w, "archiveHandler")
 }
 
 func monthlyHandler(req *web.Request) {
-    w := req.Respond(web.StatusOK)
     io.WriteString(w, "monthlyHandler")
 }
 
 func categoryHandler(req *web.Request) {
-    w := req.Respond(web.StatusOK)
     io.WriteString(w, "categoryHandler")
 }
 
 func permalinkHandler(req *web.Request) {
-    w := req.Respond(web.StatusOK)
     io.WriteString(w, "permalinkHandler")
 }
 
 func tagHandler(req *web.Request) {
-    w := req.Respond(web.StatusOK)
     io.WriteString(w, "tagHandler")
 }
 
 func pageHandler(req *web.Request) {
-    w := req.Respond(web.StatusOK)
-    io.WriteString(w, "pageHandler")
+    page := Page.FindBySlug(req.URLParam["slug"])
+    if page == nil {
+        notFound(w)
+    } else {
+        io.WriteString(w, "pageHandler")
+    }
 }
 
-func notFoundHandler(req *web.Request) {
-    w := req.Respond(web.StatusOK)
-    io.WriteString(w, "notFoundHandler")
+func notFound(w io.Writer) {
+    var buffer bytes.Buffer
+    view.RenderPartial(&buffer, "not_found.tmpl", nil)
+    view.RenderLayout(w, buffer.String(), "", "", "")
 }
 
 func redirectHandler(req *web.Request) {
@@ -112,17 +120,17 @@ func ShortLogger(lr *server.LogRecord) {
 
 func main() {
     router := web.NewRouter().
-        Register("/", "GET", withGzip("text/html; charset=utf-8", rootHandler)).
+        Register("/", "GET", rootHandler).
         Register("/opensearch.xml", "GET", opensearchHandler).
         Register("/search", "GET", searchHandler).
         Register("/feed", "GET", feedHandler).
-        Register("/sitemap.xml<gzip:(\\.gz)?>", "GET", sitemapHandler).
-        Register("/archive/<archive:(full|category|month)>", "GET", archiveHandler).
+        Register("/sitemap.xml<gzip:(\\.gz)?>", "GET", withGzip("application/xml; charset=utf-8", sitemapHandler)).
+        Register("/archive/<archive:(full|category|month)>", "GET", withGzip(archiveHandler)).
         Register("/<year:\\d{4}>/<month:\\d{2}>", "GET", monthlyHandler).
         Register("/category/<category>", "GET", categoryHandler).
         Register("/<year:\\d{4}>/<month:\\d{2}>/<day:\\d{2}>/<slug>", "GET", permalinkHandler).
         Register("/tag/<tag>", "GET", tagHandler).
-        Register("/<page:\\w+>", "GET", pageHandler).
+        Register("/<slug:\\w+>", "GET", pageHandler).
         Register("/<path:.*>", "GET", web.DirectoryHandler("public", nil))
 
     redirector := web.NewRouter().

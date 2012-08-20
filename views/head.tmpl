@@ -5,7 +5,9 @@
 <meta name="HandheldFriendly" content="True">
 <meta name="MobileOptimized" content="320">
 <meta name="viewport" content="width=device-width, target-densitydpi=160, initial-scale=1.0">
-<link rel="canonical" href="{{.Canonical}}">
+{{if .Canonical}}
+<link rel="canonical" href="{{Url .Canonical}}">
+{{end}}
 <link rel="search" title="Verbose Logging" type="application/opensearchdescription+xml" href="{{Url "/opensearch.xml"}}">
 <link rel="sitemap" title="Sitemap" type="application/xml" href="{{Url "/sitemap.xml"}}">
 <link rel="shortcut icon" type="image/png" href="{{ImagePath "favicon.png"}}">

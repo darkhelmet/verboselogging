@@ -18,6 +18,7 @@ var (
     assetHost     = env.StringDefaultF("ASSET_HOST", func() string { return fmt.Sprintf("http://%s", canonicalHost) })
     logger        = log.New(os.Stdout, "[view] ", env.IntDefault("LOG_FLAGS", log.LstdFlags|log.Lmicroseconds))
     middot        = T.HTML("&middot;")
+    HTML          = func(s string) T.HTML { return T.HTML(s) }
     pageLinks     = []PageLink{
         PageLink{Name: "Home", Path: "/", Icon: "H", Header: true, Footer: true, After: middot},
         PageLink{Name: "About", Path: "/about", Icon: "A", Header: true, Footer: true, After: middot},
@@ -100,6 +101,11 @@ func fontTag(family string) T.HTML {
 }
 
 func RenderLayout(w io.Writer, yield interface{}, path, title, description string) {
+    if title == "" {
+        title = "Verbose Logging"
+    } else {
+        title = fmt.Sprintf("%s | Verbose Logging", title)
+    }
     err := templates.ExecuteTemplate(w, "layout.tmpl", TemplateData{
         Yield:       yield,
         Title:       title,

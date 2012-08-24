@@ -40,7 +40,7 @@ func withGzip(req *web.Request, status int, contentType string, f func(io.Writer
 
 func rootHandler(req *web.Request) {
     withGzip(req, web.StatusOK, "text/html; charset=utf-8", func(w io.Writer) {
-        view.RenderLayout(w, "rootHandler", "/", "Verbose Logging", "software development with some really amazing hair")
+        view.RenderLayout(w, "rootHandler", "/", "", "software development with some really amazing hair")
     })
 }
 
@@ -69,38 +69,67 @@ func sitemapHandler(req *web.Request) {
 }
 
 func archiveHandler(req *web.Request) {
-    io.WriteString(w, "archiveHandler")
+    withGzip(req, web.StatusOK, "text/html; charset=utf-8", func(w io.Writer) {
+        io.WriteString(w, "archiveHandler")
+    })
 }
 
 func monthlyHandler(req *web.Request) {
-    io.WriteString(w, "monthlyHandler")
+    withGzip(req, web.StatusOK, "text/html; charset=utf-8", func(w io.Writer) {
+        io.WriteString(w, "monthlyHandler")
+    })
 }
 
 func categoryHandler(req *web.Request) {
-    io.WriteString(w, "categoryHandler")
+    withGzip(req, web.StatusOK, "text/html; charset=utf-8", func(w io.Writer) {
+        io.WriteString(w, "categoryHandler")
+    })
 }
 
 func permalinkHandler(req *web.Request) {
-    io.WriteString(w, "permalinkHandler")
+    withGzip(req, web.StatusOK, "text/html; charset=utf-8", func(w io.Writer) {
+        io.WriteString(w, "permalinkHandler")
+    })
 }
 
 func tagHandler(req *web.Request) {
-    io.WriteString(w, "tagHandler")
+    withGzip(req, web.StatusOK, "text/html; charset=utf-8", func(w io.Writer) {
+        io.WriteString(w, "tagHandler")
+    })
 }
 
 func pageHandler(req *web.Request) {
-    page := Page.FindBySlug(req.URLParam["slug"])
-    if page == nil {
-        notFound(w)
+    slug := req.URLParam["slug"]
+    page, err := Page.FindBySlug(slug)
+    if err != nil {
+        switch err.(type) {
+        case Page.NotFound:
+            withGzip(req, web.StatusNotFound, "text/html; charset=utf-8", func(w io.Writer) {
+                notFound(w)
+            })
+        default:
+            logger.Printf("failed finding page with slug %#v: %s (%T)", slug, err, err)
+            withGzip(req, web.StatusInternalServerError, "text/html; charset=utf-8", func(w io.Writer) {
+                serverError(w)
+            })
+        }
     } else {
-        io.WriteString(w, "pageHandler")
+        withGzip(req, web.StatusOK, "text/html; charset=utf-8", func(w io.Writer) {
+            view.RenderLayout(w, page.Title, req.URL.Path, page.Title, "")
+        })
     }
+}
+
+func serverError(w io.Writer) {
+    var buffer bytes.Buffer
+    view.RenderPartial(&buffer, "server_error.tmpl", nil)
+    view.RenderLayout(w, view.HTML(buffer.String()), "", "Oh. Sorry about that.", "")
 }
 
 func notFound(w io.Writer) {
     var buffer bytes.Buffer
     view.RenderPartial(&buffer, "not_found.tmpl", nil)
-    view.RenderLayout(w, buffer.String(), "", "", "")
+    view.RenderLayout(w, view.HTML(buffer.String()), "", "Not Found", "")
 }
 
 func redirectHandler(req *web.Request) {
@@ -124,8 +153,8 @@ func main() {
         Register("/opensearch.xml", "GET", opensearchHandler).
         Register("/search", "GET", searchHandler).
         Register("/feed", "GET", feedHandler).
-        Register("/sitemap.xml<gzip:(\\.gz)?>", "GET", withGzip("application/xml; charset=utf-8", sitemapHandler)).
-        Register("/archive/<archive:(full|category|month)>", "GET", withGzip(archiveHandler)).
+        Register("/sitemap.xml<gzip:(\\.gz)?>", "GET", sitemapHandler).
+        Register("/archive/<archive:(full|category|month)>", "GET", archiveHandler).
         Register("/<year:\\d{4}>/<month:\\d{2}>", "GET", monthlyHandler).
         Register("/category/<category>", "GET", categoryHandler).
         Register("/<year:\\d{4}>/<month:\\d{2}>/<day:\\d{2}>/<slug>", "GET", permalinkHandler).

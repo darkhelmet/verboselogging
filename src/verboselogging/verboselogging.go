@@ -113,8 +113,10 @@ func pageHandler(req *web.Request) {
         }
     } else {
         withGzip(req, web.StatusOK, "text/html; charset=utf-8", func(w io.Writer) {
+            var buffer bytes.Buffer
+            view.RenderPartial(&buffer, "page.tmpl", view.HTML(page.BodyHtml))
             view.RenderLayout(w, &view.RenderInfo{
-                Yield:     view.HTML(page.BodyHtml),
+                Yield:     view.HTML(buffer.String()),
                 Title:     page.Title,
                 Canonical: page.Canonical(),
             })

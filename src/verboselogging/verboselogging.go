@@ -156,6 +156,11 @@ func ShortLogger(lr *server.LogRecord) {
 }
 
 func main() {
+    staticOptions := &web.ServeFileOptions{
+        Header: web.Header{
+            web.HeaderCacheControl: {"public, max-age=31536000"},
+        },
+    }
     router := web.NewRouter().
         Register("/", "GET", rootHandler).
         Register("/opensearch.xml", "GET", opensearchHandler).
@@ -168,7 +173,7 @@ func main() {
         Register("/<year:\\d{4}>/<month:\\d{2}>/<day:\\d{2}>/<slug>", "GET", permalinkHandler).
         Register("/tag/<tag>", "GET", tagHandler).
         Register("/<slug:\\w+>", "GET", pageHandler).
-        Register("/<path:.*>", "GET", web.DirectoryHandler("public", nil))
+        Register("/<path:.*>", "GET", web.DirectoryHandler("public", staticOptions))
 
     redirector := web.NewRouter().
         Register("/<splat:.*>", "GET", redirectHandler)

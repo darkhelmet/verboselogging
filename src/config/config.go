@@ -7,6 +7,8 @@ import (
 )
 
 var (
+    user            = env.StringDefault("USER", "")
+    DatabaseUrl     = env.StringDefault("DATABASE_URL", fmt.Sprintf("postgres://localhost/darkblog2_development?sslmode=disable"))
     Port            = env.IntDefault("PORT", 5000)
     CanonicalHost   = env.StringDefaultF("CANONICAL_HOST", func() string { return fmt.Sprintf("localhost:%d", Port) })
     AssetHost       = env.StringDefaultF("ASSET_HOST", func() string { return fmt.Sprintf("http://%s", CanonicalHost) })

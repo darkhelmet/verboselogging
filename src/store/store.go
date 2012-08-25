@@ -1,21 +1,28 @@
 package store
 
 import (
+    "config"
     "database/sql"
-    "fmt"
-    "github.com/darkhelmet/env"
     "sync"
     _ "vendor/github.com/bmizerany/pq"
+    "vendor/github.com/bmizerany/pq"
 )
 
 var (
-    user   = env.StringDefault("USER", "")
-    url    = env.StringDefault("DATABASE_URL", fmt.Sprintf("dbname=darkblog2_development sslmode=disable"))
     NoRows = sql.ErrNoRows
     conn   *sql.DB
     refs   uint
     mu     sync.Mutex
+    url    string
 )
+
+func init() {
+    var err error
+    url, err = pq.ParseURL(config.DatabaseUrl)
+    if err != nil {
+        panic(err)
+    }
+}
 
 func Connect() (*sql.DB, error) {
     mu.Lock()

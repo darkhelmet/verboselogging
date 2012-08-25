@@ -14,5 +14,4 @@ var (
     SiteTitle       = "Verbose Logging"
     SiteDescription = "software development with some really amazing hair"
     SiteContact     = "darkhelmet@darkhelmetlive.com"
-    Multicore       = env.StringDefault("MULTICORE", "no") == "yes"
 )

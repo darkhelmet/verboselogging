@@ -10,7 +10,6 @@ import (
     "net"
     "os"
     Page "page"
-    "runtime"
     "strings"
     "vendor/github.com/garyburd/twister/server"
     "vendor/github.com/garyburd/twister/web"
@@ -22,12 +21,6 @@ var (
 )
 
 type h func(*web.Request, io.Writer)
-
-func init() {
-    if config.Multicore {
-        runtime.GOMAXPROCS(runtime.NumCPU())
-    }
-}
 
 func withGzip(req *web.Request, status int, contentType string, f func(io.Writer)) {
     if strings.Contains(req.Header.Get("Accept-Encoding"), "gzip") {

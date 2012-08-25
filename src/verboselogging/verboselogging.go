@@ -3,13 +3,14 @@ package main
 import (
     "bytes"
     "compress/gzip"
+    "config"
     "fmt"
-    "github.com/darkhelmet/env"
     "io"
     "log"
     "net"
     "os"
     Page "page"
+    "runtime"
     "strings"
     "vendor/github.com/garyburd/twister/server"
     "vendor/github.com/garyburd/twister/web"
@@ -17,12 +18,16 @@ import (
 )
 
 var (
-    port          = env.IntDefault("PORT", 8080)
-    canonicalHost = env.StringDefaultF("CANONICAL_HOST", func() string { return fmt.Sprintf("localhost:%d", port) })
-    logger        = log.New(os.Stdout, "[server] ", env.IntDefault("LOG_FLAGS", log.LstdFlags|log.Lmicroseconds))
+    logger = log.New(os.Stdout, "[server] ", config.LogFlags)
 )
 
 type h func(*web.Request, io.Writer)
+
+func init() {
+    if config.Multicore {
+        runtime.GOMAXPROCS(runtime.NumCPU())
+    }
+}
 
 func withGzip(req *web.Request, status int, contentType string, f func(io.Writer)) {
     if strings.Contains(req.Header.Get("Accept-Encoding"), "gzip") {
@@ -40,7 +45,7 @@ func withGzip(req *web.Request, status int, contentType string, f func(io.Writer
 
 func rootHandler(req *web.Request) {
     withGzip(req, web.StatusOK, "text/html; charset=utf-8", func(w io.Writer) {
-        view.RenderLayout(w, "rootHandler", "/", "", "software development with some really amazing hair")
+        view.RenderLayout(w, &view.RenderInfo{Yield: "rootHandler", Canonical: "/"})
     })
 }
 
@@ -115,7 +120,11 @@ func pageHandler(req *web.Request) {
         }
     } else {
         withGzip(req, web.StatusOK, "text/html; charset=utf-8", func(w io.Writer) {
-            view.RenderLayout(w, page.Title, req.URL.Path, page.Title, "")
+            view.RenderLayout(w, &view.RenderInfo{
+                Yield:     view.HTML(page.BodyHtml),
+                Title:     page.Title,
+                Canonical: page.Canonical(),
+            })
         })
     }
 }
@@ -123,18 +132,24 @@ func pageHandler(req *web.Request) {
 func serverError(w io.Writer) {
     var buffer bytes.Buffer
     view.RenderPartial(&buffer, "server_error.tmpl", nil)
-    view.RenderLayout(w, view.HTML(buffer.String()), "", "Oh. Sorry about that.", "")
+    view.RenderLayout(w, &view.RenderInfo{
+        Yield: view.HTML(buffer.String()),
+        Title: "Oh. Sorry about that.",
+    })
 }
 
 func notFound(w io.Writer) {
     var buffer bytes.Buffer
     view.RenderPartial(&buffer, "not_found.tmpl", nil)
-    view.RenderLayout(w, view.HTML(buffer.String()), "", "Not Found", "")
+    view.RenderLayout(w, &view.RenderInfo{
+        Yield: view.HTML(buffer.String()),
+        Title: "Not Found",
+    })
 }
 
 func redirectHandler(req *web.Request) {
     url := req.URL
-    url.Host = canonicalHost
+    url.Host = config.CanonicalHost
     url.Scheme = "http"
     req.Respond(web.StatusMovedPermanently, web.HeaderLocation, url.String())
 }
@@ -166,9 +181,9 @@ func main() {
         Register("/<splat:.*>", "GET", redirectHandler)
 
     hostRouter := web.NewHostRouter(redirector).
-        Register(canonicalHost, router)
+        Register(config.CanonicalHost, router)
 
-    listener, err := net.Listen("tcp", fmt.Sprintf("0.0.0.0:%d", port))
+    listener, err := net.Listen("tcp", fmt.Sprintf("0.0.0.0:%d", config.Port))
     if err != nil {
         logger.Fatalf("Failed to listen: %s", err)
     }
@@ -178,7 +193,7 @@ func main() {
         Handler:  hostRouter,
         Logger:   server.LoggerFunc(ShortLogger),
     }
-    logger.Printf("verboselogging is starting on 0.0.0.0:%d", port)
+    logger.Printf("verboselogging is starting on 0.0.0.0:%d", config.Port)
     err = server.Serve()
     if err != nil {
         logger.Fatalf("Failed to serve: %s", err)

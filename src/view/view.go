@@ -1,9 +1,9 @@
 package view
 
 import (
+    "config"
     "encoding/json"
     "fmt"
-    "github.com/darkhelmet/env"
     T "html/template"
     "io"
     "io/ioutil"
@@ -12,14 +12,11 @@ import (
 )
 
 var (
-    templates     *T.Template
-    port          = env.IntDefault("PORT", 8080)
-    canonicalHost = env.StringDefaultF("CANONICAL_HOST", func() string { return fmt.Sprintf("localhost:%d", port) })
-    assetHost     = env.StringDefaultF("ASSET_HOST", func() string { return fmt.Sprintf("http://%s", canonicalHost) })
-    logger        = log.New(os.Stdout, "[view] ", env.IntDefault("LOG_FLAGS", log.LstdFlags|log.Lmicroseconds))
-    middot        = T.HTML("&middot;")
-    HTML          = func(s string) T.HTML { return T.HTML(s) }
-    pageLinks     = []PageLink{
+    templates *T.Template
+    logger    = log.New(os.Stdout, "[view] ", config.LogFlags)
+    middot    = T.HTML("&middot;")
+    HTML      = func(s string) T.HTML { return T.HTML(s) }
+    pageLinks = []PageLink{
         PageLink{Name: "Home", Path: "/", Icon: "H", Header: true, Footer: true, After: middot},
         PageLink{Name: "About", Path: "/about", Icon: "A", Header: true, Footer: true, After: middot},
         PageLink{Name: "Talks", Path: "/talks", Icon: "E", Header: true, Footer: true, After: middot},
@@ -38,17 +35,23 @@ type PageLink struct {
 }
 
 type TemplateData struct {
+    Yield                                   interface{}
+    Title, Description, Canonical           string
+    SiteTitle, SiteDescription, SiteContact string
+    PageLinks                               []PageLink
+}
+
+type RenderInfo struct {
     Yield                         interface{}
     Title, Description, Canonical string
-    PageLinks                     []PageLink
 }
 
 func setupAssets() {
-    manifest := make(map[string]interface{})
     data, err := ioutil.ReadFile("public/assets/manifest.json")
     if err != nil {
         logger.Fatalf("failed to read asset manifest file: %s", err)
     }
+    manifest := make(map[string]interface{})
     err = json.Unmarshal(data, &manifest)
     if err != nil {
         logger.Fatalf("failed parsing manifest file: %s", err)
@@ -61,57 +64,43 @@ func setupAssets() {
 
 func init() {
     templates = T.Must(T.New("funcs").Funcs(T.FuncMap{
-        "ArchivePath":    archivePath,
-        "FontTag":        fontTag,
-        "StylesheetPath": stylesheetPath,
-        "JavascriptPath": javascriptPath,
-        "ImagePath":      imagePath,
-        "AssetPath":      assetPath,
-        "Url":            urlFunction,
+        "AssetPath": assetPath,
+        "ArchivePath": func(name string) string {
+            return fmt.Sprintf("/archive/%s", name)
+        },
+        "FontTag": func(family string) T.HTML {
+            return T.HTML(fmt.Sprintf(`<link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=%s">`, family))
+        },
+        "StylesheetPath": func(name string) string {
+            return assetPath(fmt.Sprintf("stylesheets/%s.css", name))
+        },
+        "JavascriptPath": func(name string) string {
+            return assetPath(fmt.Sprintf("javascripts/%s.js", name))
+        },
+        "ImagePath": func(name string) string {
+            return assetPath(fmt.Sprintf("images/%s", name))
+        },
+        "CanonicalUrl": func(path string) string {
+            return fmt.Sprintf("http://%s%s", config.CanonicalHost, path)
+        },
     }).ParseGlob("views/*.tmpl"))
     setupAssets()
 }
 
-func urlFunction(path string) string {
-    return fmt.Sprintf("http://%s%s", canonicalHost, path)
-}
-
 func assetPath(name string) string {
-    return fmt.Sprintf("%s/assets/%s", assetHost, assets[name])
+    return fmt.Sprintf("%s/assets/%s", config.AssetHost, assets[name])
 }
 
-func stylesheetPath(name string) string {
-    return assetPath(fmt.Sprintf("stylesheets/%s.css", name))
-}
-
-func imagePath(name string) string {
-    return assetPath(fmt.Sprintf("images/%s", name))
-}
-
-func javascriptPath(name string) string {
-    return assetPath(fmt.Sprintf("javascripts/%s.js", name))
-}
-
-func archivePath(name string) string {
-    return fmt.Sprintf("/archive/%s", name)
-}
-
-func fontTag(family string) T.HTML {
-    return T.HTML(fmt.Sprintf(`<link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=%s">`, family))
-}
-
-func RenderLayout(w io.Writer, yield interface{}, path, title, description string) {
-    if title == "" {
-        title = "Verbose Logging"
-    } else {
-        title = fmt.Sprintf("%s | Verbose Logging", title)
-    }
+func RenderLayout(w io.Writer, data *RenderInfo) {
     err := templates.ExecuteTemplate(w, "layout.tmpl", TemplateData{
-        Yield:       yield,
-        Title:       title,
-        Description: description,
-        PageLinks:   pageLinks,
-        Canonical:   path,
+        Yield:           data.Yield,
+        Title:           data.Title,
+        Description:     data.Description,
+        Canonical:       data.Canonical,
+        SiteTitle:       config.SiteTitle,
+        SiteDescription: config.SiteDescription,
+        SiteContact:     config.SiteContact,
+        PageLinks:       pageLinks,
     })
     if err != nil {
         logger.Printf("error rendering template: %s", err)

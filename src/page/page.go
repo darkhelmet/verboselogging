@@ -7,9 +7,13 @@ import (
 )
 
 type Page struct {
-    Id                   int
-    Title, Slug, Body    string
-    CreatedAt, UpdatedAt time.Time
+    Id                          int
+    Title, Slug, Body, BodyHtml string
+    CreatedAt, UpdatedAt        time.Time
+}
+
+func (p Page) Canonical() string {
+    return fmt.Sprintf("/%s", p.Slug)
 }
 
 type NotFound string
@@ -24,9 +28,9 @@ func FindBySlug(slug string) (*Page, error) {
         return nil, err
     }
     defer store.Disconnect()
-    row := db.QueryRow("SELECT * FROM pages WHERE pages.slug = $1 LIMIT 1", slug)
+    row := db.QueryRow("SELECT id, title, slug, body, body_html, created_at, updated_at FROM pages WHERE slug = $1 LIMIT 1", slug)
     page := new(Page)
-    if err := row.Scan(&page.Id, &page.Title, &page.Slug, &page.Body, &page.CreatedAt, &page.UpdatedAt); err != nil {
+    if err := row.Scan(&page.Id, &page.Title, &page.Slug, &page.Body, &page.BodyHtml, &page.CreatedAt, &page.UpdatedAt); err != nil {
         if err == store.NoRows {
             err = NotFound(fmt.Sprintf("Page %#v could not be found", slug))
         }

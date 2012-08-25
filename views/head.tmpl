@@ -1,19 +1,19 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-<title>{{.Title}}</title>
+<title>{{if .Title }}{{.Title}} | {{end}}{{.SiteTitle}}</title>
 <meta name="description" content="{{.Description}}">
 <meta name="readability-verification" content="ee3QxRba5qSzvNEXBLAgbYCyCMTqMkkmJQrhvQKs">
 <meta name="HandheldFriendly" content="True">
 <meta name="MobileOptimized" content="320">
 <meta name="viewport" content="width=device-width, target-densitydpi=160, initial-scale=1.0">
 {{if .Canonical}}
-<link rel="canonical" href="{{Url .Canonical}}">
+<link rel="canonical" href="{{CanonicalUrl .Canonical}}">
 {{end}}
-<link rel="search" title="Verbose Logging" type="application/opensearchdescription+xml" href="{{Url "/opensearch.xml"}}">
-<link rel="sitemap" title="Sitemap" type="application/xml" href="{{Url "/sitemap.xml"}}">
+<link rel="search" title="{{.SiteTitle}}" type="application/opensearchdescription+xml" href="{{CanonicalUrl "/opensearch.xml"}}">
+<link rel="sitemap" title="Sitemap" type="application/xml" href="{{CanonicalUrl "/sitemap.xml"}}">
 <link rel="shortcut icon" type="image/png" href="{{ImagePath "favicon.png"}}">
 <link rel="apple-touch-icon" href="http://www.gravatar.com/avatar/48409ce1953c290351fcb875b20eccbb.png?s=114">
-<link rel="alternate" title="Verbose Logging RSS Feed" type="application/rss+xml" href="{{Url "/feed"}}">
-<link rel="index" title="Verbose Logging" href="{{Url "/"}}">
+<link rel="alternate" title="{{.SiteTitle}} RSS Feed" type="application/rss+xml" href="{{CanonicalUrl "/feed"}}">
+<link rel="index" title="{{.SiteTitle}}" href="{{CanonicalUrl "/"}}">
 {{FontTag "Droid+Sans:regular,italic,bold,bolditalic"}}
 {{FontTag "Droid+Sans+Mono"}}
 <link rel="stylesheet" href="{{StylesheetPath "application"}}">

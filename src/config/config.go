@@ -4,6 +4,7 @@ import (
     "fmt"
     "github.com/darkhelmet/env"
     "log"
+    "time"
 )
 
 var (
@@ -16,4 +17,13 @@ var (
     SiteTitle       = "Verbose Logging"
     SiteDescription = "software development with some really amazing hair"
     SiteContact     = "darkhelmet@darkhelmetlive.com"
+    TimeZone        = mustLoadLocation("America/Edmonton")
 )
+
+func mustLoadLocation(loc string) *time.Location {
+    l, err := time.LoadLocation(loc)
+    if err != nil {
+        panic(err)
+    }
+    return l
+}

@@ -1,7 +1,6 @@
 package main
 
 import (
-    "bytes"
     "compress/gzip"
     "config"
     "fmt"
@@ -10,6 +9,7 @@ import (
     "net"
     "os"
     Page "page"
+    Post "post"
     "strings"
     "vendor/github.com/garyburd/twister/server"
     "vendor/github.com/garyburd/twister/web"
@@ -38,7 +38,7 @@ func withGzip(req *web.Request, status int, contentType string, f func(io.Writer
 
 func rootHandler(req *web.Request) {
     withGzip(req, web.StatusOK, "text/html; charset=utf-8", func(w io.Writer) {
-        view.RenderLayout(w, &view.RenderInfo{Yield: "rootHandler", Canonical: "/"})
+        view.RenderLayout(w, &view.RenderInfo{Canonical: "/", ArchiveLinks: true})
     })
 }
 
@@ -91,9 +91,21 @@ func permalinkHandler(req *web.Request) {
 }
 
 func tagHandler(req *web.Request) {
-    withGzip(req, web.StatusOK, "text/html; charset=utf-8", func(w io.Writer) {
-        io.WriteString(w, "tagHandler")
-    })
+    tag := req.URLParam["tag"]
+    posts, err := Post.FindByTag(tag)
+    if err != nil {
+        logger.Printf("failed finding posts with tag %#v: %s", tag, err)
+        withGzip(req, web.StatusInternalServerError, "text/html; charset=utf-8", serverError)
+    } else {
+        withGzip(req, web.StatusOK, "text/html; charset=utf-8", func(w io.Writer) {
+            view.RenderLayout(w, &view.RenderInfo{
+                PostPreview: posts,
+                Title:       fmt.Sprintf("Articles tagged with %#v", tag),
+                Canonical:   req.URL.Path,
+            })
+            io.WriteString(w, "tagHandler")
+        })
+    }
 }
 
 func pageHandler(req *web.Request) {
@@ -102,21 +114,15 @@ func pageHandler(req *web.Request) {
     if err != nil {
         switch err.(type) {
         case Page.NotFound:
-            withGzip(req, web.StatusNotFound, "text/html; charset=utf-8", func(w io.Writer) {
-                notFound(w)
-            })
+            withGzip(req, web.StatusNotFound, "text/html; charset=utf-8", notFound)
         default:
             logger.Printf("failed finding page with slug %#v: %s (%T)", slug, err, err)
-            withGzip(req, web.StatusInternalServerError, "text/html; charset=utf-8", func(w io.Writer) {
-                serverError(w)
-            })
+            withGzip(req, web.StatusInternalServerError, "text/html; charset=utf-8", serverError)
         }
     } else {
         withGzip(req, web.StatusOK, "text/html; charset=utf-8", func(w io.Writer) {
-            var buffer bytes.Buffer
-            view.RenderPartial(&buffer, "page.tmpl", view.HTML(page.BodyHtml))
             view.RenderLayout(w, &view.RenderInfo{
-                Yield:     view.HTML(buffer.String()),
+                Page:      view.HTML(page.BodyHtml),
                 Title:     page.Title,
                 Canonical: page.Canonical(),
             })
@@ -125,20 +131,16 @@ func pageHandler(req *web.Request) {
 }
 
 func serverError(w io.Writer) {
-    var buffer bytes.Buffer
-    view.RenderPartial(&buffer, "server_error.tmpl", nil)
     view.RenderLayout(w, &view.RenderInfo{
-        Yield: view.HTML(buffer.String()),
+        Error: true,
         Title: "Oh. Sorry about that.",
     })
 }
 
 func notFound(w io.Writer) {
-    var buffer bytes.Buffer
-    view.RenderPartial(&buffer, "not_found.tmpl", nil)
     view.RenderLayout(w, &view.RenderInfo{
-        Yield: view.HTML(buffer.String()),
-        Title: "Not Found",
+        NotFound: true,
+        Title:    "Not Found",
     })
 }
 

@@ -10,7 +10,11 @@
         {{template "header.tmpl" .}}
       </header>
       <section class="clear" id="content">
-        {{.Yield}}
+        {{if .Page}}{{template "page.tmpl" .Page}}{{end}}
+        {{range .PostPreview}}{{template "post_preview.tmpl" .}}{{end}}
+        {{if .ArchiveLinks}}{{template "archive_links.tmpl"}}{{end}}
+        {{if .NotFound}}{{template "not_found.tmpl"}}{{end}}
+        {{if .Error}}{{template "server_error.tmpl"}}{{end}}
       </section>
       <footer>
         {{template "footer.tmpl" .}}

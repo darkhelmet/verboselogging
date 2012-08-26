@@ -9,6 +9,9 @@ import (
     "io/ioutil"
     "log"
     "os"
+    PostView "post/view"
+    "strings"
+    "time"
 )
 
 var (
@@ -34,16 +37,14 @@ type PageLink struct {
     Header, Footer          bool
 }
 
-type TemplateData struct {
-    Yield                                   interface{}
-    Title, Description, Canonical           string
+type RenderInfo struct {
+    Page                          interface{}
+    Title, Description, Canonical string
+    Error, NotFound, ArchiveLinks bool
+
     SiteTitle, SiteDescription, SiteContact string
     PageLinks                               []PageLink
-}
-
-type RenderInfo struct {
-    Yield                         interface{}
-    Title, Description, Canonical string
+    PostPreview                             interface{}
 }
 
 func setupAssets() {
@@ -83,7 +84,17 @@ func init() {
         "CanonicalUrl": func(path string) string {
             return fmt.Sprintf("http://%s%s", config.CanonicalHost, path)
         },
-    }).ParseGlob("views/*.tmpl"))
+        "InTimeZone": func(t time.Time) time.Time {
+            return t.In(config.TimeZone)
+        },
+        "ISO8601": func(t time.Time) string {
+            return t.Format(time.RFC3339)
+        },
+        "DisplayTime": func(t time.Time) string {
+            return t.Format("02 Jan 2006 15:04 MST")
+        },
+        "Titleize": strings.Title,
+    }).Funcs(PostView.FuncMap()).ParseGlob("views/*.tmpl"))
     setupAssets()
 }
 
@@ -92,16 +103,11 @@ func assetPath(name string) string {
 }
 
 func RenderLayout(w io.Writer, data *RenderInfo) {
-    err := templates.ExecuteTemplate(w, "layout.tmpl", TemplateData{
-        Yield:           data.Yield,
-        Title:           data.Title,
-        Description:     data.Description,
-        Canonical:       data.Canonical,
-        SiteTitle:       config.SiteTitle,
-        SiteDescription: config.SiteDescription,
-        SiteContact:     config.SiteContact,
-        PageLinks:       pageLinks,
-    })
+    data.SiteTitle = config.SiteTitle
+    data.SiteDescription = config.SiteDescription
+    data.SiteContact = config.SiteContact
+    data.PageLinks = pageLinks
+    err := templates.ExecuteTemplate(w, "layout.tmpl", data)
     if err != nil {
         logger.Printf("error rendering template: %s", err)
     }

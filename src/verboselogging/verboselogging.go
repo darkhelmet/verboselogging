@@ -37,9 +37,20 @@ func withGzip(req *web.Request, status int, contentType string, f func(io.Writer
 }
 
 func rootHandler(req *web.Request) {
-    withGzip(req, web.StatusOK, "text/html; charset=utf-8", func(w io.Writer) {
-        view.RenderLayout(w, &view.RenderInfo{Canonical: "/", ArchiveLinks: true})
-    })
+    posts, err := Post.FindLatest(6)
+    if err != nil {
+        logger.Printf("failed finding latest posts: %s", err)
+        withGzip(req, web.StatusInternalServerError, "text/html; charset=utf-8", serverError)
+    } else {
+        withGzip(req, web.StatusOK, "text/html; charset=utf-8", func(w io.Writer) {
+            view.RenderLayout(w, &view.RenderInfo{
+                PostPreview:  posts,
+                Canonical:    "/",
+                ArchiveLinks: true,
+                Description:  config.SiteDescription,
+            })
+        })
+    }
 }
 
 func opensearchHandler(req *web.Request) {
@@ -49,9 +60,22 @@ func opensearchHandler(req *web.Request) {
 }
 
 func searchHandler(req *web.Request) {
-    withGzip(req, web.StatusOK, "text/html; charset=utf-8", func(w io.Writer) {
-        io.WriteString(w, "searchHandler")
-    })
+    query := req.Param.Get("query")
+    posts, err := Post.Search(query)
+    if err != nil {
+        logger.Printf("failed finding posts with query %#v: %s", query, err)
+        withGzip(req, web.StatusInternalServerError, "text/html; charset=utf-8", serverError)
+    } else {
+        withGzip(req, web.StatusOK, "text/html; charset=utf-8", func(w io.Writer) {
+            title := fmt.Sprintf("Search results for %#v", query)
+            view.RenderLayout(w, &view.RenderInfo{
+                PostPreview: posts,
+                Title:       title,
+                PageTitle:   title,
+                // Canonical:   req.URL.Path,
+            })
+        })
+    }
 }
 
 func feedHandler(req *web.Request) {
@@ -79,15 +103,48 @@ func monthlyHandler(req *web.Request) {
 }
 
 func categoryHandler(req *web.Request) {
-    withGzip(req, web.StatusOK, "text/html; charset=utf-8", func(w io.Writer) {
-        io.WriteString(w, "categoryHandler")
-    })
+    category := req.URLParam["category"]
+    posts, err := Post.FindByCategory(category)
+    if err != nil {
+        logger.Printf("failed finding posts with category %#v: %s", category, err)
+        withGzip(req, web.StatusInternalServerError, "text/html; charset=utf-8", serverError)
+    } else {
+        withGzip(req, web.StatusOK, "text/html; charset=utf-8", func(w io.Writer) {
+            category = strings.Title(category)
+            title := fmt.Sprintf("%s Articles", category)
+            view.RenderLayout(w, &view.RenderInfo{
+                PostPreview: posts,
+                Title:       title,
+                PageTitle:   title,
+                Canonical:   req.URL.Path,
+                Description: fmt.Sprintf("Articles in the %s category", category),
+            })
+        })
+    }
 }
 
 func permalinkHandler(req *web.Request) {
-    withGzip(req, web.StatusOK, "text/html; charset=utf-8", func(w io.Writer) {
-        io.WriteString(w, "permalinkHandler")
-    })
+    slug := req.URLParam["slug"]
+    year, month, day := req.URLParam["year"], req.URLParam["month"], req.URLParam["day"]
+    post, err := Post.FindByPermalink(year, month, day, slug)
+    if err != nil {
+        switch err.(type) {
+        case Post.NotFound:
+            withGzip(req, web.StatusNotFound, "text/html; charset=utf-8", notFound)
+        default:
+            logger.Printf("failed finding post with year(%#v) month(%#v) day(%#v) slug(%#v): %s (%T)", year, month, day, slug, err, err)
+            withGzip(req, web.StatusInternalServerError, "text/html; charset=utf-8", serverError)
+        }
+    } else {
+        withGzip(req, web.StatusOK, "text/html; charset=utf-8", func(w io.Writer) {
+            view.RenderLayout(w, &view.RenderInfo{
+                Post:        post,
+                Title:       post.Title,
+                Canonical:   post.Canonical(),
+                Description: post.Description,
+            })
+        })
+    }
 }
 
 func tagHandler(req *web.Request) {
@@ -98,12 +155,13 @@ func tagHandler(req *web.Request) {
         withGzip(req, web.StatusInternalServerError, "text/html; charset=utf-8", serverError)
     } else {
         withGzip(req, web.StatusOK, "text/html; charset=utf-8", func(w io.Writer) {
+            title := fmt.Sprintf("Articles tagged with %#v", tag)
             view.RenderLayout(w, &view.RenderInfo{
                 PostPreview: posts,
-                Title:       fmt.Sprintf("Articles tagged with %#v", tag),
+                Title:       title,
+                PageTitle:   title,
                 Canonical:   req.URL.Path,
             })
-            io.WriteString(w, "tagHandler")
         })
     }
 }
@@ -122,9 +180,10 @@ func pageHandler(req *web.Request) {
     } else {
         withGzip(req, web.StatusOK, "text/html; charset=utf-8", func(w io.Writer) {
             view.RenderLayout(w, &view.RenderInfo{
-                Page:      view.HTML(page.BodyHtml),
-                Title:     page.Title,
-                Canonical: page.Canonical(),
+                Page:        view.HTML(page.BodyHtml),
+                Title:       page.Title,
+                Canonical:   page.Canonical(),
+                Description: config.SiteDescription,
             })
         })
     }

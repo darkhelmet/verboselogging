@@ -2,6 +2,7 @@ package view
 
 import (
     "config"
+    "crypto/md5"
     "encoding/json"
     "fmt"
     T "html/template"
@@ -12,6 +13,7 @@ import (
     PostView "post/view"
     "strings"
     "time"
+    "unicode"
 )
 
 var (
@@ -38,13 +40,13 @@ type PageLink struct {
 }
 
 type RenderInfo struct {
-    Page                          interface{}
-    Title, Description, Canonical string
-    Error, NotFound, ArchiveLinks bool
+    Page                                               interface{}
+    Title, PageTitle, Description, Canonical, Gravatar string
+    Error, NotFound, ArchiveLinks                      bool
 
     SiteTitle, SiteDescription, SiteContact string
     PageLinks                               []PageLink
-    PostPreview                             interface{}
+    PostPreview, Post                       interface{}
 }
 
 func setupAssets() {
@@ -93,7 +95,15 @@ func init() {
         "DisplayTime": func(t time.Time) string {
             return t.Format("02 Jan 2006 15:04 MST")
         },
+        "Gravatar": func(email string) string {
+            email = strings.TrimFunc(email, unicode.IsSpace)
+            email = strings.ToLower(email)
+            hash := md5.New()
+            io.WriteString(hash, email)
+            return fmt.Sprintf("http://www.gravatar.com/avatar/%x.png", hash.Sum(nil))
+        },
         "Titleize": strings.Title,
+        "Safe":     HTML,
     }).Funcs(PostView.FuncMap()).ParseGlob("views/*.tmpl"))
     setupAssets()
 }

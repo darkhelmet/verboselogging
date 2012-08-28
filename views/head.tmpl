@@ -11,7 +11,7 @@
 <link rel="search" title="{{.SiteTitle}}" type="application/opensearchdescription+xml" href="{{CanonicalUrl "/opensearch.xml"}}">
 <link rel="sitemap" title="Sitemap" type="application/xml" href="{{CanonicalUrl "/sitemap.xml"}}">
 <link rel="shortcut icon" type="image/png" href="{{ImagePath "favicon.png"}}">
-<link rel="apple-touch-icon" href="http://www.gravatar.com/avatar/48409ce1953c290351fcb875b20eccbb.png?s=114">
+<link rel="apple-touch-icon" href="{{.SiteContact | Gravatar}}?s=114">
 <link rel="alternate" title="{{.SiteTitle}} RSS Feed" type="application/rss+xml" href="{{CanonicalUrl "/feed"}}">
 <link rel="index" title="{{.SiteTitle}}" href="{{CanonicalUrl "/"}}">
 {{FontTag "Droid+Sans:regular,italic,bold,bolditalic"}}
@@ -20,10 +20,17 @@
 
 <script type="text/javascript" src="{{JavascriptPath "head"}}"></script>
 
-<!-- content_for(:head) FIXME -->
+{{if .Post}}
+<meta property="og:title" content="{{.Post.Title}} | {{.SiteTitle}}">
+<meta property="og:type" content="article">
+<meta property="og:url" content="{{.Post.Canonical | CanonicalUrl}}">
+<meta property="og:description" content="{{.Post.Description}}">
+<meta property="og:image" content="{{.SiteContact | Gravatar}}?s=100">
+<meta property="og:site_name" content="{{.SiteTitle}}">
+{{end}}
 
 <script type="text/javascript">
-  //<![CDATA[
+    //<![CDATA[
     var _gaq = _gaq || [];
     _gaq.push(['_setAccount', 'UA-2062105-4']);
     _gaq.push(['_trackPageview']);
@@ -34,5 +41,5 @@
       ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
       var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
     })();
-  //]]>
+    //]]>
 </script>

@@ -1,17 +1,17 @@
 <article class="preview main">
     <h2 class="entry-title">
-        <a href="{{PostPermalinkPath . | CanonicalUrl}}" rel="bookmark">{{.Title}}</a>
+        <a href="{{.Canonical | CanonicalUrl}}" rel="bookmark">{{.Title}}</a>
     </h2>
     <div class="meta">
         <time datetime="{{.PublishedOn | ISO8601}}">{{.PublishedOn | InTimeZone | DisplayTime}}</time>
-        &raquo;
+        &middot;
         Posted in
         <span class="category">
             <a href="{{CategoryPath . | CanonicalUrl}}">{{.Category | Titleize}}</a>
         </span>
     </div>
-    <div class="snippet">post.truncated_body_html</div>
+    <div class="snippet">{{.BodyTruncated | Safe}}</div>
     <div class="extra_links">
-        <a href="{{PostPermalink . | CanonicalUrl}}" class="read_more fleft">Keep Reading</a>
+        <a href="{{.Canonical | CanonicalUrl}}" class="read_more fleft">Keep Reading</a>
     </div>
 </article>

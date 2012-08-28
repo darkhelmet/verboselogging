@@ -17,6 +17,7 @@ var (
     SiteTitle       = "Verbose Logging"
     SiteDescription = "software development with some really amazing hair"
     SiteContact     = "darkhelmet@darkhelmetlive.com"
+    SiteAuthor      = "Daniel Huckstep"
     TimeZone        = mustLoadLocation("America/Edmonton")
 )
 

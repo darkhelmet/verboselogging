@@ -1,6 +1,7 @@
 <section id="search">
   <form action="/search">
-    <input type="text" placeholder="Search {{.SiteTitle}}" id="query">
+    <input name="utf8" type="hidden" value="✓">
+    <input type="text" placeholder="Search {{.SiteTitle}}" id="query" name="query">
     <input type="image" src="{{ImagePath "magnifier.png"}}">
   </form>
 </section>

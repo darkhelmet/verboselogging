@@ -20,8 +20,6 @@ var (
     logger = log.New(os.Stdout, "[server] ", config.LogFlags)
 )
 
-type h func(*web.Request, io.Writer)
-
 func withGzip(req *web.Request, status int, contentType string, f func(io.Writer)) {
     if strings.Contains(req.Header.Get("Accept-Encoding"), "gzip") {
         w := req.Respond(status, web.HeaderContentType, contentType,
@@ -72,7 +70,6 @@ func searchHandler(req *web.Request) {
                 PostPreview: posts,
                 Title:       title,
                 PageTitle:   title,
-                // Canonical:   req.URL.Path,
             })
         })
     }
@@ -161,6 +158,7 @@ func tagHandler(req *web.Request) {
                 Title:       title,
                 PageTitle:   title,
                 Canonical:   req.URL.Path,
+                Description: fmt.Sprintf("Articles with the %#v tag", tag),
             })
         })
     }

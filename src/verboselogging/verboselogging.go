@@ -1,7 +1,6 @@
 package main
 
 import (
-    "compress/gzip"
     "config"
     "fmt"
     "io"
@@ -20,181 +19,158 @@ var (
     logger = log.New(os.Stdout, "[server] ", config.LogFlags)
 )
 
-func withGzip(req *web.Request, status int, contentType string, f func(io.Writer)) {
-    if strings.Contains(req.Header.Get("Accept-Encoding"), "gzip") {
-        w := req.Respond(status, web.HeaderContentType, contentType,
-            web.HeaderContentEncoding, "gzip",
-            web.HeaderVary, "Accept-Encoding")
-        gz := gzip.NewWriter(w)
-        defer gz.Close()
-        f(gz)
-    } else {
-        w := req.Respond(status, web.HeaderContentType, contentType)
-        f(w)
-    }
-}
-
-func rootHandler(req *web.Request) {
+func rootHandler(req *web.Request, r Responder) {
     posts, err := Post.FindLatest(6)
     if err != nil {
         logger.Printf("failed finding latest posts: %s", err)
-        withGzip(req, web.StatusInternalServerError, "text/html; charset=utf-8", serverError)
+        serverError(r)
     } else {
-        withGzip(req, web.StatusOK, "text/html; charset=utf-8", func(w io.Writer) {
-            view.RenderLayout(w, &view.RenderInfo{
-                PostPreview:  posts,
-                Canonical:    "/",
-                ArchiveLinks: true,
-                Description:  config.SiteDescription,
-            })
+        w := r.Respond(web.StatusOK, web.HeaderContentType, "text/html; charset=utf-8")
+        view.RenderLayout(w, &view.RenderInfo{
+            PostPreview:  posts,
+            Canonical:    "/",
+            ArchiveLinks: true,
+            Description:  config.SiteDescription,
         })
     }
 }
 
-func opensearchHandler(req *web.Request) {
-    withGzip(req, web.StatusOK, "application/xml; charset=utf-8", func(w io.Writer) {
-        view.RenderPartial(w, "opensearch.tmpl", nil)
-    })
+func opensearchHandler(req *web.Request, r Responder) {
+    w := r.Respond(web.StatusOK, web.HeaderContentType, "application/xml; charset=utf-8")
+    view.RenderPartial(w, "opensearch.tmpl", nil)
 }
 
-func searchHandler(req *web.Request) {
+func searchHandler(req *web.Request, r Responder) {
     query := req.Param.Get("query")
     posts, err := Post.Search(query)
     if err != nil {
         logger.Printf("failed finding posts with query %#v: %s", query, err)
-        withGzip(req, web.StatusInternalServerError, "text/html; charset=utf-8", serverError)
+        serverError(r)
     } else {
-        withGzip(req, web.StatusOK, "text/html; charset=utf-8", func(w io.Writer) {
-            title := fmt.Sprintf("Search results for %#v", query)
-            view.RenderLayout(w, &view.RenderInfo{
-                PostPreview: posts,
-                Title:       title,
-                PageTitle:   title,
-            })
+        w := r.Respond(web.StatusOK, web.HeaderContentType, "text/html; charset=utf-8")
+        title := fmt.Sprintf("Search results for %#v", query)
+        view.RenderLayout(w, &view.RenderInfo{
+            PostPreview: posts,
+            Title:       title,
+            PageTitle:   title,
         })
     }
 }
 
-func feedHandler(req *web.Request) {
-    withGzip(req, web.StatusOK, "application/rss+xml; charset=utf-8", func(w io.Writer) {
-        io.WriteString(w, "feedHandler")
-    })
+func feedHandler(req *web.Request, r Responder) {
+    w := r.Respond(web.StatusOK, web.HeaderContentType, "application/rss+xml; charset=utf-8")
+    io.WriteString(w, "feedHandler")
 }
 
-func sitemapHandler(req *web.Request) {
-    withGzip(req, web.StatusOK, "application/xml; charset=utf-8", func(w io.Writer) {
-        view.RenderPartial(w, "sitemapHandler", nil)
-    })
+func sitemapHandler(req *web.Request, r Responder) {
+    w := r.Respond(web.StatusOK, web.HeaderContentType, "application/xml; charset=utf-8")
+    view.RenderPartial(w, "sitemapHandler", nil)
 }
 
-func archiveHandler(req *web.Request) {
-    withGzip(req, web.StatusOK, "text/html; charset=utf-8", func(w io.Writer) {
-        io.WriteString(w, "archiveHandler")
-    })
+func archiveHandler(req *web.Request, r Responder) {
+    w := r.Respond(web.StatusOK, web.HeaderContentType, "text/html; charset=utf-8")
+    io.WriteString(w, "archiveHandler")
 }
 
-func monthlyHandler(req *web.Request) {
-    withGzip(req, web.StatusOK, "text/html; charset=utf-8", func(w io.Writer) {
-        io.WriteString(w, "monthlyHandler")
-    })
+func monthlyHandler(req *web.Request, r Responder) {
+    w := r.Respond(web.StatusOK, web.HeaderContentType, "text/html; charset=utf-8")
+    io.WriteString(w, "monthlyHandler")
 }
 
-func categoryHandler(req *web.Request) {
+func categoryHandler(req *web.Request, r Responder) {
     category := req.URLParam["category"]
     posts, err := Post.FindByCategory(category)
     if err != nil {
         logger.Printf("failed finding posts with category %#v: %s", category, err)
-        withGzip(req, web.StatusInternalServerError, "text/html; charset=utf-8", serverError)
+        serverError(r)
     } else {
-        withGzip(req, web.StatusOK, "text/html; charset=utf-8", func(w io.Writer) {
-            category = strings.Title(category)
-            title := fmt.Sprintf("%s Articles", category)
-            view.RenderLayout(w, &view.RenderInfo{
-                PostPreview: posts,
-                Title:       title,
-                PageTitle:   title,
-                Canonical:   req.URL.Path,
-                Description: fmt.Sprintf("Articles in the %s category", category),
-            })
+        w := r.Respond(web.StatusOK, web.HeaderContentType, "text/html; charset=utf-8")
+        category = strings.Title(category)
+        title := fmt.Sprintf("%s Articles", category)
+        view.RenderLayout(w, &view.RenderInfo{
+            PostPreview: posts,
+            Title:       title,
+            PageTitle:   title,
+            Canonical:   req.URL.Path,
+            Description: fmt.Sprintf("Articles in the %s category", category),
         })
     }
 }
 
-func permalinkHandler(req *web.Request) {
+func permalinkHandler(req *web.Request, r Responder) {
     slug := req.URLParam["slug"]
     year, month, day := req.URLParam["year"], req.URLParam["month"], req.URLParam["day"]
     post, err := Post.FindByPermalink(year, month, day, slug)
     if err != nil {
         switch err.(type) {
         case Post.NotFound:
-            withGzip(req, web.StatusNotFound, "text/html; charset=utf-8", notFound)
+            notFound(r)
         default:
             logger.Printf("failed finding post with year(%#v) month(%#v) day(%#v) slug(%#v): %s (%T)", year, month, day, slug, err, err)
-            withGzip(req, web.StatusInternalServerError, "text/html; charset=utf-8", serverError)
+            serverError(r)
         }
     } else {
-        withGzip(req, web.StatusOK, "text/html; charset=utf-8", func(w io.Writer) {
-            view.RenderLayout(w, &view.RenderInfo{
-                Post:        post,
-                Title:       post.Title,
-                Canonical:   post.Canonical(),
-                Description: post.Description,
-            })
+        w := r.Respond(web.StatusOK, web.HeaderContentType, "text/html; charset=utf-8")
+        view.RenderLayout(w, &view.RenderInfo{
+            Post:        post,
+            Title:       post.Title,
+            Canonical:   post.Canonical(),
+            Description: post.Description,
         })
     }
 }
 
-func tagHandler(req *web.Request) {
+func tagHandler(req *web.Request, r Responder) {
     tag := req.URLParam["tag"]
     posts, err := Post.FindByTag(tag)
     if err != nil {
         logger.Printf("failed finding posts with tag %#v: %s", tag, err)
-        withGzip(req, web.StatusInternalServerError, "text/html; charset=utf-8", serverError)
+        serverError(r)
     } else {
-        withGzip(req, web.StatusOK, "text/html; charset=utf-8", func(w io.Writer) {
-            title := fmt.Sprintf("Articles tagged with %#v", tag)
-            view.RenderLayout(w, &view.RenderInfo{
-                PostPreview: posts,
-                Title:       title,
-                PageTitle:   title,
-                Canonical:   req.URL.Path,
-                Description: fmt.Sprintf("Articles with the %#v tag", tag),
-            })
+        w := r.Respond(web.StatusOK, web.HeaderContentType, "text/html; charset=utf-8")
+        title := fmt.Sprintf("Articles tagged with %#v", tag)
+        view.RenderLayout(w, &view.RenderInfo{
+            PostPreview: posts,
+            Title:       title,
+            PageTitle:   title,
+            Canonical:   req.URL.Path,
+            Description: fmt.Sprintf("Articles with the %#v tag", tag),
         })
     }
 }
 
-func pageHandler(req *web.Request) {
+func pageHandler(req *web.Request, r Responder) {
     slug := req.URLParam["slug"]
     page, err := Page.FindBySlug(slug)
     if err != nil {
         switch err.(type) {
         case Page.NotFound:
-            withGzip(req, web.StatusNotFound, "text/html; charset=utf-8", notFound)
+            notFound(r)
         default:
             logger.Printf("failed finding page with slug %#v: %s (%T)", slug, err, err)
-            withGzip(req, web.StatusInternalServerError, "text/html; charset=utf-8", serverError)
+            serverError(r)
         }
     } else {
-        withGzip(req, web.StatusOK, "text/html; charset=utf-8", func(w io.Writer) {
-            view.RenderLayout(w, &view.RenderInfo{
-                Page:        view.HTML(page.BodyHtml),
-                Title:       page.Title,
-                Canonical:   page.Canonical(),
-                Description: config.SiteDescription,
-            })
+        w := r.Respond(web.StatusOK, web.HeaderContentType, "text/html; charset=utf-8")
+        view.RenderLayout(w, &view.RenderInfo{
+            Page:        view.HTML(page.BodyHtml),
+            Title:       page.Title,
+            Canonical:   page.Canonical(),
+            Description: config.SiteDescription,
         })
     }
 }
 
-func serverError(w io.Writer) {
+func serverError(r Responder) {
+    w := r.Respond(web.StatusInternalServerError, web.HeaderContentType, "text/html; charset=utf-8")
     view.RenderLayout(w, &view.RenderInfo{
         Error: true,
         Title: "Oh. Sorry about that.",
     })
 }
 
-func notFound(w io.Writer) {
+func notFound(r Responder) {
+    w := r.Respond(web.StatusNotFound, web.HeaderContentType, "text/html; charset=utf-8")
     view.RenderLayout(w, &view.RenderInfo{
         NotFound: true,
         Title:    "Not Found",
@@ -223,17 +199,17 @@ func main() {
         },
     }
     router := web.NewRouter().
-        Register("/", "GET", rootHandler).
-        Register("/opensearch.xml", "GET", opensearchHandler).
-        Register("/search", "GET", searchHandler).
-        Register("/feed", "GET", feedHandler).
-        Register("/sitemap.xml<gzip:(\\.gz)?>", "GET", sitemapHandler).
-        Register("/archive/<archive:(full|category|month)>", "GET", archiveHandler).
-        Register("/<year:\\d{4}>/<month:\\d{2}>", "GET", monthlyHandler).
-        Register("/category/<category>", "GET", categoryHandler).
-        Register("/<year:\\d{4}>/<month:\\d{2}>/<day:\\d{2}>/<slug>", "GET", permalinkHandler).
-        Register("/tag/<tag>", "GET", tagHandler).
-        Register("/<slug:\\w+>", "GET", pageHandler).
+        Register("/", "GET", Use(Gzip(rootHandler))).
+        Register("/opensearch.xml", "GET", Use(Gzip(opensearchHandler))).
+        Register("/search", "GET", Use(Gzip(searchHandler))).
+        Register("/feed", "GET", Use(Gzip(feedHandler))).
+        Register("/sitemap.xml<gzip:(\\.gz)?>", "GET", Use(Gzip(sitemapHandler))).
+        Register("/archive/<archive:(full|category|month)>", "GET", Use(Gzip(archiveHandler))).
+        Register("/<year:\\d{4}>/<month:\\d{2}>", "GET", Use(Gzip(monthlyHandler))).
+        Register("/category/<category>", "GET", Use(Gzip(categoryHandler))).
+        Register("/<year:\\d{4}>/<month:\\d{2}>/<day:\\d{2}>/<slug>", "GET", Use(Gzip(permalinkHandler))).
+        Register("/tag/<tag>", "GET", Use(Gzip(tagHandler))).
+        Register("/<slug:\\w+>", "GET", Use(Gzip(pageHandler))).
         Register("/<path:.*>", "GET", web.DirectoryHandler("public", staticOptions))
 
     redirector := web.NewRouter().

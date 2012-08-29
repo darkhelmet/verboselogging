@@ -15,6 +15,7 @@
 package web
 
 import (
+    "compress/gzip"
     "errors"
     "io"
     "mime"
@@ -29,7 +30,7 @@ type ServeFileOptions struct {
     // Map file extension to mime type.
     MimeType map[string]string
 
-    // Response headers. 
+    // Response headers.
     Header Header
 }
 
@@ -77,6 +78,11 @@ func ServeFile(req *Request, fname string, options *ServeFileOptions) {
         }
     }
 
+    compress := strings.Contains(req.Header.Get("Accept-Encoding"), "gzip")
+    if compress {
+        header.Set(HeaderContentEncoding, "gzip")
+    }
+
     if status == StatusNotModified {
         // Clear entity headers.
         for k := range header {
@@ -86,7 +92,9 @@ func ServeFile(req *Request, fname string, options *ServeFileOptions) {
         }
     } else {
         // Set entity headers
-        header.Set(HeaderContentLength, strconv.FormatInt(info.Size(), 10))
+        if !compress {
+            header.Set(HeaderContentLength, strconv.FormatInt(info.Size(), 10))
+        }
         if _, found := header[HeaderContentType]; !found {
             ext := path.Ext(fname)
             contentType := ""
@@ -124,6 +132,11 @@ func ServeFile(req *Request, fname string, options *ServeFileOptions) {
     }
 
     w := req.Responder.Respond(status, header)
+    if compress {
+        gz := gzip.NewWriter(w)
+        w = gz
+        defer gz.Close()
+    }
     if req.Method != "HEAD" && status != StatusNotModified {
         io.Copy(w, f)
     }
@@ -171,7 +184,7 @@ func (dh *directoryHandler) ServeWeb(req *Request) {
 }
 
 // FileHandler returns a request handler that serves a static file specified by
-// fname. 
+// fname.
 func FileHandler(fname string, options *ServeFileOptions) Handler {
     return &fileHandler{fname, options}
 }

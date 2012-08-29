@@ -1,10 +1,10 @@
 package pq
 
 import (
-	"fmt"
-	nurl "net/url"
-	"sort"
-	"strings"
+    "fmt"
+    nurl "net/url"
+    "sort"
+    "strings"
 )
 
 // ParseURL converts url to a connection string for driver.Open.
@@ -22,47 +22,47 @@ import (
 //
 // This will be blank, causing driver.Open to use all of the defaults
 func ParseURL(url string) (string, error) {
-	u, err := nurl.Parse(url)
-	if err != nil {
-		return "", err
-	}
+    u, err := nurl.Parse(url)
+    if err != nil {
+        return "", err
+    }
 
-	if u.Scheme != "postgres" {
-		return "", fmt.Errorf("invalid connection protocol: %s", u.Scheme)
-	}
+    if u.Scheme != "postgres" {
+        return "", fmt.Errorf("invalid connection protocol: %s", u.Scheme)
+    }
 
-	var kvs []string
-	accrue := func(k, v string) {
-		if v != "" {
-			kvs = append(kvs, k+"="+v)
-		}
-	}
+    var kvs []string
+    accrue := func(k, v string) {
+        if v != "" {
+            kvs = append(kvs, k+"="+v)
+        }
+    }
 
-	if u.User != nil {
-		v := u.User.Username()
-		accrue("user", v)
+    if u.User != nil {
+        v := u.User.Username()
+        accrue("user", v)
 
-		v, _ = u.User.Password()
-		accrue("password", v)
-	}
+        v, _ = u.User.Password()
+        accrue("password", v)
+    }
 
-	i := strings.Index(u.Host, ":")
-	if i < 0 {
-		accrue("host", u.Host)
-	} else {
-		accrue("host", u.Host[:i])
-		accrue("port", u.Host[i+1:])
-	}
+    i := strings.Index(u.Host, ":")
+    if i < 0 {
+        accrue("host", u.Host)
+    } else {
+        accrue("host", u.Host[:i])
+        accrue("port", u.Host[i+1:])
+    }
 
-	if u.Path != "" {
-		accrue("dbname", u.Path[1:])
-	}
+    if u.Path != "" {
+        accrue("dbname", u.Path[1:])
+    }
 
-	q := u.Query()
-	for k, _ := range q {
-		accrue(k, q.Get(k))
-	}
+    q := u.Query()
+    for k, _ := range q {
+        accrue(k, q.Get(k))
+    }
 
-	sort.Strings(kvs) // Makes testing easier (not a performance concern)
-	return strings.Join(kvs, " "), nil
+    sort.Strings(kvs) // Makes testing easier (not a performance concern)
+    return strings.Join(kvs, " "), nil
 }

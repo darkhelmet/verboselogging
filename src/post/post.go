@@ -25,6 +25,10 @@ func (p *Post) Author() string {
     return config.SiteAuthor
 }
 
+func (p *Post) FeedAuthor() string {
+    return fmt.Sprintf("%s (%s)", config.SiteContact, config.SiteAuthor)
+}
+
 func (p *Post) Slug() string {
     return p.Slugs[0]
 }

@@ -9,6 +9,7 @@ import (
     "os"
     Page "page"
     Post "post"
+    "regexp"
     "strings"
     "vendor/github.com/garyburd/twister/server"
     "vendor/github.com/garyburd/twister/web"
@@ -16,7 +17,8 @@ import (
 )
 
 var (
-    logger = log.New(os.Stdout, "[server] ", config.LogFlags)
+    logger     = log.New(os.Stdout, "[server] ", config.LogFlags)
+    feedburner = regexp.MustCompile("(?i)feedburner")
 )
 
 func rootHandler(req *web.Request, r Responder) {
@@ -58,8 +60,23 @@ func searchHandler(req *web.Request, r Responder) {
 }
 
 func feedHandler(req *web.Request, r Responder) {
-    w := r.Respond(web.StatusOK, web.HeaderContentType, "application/rss+xml; charset=utf-8")
-    io.WriteString(w, "feedHandler")
+    if !feedburner.Match([]byte(req.Header.Get(web.HeaderUserAgent))) {
+        // Not Feedburner
+        if "" == req.Param.Get("no_fb") {
+            // And nothing saying to ignore
+            r.Respond(web.StatusMovedPermanently)
+            return
+        }
+    }
+
+    posts, err := Post.FindLatest(10)
+    if err != nil {
+        logger.Printf("failed getting posts for feed: %s", err)
+        serverError(r)
+    } else {
+        w := r.Respond(web.StatusOK, web.HeaderContentType, "application/rss+xml; charset=utf-8")
+        view.RenderPartial(w, "feed.tmpl", &view.RenderInfo{Post: posts})
+    }
 }
 
 func sitemapHandler(req *web.Request, r Responder) {

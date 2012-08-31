@@ -44,9 +44,9 @@ type RenderInfo struct {
     Title, PageTitle, Description, Canonical, Gravatar string
     Error, NotFound, ArchiveLinks                      bool
 
-    SiteTitle, SiteDescription, SiteContact string
-    PageLinks                               []PageLink
-    PostPreview, Post                       interface{}
+    SiteTitle, SiteDescription, SiteContact, SiteAuthor string
+    PageLinks                                           []PageLink
+    PostPreview, Post                                   interface{}
 }
 
 func setupAssets() {
@@ -92,6 +92,9 @@ func init() {
         "ISO8601": func(t time.Time) string {
             return t.Format(time.RFC3339)
         },
+        "RFC822": func(t time.Time) string {
+            return t.Format(time.RFC822)
+        },
         "DisplayTime": func(t time.Time) string {
             return t.Format("02 Jan 2006 15:04 MST")
         },
@@ -116,6 +119,7 @@ func RenderLayout(w io.Writer, data *RenderInfo) {
     data.SiteTitle = config.SiteTitle
     data.SiteDescription = config.SiteDescription
     data.SiteContact = config.SiteContact
+    data.SiteAuthor = config.SiteAuthor
     data.PageLinks = pageLinks
     err := templates.ExecuteTemplate(w, "layout.tmpl", data)
     if err != nil {

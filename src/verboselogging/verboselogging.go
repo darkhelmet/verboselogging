@@ -301,7 +301,8 @@ func ShortLogger(lr *server.LogRecord) {
 func main() {
     staticOptions := &web.ServeFileOptions{
         Header: web.Header{
-            web.HeaderCacheControl: {"public, max-age=31536000"},
+            web.HeaderCacheControl:              {"public, max-age=31536000"},
+            web.HeaderAccessControllAllowOrigin: {"*"},
         },
     }
     router := web.NewRouter().

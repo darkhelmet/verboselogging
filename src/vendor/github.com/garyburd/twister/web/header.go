@@ -43,7 +43,7 @@ func init() {
     // CRLF       = CR LF
     // LWS        = [CRLF] 1*( SP | HT )
     // TEXT       = <any OCTET except CTLs, but including LWS>
-    // separators = "(" | ")" | "<" | ">" | "@" | "," | ";" | ":" | "\" | <"> 
+    // separators = "(" | ")" | "<" | ">" | "@" | "," | ";" | ":" | "\" | <">
     //              | "/" | "[" | "]" | "?" | "=" | "{" | "}" | SP | HT
     // token      = 1*<any CHAR except CTLs or separators>
     // qdtext     = <any TEXT except <">>
@@ -64,8 +64,8 @@ var (
     ErrHeadersTooLong = errors.New("too many HTTP headers")
 )
 
-// Header maps header names to a slice of header values. 
-// 
+// Header maps header names to a slice of header values.
+//
 // The header names must be in canonical format: the first letter and letters
 // following '-' are uppercase and all other letters are lowercase.  The
 // Header* constants are in canonical format. Use the function HeaderName to
@@ -214,7 +214,7 @@ func (m Header) WriteHttpHeader(w io.Writer) error {
                 return err
             }
             valueBytes := []byte(value)
-            // Convert \r, \n and other control characters to space to 
+            // Convert \r, \n and other control characters to space to
             // prevent response splitting attacks.
             for i, c := range valueBytes {
                 if isCtl[c] {
@@ -242,7 +242,7 @@ func (m Header) ParseHttpHeader(br *bufio.Reader) (err error) {
         maxLineSize = 4096
         // Max size for header value
         maxValueSize = 4096
-        // Maximum number of headers 
+        // Maximum number of headers
         maxHeaderCount = 256
     )
 
@@ -316,7 +316,7 @@ func (m Header) ParseHttpHeader(br *bufio.Reader) (err error) {
             }
             p = p[1:]
 
-            // Value 
+            // Value
             value := string(trimBytes(p))
             m.Add(key, value)
         }
@@ -347,62 +347,63 @@ func trimBytes(p []byte) []byte {
 
 // Header names in canonical format.
 const (
-    HeaderAccept             = "Accept"
-    HeaderAcceptCharset      = "Accept-Charset"
-    HeaderAcceptEncoding     = "Accept-Encoding"
-    HeaderAcceptLanguage     = "Accept-Language"
-    HeaderAcceptRanges       = "Accept-Ranges"
-    HeaderAge                = "Age"
-    HeaderAllow              = "Allow"
-    HeaderAuthorization      = "Authorization"
-    HeaderCacheControl       = "Cache-Control"
-    HeaderConnection         = "Connection"
-    HeaderContentDisposition = "Content-Disposition"
-    HeaderContentEncoding    = "Content-Encoding"
-    HeaderContentLanguage    = "Content-Language"
-    HeaderContentLength      = "Content-Length"
-    HeaderContentLocation    = "Content-Location"
-    HeaderContentMD5         = "Content-Md5"
-    HeaderContentRange       = "Content-Range"
-    HeaderContentType        = "Content-Type"
-    HeaderCookie             = "Cookie"
-    HeaderDate               = "Date"
-    HeaderETag               = "Etag"
-    HeaderEtag               = "Etag"
-    HeaderExpect             = "Expect"
-    HeaderExpires            = "Expires"
-    HeaderFrom               = "From"
-    HeaderHost               = "Host"
-    HeaderIfMatch            = "If-Match"
-    HeaderIfModifiedSince    = "If-Modified-Since"
-    HeaderIfNoneMatch        = "If-None-Match"
-    HeaderIfRange            = "If-Range"
-    HeaderIfUnmodifiedSince  = "If-Unmodified-Since"
-    HeaderLastModified       = "Last-Modified"
-    HeaderLocation           = "Location"
-    HeaderMaxForwards        = "Max-Forwards"
-    HeaderOrigin             = "Origin"
-    HeaderPragma             = "Pragma"
-    HeaderProxyAuthenticate  = "Proxy-Authenticate"
-    HeaderProxyAuthorization = "Proxy-Authorization"
-    HeaderRange              = "Range"
-    HeaderReferer            = "Referer"
-    HeaderRetryAfter         = "Retry-After"
-    HeaderServer             = "Server"
-    HeaderSetCookie          = "Set-Cookie"
-    HeaderTE                 = "Te"
-    HeaderTrailer            = "Trailer"
-    HeaderTransferEncoding   = "Transfer-Encoding"
-    HeaderUpgrade            = "Upgrade"
-    HeaderUserAgent          = "User-Agent"
-    HeaderVary               = "Vary"
-    HeaderVia                = "Via"
-    HeaderWWWAuthenticate    = "Www-Authenticate"
-    HeaderWarning            = "Warning"
-    HeaderXXSRFToken         = "X-Xsrftoken"
+    HeaderAccept                    = "Accept"
+    HeaderAcceptCharset             = "Accept-Charset"
+    HeaderAcceptEncoding            = "Accept-Encoding"
+    HeaderAcceptLanguage            = "Accept-Language"
+    HeaderAcceptRanges              = "Accept-Ranges"
+    HeaderAccessControllAllowOrigin = "Access-Control-Allow-Origin"
+    HeaderAge                       = "Age"
+    HeaderAllow                     = "Allow"
+    HeaderAuthorization             = "Authorization"
+    HeaderCacheControl              = "Cache-Control"
+    HeaderConnection                = "Connection"
+    HeaderContentDisposition        = "Content-Disposition"
+    HeaderContentEncoding           = "Content-Encoding"
+    HeaderContentLanguage           = "Content-Language"
+    HeaderContentLength             = "Content-Length"
+    HeaderContentLocation           = "Content-Location"
+    HeaderContentMD5                = "Content-Md5"
+    HeaderContentRange              = "Content-Range"
+    HeaderContentType               = "Content-Type"
+    HeaderCookie                    = "Cookie"
+    HeaderDate                      = "Date"
+    HeaderETag                      = "Etag"
+    HeaderEtag                      = "Etag"
+    HeaderExpect                    = "Expect"
+    HeaderExpires                   = "Expires"
+    HeaderFrom                      = "From"
+    HeaderHost                      = "Host"
+    HeaderIfMatch                   = "If-Match"
+    HeaderIfModifiedSince           = "If-Modified-Since"
+    HeaderIfNoneMatch               = "If-None-Match"
+    HeaderIfRange                   = "If-Range"
+    HeaderIfUnmodifiedSince         = "If-Unmodified-Since"
+    HeaderLastModified              = "Last-Modified"
+    HeaderLocation                  = "Location"
+    HeaderMaxForwards               = "Max-Forwards"
+    HeaderOrigin                    = "Origin"
+    HeaderPragma                    = "Pragma"
+    HeaderProxyAuthenticate         = "Proxy-Authenticate"
+    HeaderProxyAuthorization        = "Proxy-Authorization"
+    HeaderRange                     = "Range"
+    HeaderReferer                   = "Referer"
+    HeaderRetryAfter                = "Retry-After"
+    HeaderServer                    = "Server"
+    HeaderSetCookie                 = "Set-Cookie"
+    HeaderTE                        = "Te"
+    HeaderTrailer                   = "Trailer"
+    HeaderTransferEncoding          = "Transfer-Encoding"
+    HeaderUpgrade                   = "Upgrade"
+    HeaderUserAgent                 = "User-Agent"
+    HeaderVary                      = "Vary"
+    HeaderVia                       = "Via"
+    HeaderWWWAuthenticate           = "Www-Authenticate"
+    HeaderWarning                   = "Warning"
+    HeaderXXSRFToken                = "X-Xsrftoken"
 )
 
-// HeaderName returns the canonical format of the header name. 
+// HeaderName returns the canonical format of the header name.
 func HeaderName(name string) string {
     return HeaderNameBytes([]byte(name))
 }
@@ -558,7 +559,7 @@ func splitToken(s string) (token, rest string) {
 }
 
 // splitQuoted returns RFC 2616 quoted value at the start of s and the
-// remainder of s. The value is unescaped and quotes are removed. 
+// remainder of s. The value is unescaped and quotes are removed.
 func splitQuoted(s string) (value, rest string) {
     if len(s) == 0 || s[0] != '"' {
         return "", ""

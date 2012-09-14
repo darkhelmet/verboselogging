@@ -2,6 +2,7 @@
 <html>
     <head>{{template "head.tmpl" .}}</head>
     <body>
+        <input id="headshot" type="hidden" value="{{ImagePath "headshot.jpg"}}">
         <script type="text/javascript" src="{{JavascriptPath "body"}}"></script>
         <div class="content">
             <header class="clear">{{template "header.tmpl" .}}</header>

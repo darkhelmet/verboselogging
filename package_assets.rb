@@ -7,7 +7,9 @@ FileUtils.rm_rf(Output)
 
 env = Sprockets::Environment.new(Dir.pwd)
 env.append_path(Input)
-env.js_compressor = Uglifier.new
-env.css_compressor = YUI::CssCompressor.new(jar_file: File.expand_path('vendor/yuicompressor-2.4.7.jar'))
+if ENV.fetch('COMPRESS', false)
+  env.js_compressor = Uglifier.new
+  env.css_compressor = YUI::CssCompressor.new(jar_file: File.expand_path('vendor/yuicompressor-2.4.7.jar'))
+end
 manifest = Sprockets::Manifest.new(env, Output)
 manifest.compile([])

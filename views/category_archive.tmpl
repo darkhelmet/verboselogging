@@ -1,6 +1,6 @@
 {{range $category, $posts  := .}}
     <section>
-        <h1><a href="{{CategoryPath $category}}">{{$category}}</a></h1>
+        <h1><a href="{{CategoryPath $category}}">{{$category | Titleize}}</a></h1>
         {{range $posts}}
             <article class="main">
                 <h4 class="archive_title">

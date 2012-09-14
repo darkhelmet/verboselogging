@@ -124,7 +124,7 @@ func categoryArchiveHandler(req *web.Request, r Responder) {
     } else {
         grouped := make(map[string][]*Post.Post)
         for _, post := range posts {
-            key := strings.Title(post.Category)
+            key := post.Category
             grouped[key] = append(grouped[key], post)
         }
 

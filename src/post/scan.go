@@ -39,12 +39,18 @@ func scanPost(s scanner) (*Post, error) {
             return nil, err
         }
         switch n := len(cols); n {
+        case 3:
+            // For sitemap
+            targets = []interface{}{&slugs, &post.PublishedOn, &post.UpdatedAt}
+        case 4:
+            // For archives
+            targets = []interface{}{&slugs, &post.PublishedOn, &post.Title, &post.Category}
         case 17:
             // Do nothing, but validate that it's fine
         case 18:
             targets = append(targets, &rank)
         default:
-            return nil, fmt.Errorf("Wrong number of columns %d", n)
+            return nil, fmt.Errorf("Wrong number of columns: %d", n)
         }
     }
     err := s.Scan(targets...)

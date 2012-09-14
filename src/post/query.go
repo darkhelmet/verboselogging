@@ -65,6 +65,21 @@ func FindByPermalink(year, month, day, slug string) (*Post, error) {
     return post, nil
 }
 
+func FindByMonth(year, month string) ([]*Post, error) {
+    parsed, err := stringsToInts(year, month)
+    if err != nil {
+        return nil, err
+    }
+
+    startOfMonth := time.Date(parsed[0], time.Month(parsed[1]), 1, 0, 0, 0, 0, config.TimeZone).UTC()
+    endOfMonth := time.Date(parsed[0], time.Month((parsed[1]+1)%12), 1, 0, 0, 0, -1, config.TimeZone).UTC()
+    return queryMany(`
+        SELECT *
+        FROM published_posts
+        WHERE published_on
+        BETWEEN $1 AND $2 LIMIT 1`, startOfMonth, endOfMonth)
+}
+
 func FindByTag(tag string) ([]*Post, error) {
     return queryMany("SELECT * FROM published_posts WHERE $1 = ANY(tags)", tag)
 }
@@ -87,4 +102,12 @@ func Search(query string) ([]*Post, error) {
         FROM published_posts
         WHERE (((setweight(to_tsvector('simple', title), 'A') || setweight(to_tsvector('simple', description), 'B') || setweight(to_tsvector('simple', ARRAY_TO_STRING(tags, ',')), 'B') || setweight(to_tsvector('simple', body), 'C')) @@ (to_tsquery('simple', ''' ' || $1 || ' '''))))
         ORDER BY pg_search_rank DESC`, query)
+}
+
+func FindForSitemap() ([]*Post, error) {
+    return queryMany(`SELECT slugs, published_on, updated_at FROM published_posts`)
+}
+
+func FindForArchive() ([]*Post, error) {
+    return queryMany(`SELECT slugs, published_on, title, category FROM published_posts`)
 }

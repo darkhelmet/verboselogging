@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
+{{`<?xml version="1.0" encoding="UTF-8"?>` | Safe}}
 <rss version="2.0">
     <channel>
         <title>{{.SiteTitle}}</title>
@@ -17,7 +17,7 @@
                 <guid>{{.Canonical | CanonicalUrl}}</guid>
                 <author>{{.FeedAuthor}}</author>
                 <description>
-                    <![CDATA[{{.BodyHtml | Safe }}]]>
+                    {{`<![CDATA[` | Safe }}{{.BodyHtml | Safe }}]]>
                 </description>
             </item>
         {{end}}

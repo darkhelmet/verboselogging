@@ -10,6 +10,9 @@
                 {{if .Page}}{{template "page.tmpl" .Page}}{{end}}
                 {{if .Post}}{{template "post.tmpl" .Post}}{{end}}
                 {{range .PostPreview}}{{template "post_preview.tmpl" .}}{{end}}
+                {{range .FullArchive}}{{template "full_archive.tmpl" .}}{{end}}
+                {{if .CategoryArchive}}{{template "category_archive.tmpl" .CategoryArchive}}{{end}}
+                {{if .MonthlyArchive}}{{template "monthly_archive.tmpl" .MonthlyArchive}}{{end}}
                 {{if .ArchiveLinks}}{{template "archive_links.tmpl"}}{{end}}
                 {{if .NotFound}}{{template "not_found.tmpl"}}{{end}}
                 {{if .Error}}{{template "server_error.tmpl"}}{{end}}

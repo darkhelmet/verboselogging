@@ -44,9 +44,9 @@ type RenderInfo struct {
     Title, PageTitle, Description, Canonical, Gravatar string
     Error, NotFound, ArchiveLinks                      bool
 
-    SiteTitle, SiteDescription, SiteContact, SiteAuthor string
-    PageLinks                                           []PageLink
-    PostPreview, Post                                   interface{}
+    SiteTitle, SiteDescription, SiteContact, SiteAuthor             string
+    PageLinks                                                       []PageLink
+    PostPreview, Post, FullArchive, CategoryArchive, MonthlyArchive interface{}
 }
 
 func setupAssets() {
@@ -68,6 +68,9 @@ func setupAssets() {
 func init() {
     templates = T.Must(T.New("funcs").Funcs(T.FuncMap{
         "AssetPath": assetPath,
+        "Time": func(s int64) time.Time {
+            return time.Unix(-s, 0)
+        },
         "ArchivePath": func(name string) string {
             return fmt.Sprintf("/archive/%s", name)
         },

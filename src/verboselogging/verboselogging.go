@@ -3,7 +3,6 @@ package main
 import (
     "config"
     "fmt"
-    "github.com/darkhelmet/env"
     "log"
     "net"
     "os"
@@ -14,7 +13,6 @@ import (
     "time"
     "vendor/github.com/garyburd/twister/server"
     "vendor/github.com/garyburd/twister/web"
-    "vendor/github.com/tobi/airbrake-go"
     "view"
 )
 
@@ -23,10 +21,6 @@ var (
     feedburner    = regexp.MustCompile("(?i)feedburner")
     feedburnerUrl = "http://feeds.feedburner.com/VerboseLogging"
 )
-
-func init() {
-    airbrake.ApiKey = env.StringDefault("AIRBRAKE_TOKEN", "")
-}
 
 func rootHandler(req *web.Request, r Responder) {
     posts, err := Post.FindLatest(6)
@@ -267,7 +261,6 @@ func pageHandler(req *web.Request, r Responder) {
 }
 
 func serverError(r Responder, err error) {
-    airbrake.Error(err, nil)
     w := r.Respond(web.StatusInternalServerError, web.HeaderContentType, "text/html; charset=utf-8")
     view.RenderLayout(w, &view.RenderInfo{
         Error: true,

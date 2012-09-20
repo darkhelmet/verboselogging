@@ -4,7 +4,6 @@ import (
     "config"
     "fmt"
     "log"
-    // "net"
     "net/http"
     "os"
     Page "page"
@@ -277,13 +276,6 @@ func notFound(req *web.Request) {
     })
 }
 
-func redirectHandler(req *web.Request) {
-    url := req.URL
-    url.Host = config.CanonicalHost
-    url.Scheme = "http"
-    req.Respond(web.StatusMovedPermanently, web.HeaderLocation, url.String())
-}
-
 func main() {
     staticOptions := &web.ServeFileOptions{
         Header: web.Header{
@@ -307,13 +299,7 @@ func main() {
         Register("/<slug:\\w+>", "GET", pageHandler).
         Register("/<path:.*>", "GET", web.DirectoryHandler("public", staticOptions))
 
-    redirector := web.NewRouter().
-        Register("/<splat:.*>", "GET", redirectHandler)
-
-    hostRouter := web.NewHostRouter(redirector).
-        Register(config.CanonicalHost, router)
-
-    http.Handle("/", LoggerHandler{GzipHandler{adapter.HTTPHandler{hostRouter}}, logger})
+    http.Handle("/", CanonicalHostHandler{LoggerHandler{GzipHandler{adapter.HTTPHandler{router}}, logger}, config.CanonicalHost, "http"})
     logger.Printf("verboselogging is starting on 0.0.0.0:%d", config.Port)
     err := http.ListenAndServe(fmt.Sprintf("0.0.0.0:%d", config.Port), nil)
     if err != nil {

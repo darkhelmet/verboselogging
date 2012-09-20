@@ -15,7 +15,6 @@
 package web
 
 import (
-    "compress/gzip"
     "errors"
     "io"
     "mime"
@@ -79,9 +78,6 @@ func ServeFile(req *Request, fname string, options *ServeFileOptions) {
     }
 
     compress := strings.Contains(req.Header.Get("Accept-Encoding"), "gzip")
-    if compress {
-        header.Set(HeaderContentEncoding, "gzip")
-    }
 
     if status == StatusNotModified {
         // Clear entity headers.
@@ -132,11 +128,6 @@ func ServeFile(req *Request, fname string, options *ServeFileOptions) {
     }
 
     w := req.Responder.Respond(status, header)
-    if compress {
-        gz := gzip.NewWriter(w)
-        w = gz
-        defer gz.Close()
-    }
     if req.Method != "HEAD" && status != StatusNotModified {
         io.Copy(w, f)
     }

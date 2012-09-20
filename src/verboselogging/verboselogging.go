@@ -4,14 +4,15 @@ import (
     "config"
     "fmt"
     "log"
-    "net"
+    // "net"
+    "net/http"
     "os"
     Page "page"
     Post "post"
     "regexp"
     "strings"
     "time"
-    "vendor/github.com/garyburd/twister/server"
+    "vendor/github.com/garyburd/twister/adapter"
     "vendor/github.com/garyburd/twister/web"
     "view"
 )
@@ -22,13 +23,13 @@ var (
     feedburnerUrl = "http://feeds.feedburner.com/VerboseLogging"
 )
 
-func rootHandler(req *web.Request, r Responder) {
+func rootHandler(req *web.Request) {
     posts, err := Post.FindLatest(6)
     if err != nil {
         logger.Printf("failed finding latest posts: %s", err)
-        serverError(r, err)
+        serverError(req, err)
     } else {
-        w := r.Respond(web.StatusOK, web.HeaderContentType, "text/html; charset=utf-8")
+        w := req.Respond(web.StatusOK, web.HeaderContentType, "text/html; charset=utf-8")
         view.RenderLayout(w, &view.RenderInfo{
             PostPreview:  posts,
             Canonical:    "/",
@@ -38,19 +39,19 @@ func rootHandler(req *web.Request, r Responder) {
     }
 }
 
-func opensearchHandler(req *web.Request, r Responder) {
-    w := r.Respond(web.StatusOK, web.HeaderContentType, "application/xml; charset=utf-8")
+func opensearchHandler(req *web.Request) {
+    w := req.Respond(web.StatusOK, web.HeaderContentType, "application/xml; charset=utf-8")
     view.RenderPartial(w, "opensearch.tmpl", nil)
 }
 
-func searchHandler(req *web.Request, r Responder) {
+func searchHandler(req *web.Request) {
     query := req.Param.Get("query")
     posts, err := Post.Search(query)
     if err != nil {
         logger.Printf("failed finding posts with query %#v: %s", query, err)
-        serverError(r, err)
+        serverError(req, err)
     } else {
-        w := r.Respond(web.StatusOK, web.HeaderContentType, "text/html; charset=utf-8")
+        w := req.Respond(web.StatusOK, web.HeaderContentType, "text/html; charset=utf-8")
         title := fmt.Sprintf("Search results for %#v", query)
         view.RenderLayout(w, &view.RenderInfo{
             PostPreview:  posts,
@@ -61,12 +62,12 @@ func searchHandler(req *web.Request, r Responder) {
     }
 }
 
-func feedHandler(req *web.Request, r Responder) {
+func feedHandler(req *web.Request) {
     if !feedburner.Match([]byte(req.Header.Get(web.HeaderUserAgent))) {
         // Not Feedburner
         if "" == req.Param.Get("no_fb") {
             // And nothing saying to ignore
-            r.Respond(web.StatusMovedPermanently, web.HeaderLocation, feedburnerUrl)
+            req.Respond(web.StatusMovedPermanently, web.HeaderLocation, feedburnerUrl)
             return
         }
     }
@@ -74,31 +75,31 @@ func feedHandler(req *web.Request, r Responder) {
     posts, err := Post.FindLatest(10)
     if err != nil {
         logger.Printf("failed getting posts for feed: %s", err)
-        serverError(r, err)
+        serverError(req, err)
     } else {
-        w := r.Respond(web.StatusOK, web.HeaderContentType, "application/rss+xml; charset=utf-8")
+        w := req.Respond(web.StatusOK, web.HeaderContentType, "application/rss+xml; charset=utf-8")
         view.RenderPartial(w, "feed.tmpl", &view.RenderInfo{Post: posts})
     }
 }
 
-func sitemapHandler(req *web.Request, r Responder) {
+func sitemapHandler(req *web.Request) {
     posts, err := Post.FindForSitemap()
     if err != nil {
         logger.Printf("failed getting posts for sitemap: %s", err)
-        serverError(r, err)
+        serverError(req, err)
     } else {
-        w := r.Respond(web.StatusOK, web.HeaderContentType, "application/xml; charset=utf-8")
+        w := req.Respond(web.StatusOK, web.HeaderContentType, "application/xml; charset=utf-8")
         view.RenderPartial(w, "sitemap.tmpl", &view.RenderInfo{Post: posts})
     }
 }
 
-func fullArchiveHandler(req *web.Request, r Responder) {
+func fullArchiveHandler(req *web.Request) {
     posts, err := Post.FindForArchive()
     if err != nil {
         logger.Printf("failed getting posts for full archive: %s", err)
-        serverError(r, err)
+        serverError(req, err)
     } else {
-        w := r.Respond(web.StatusOK, web.HeaderContentType, "text/html; charset=utf-8")
+        w := req.Respond(web.StatusOK, web.HeaderContentType, "text/html; charset=utf-8")
         title := "Full archives"
         view.RenderLayout(w, &view.RenderInfo{
             FullArchive:  posts,
@@ -110,11 +111,11 @@ func fullArchiveHandler(req *web.Request, r Responder) {
     }
 }
 
-func categoryArchiveHandler(req *web.Request, r Responder) {
+func categoryArchiveHandler(req *web.Request) {
     posts, err := Post.FindForArchive()
     if err != nil {
         logger.Printf("failed getting posts for category archive: %s", err)
-        serverError(r, err)
+        serverError(req, err)
     } else {
         grouped := make(map[string][]*Post.Post)
         for _, post := range posts {
@@ -122,7 +123,7 @@ func categoryArchiveHandler(req *web.Request, r Responder) {
             grouped[key] = append(grouped[key], post)
         }
 
-        w := r.Respond(web.StatusOK, web.HeaderContentType, "text/html; charset=utf-8")
+        w := req.Respond(web.StatusOK, web.HeaderContentType, "text/html; charset=utf-8")
         view.RenderLayout(w, &view.RenderInfo{
             CategoryArchive: grouped,
             Description:     "Archives by category",
@@ -133,11 +134,11 @@ func categoryArchiveHandler(req *web.Request, r Responder) {
     }
 }
 
-func monthlyArchiveHandler(req *web.Request, r Responder) {
+func monthlyArchiveHandler(req *web.Request) {
     posts, err := Post.FindForArchive()
     if err != nil {
         logger.Printf("failed getting posts for monthly archive: %s", err)
-        serverError(r, err)
+        serverError(req, err)
     } else {
         grouped := make(map[int64][]*Post.Post)
         for _, post := range posts {
@@ -146,7 +147,7 @@ func monthlyArchiveHandler(req *web.Request, r Responder) {
             grouped[key] = append(grouped[key], post)
         }
 
-        w := r.Respond(web.StatusOK, web.HeaderContentType, "text/html; charset=utf-8")
+        w := req.Respond(web.StatusOK, web.HeaderContentType, "text/html; charset=utf-8")
         view.RenderLayout(w, &view.RenderInfo{
             MonthlyArchive: grouped,
             Description:    "Archives by month",
@@ -157,14 +158,14 @@ func monthlyArchiveHandler(req *web.Request, r Responder) {
     }
 }
 
-func monthlyHandler(req *web.Request, r Responder) {
+func monthlyHandler(req *web.Request) {
     year, month := req.URLParam["year"], req.URLParam["month"]
     posts, err := Post.FindByMonth(year, month)
     if err != nil {
         logger.Printf("failed finding posts in month %#v of %#v: %s", month, year, err)
-        serverError(r, err)
+        serverError(req, err)
     } else {
-        w := r.Respond(web.StatusOK, web.HeaderContentType, "text/html; charset=utf-8")
+        w := req.Respond(web.StatusOK, web.HeaderContentType, "text/html; charset=utf-8")
         title := fmt.Sprintf("Archives for %s-%s", month, year)
         view.RenderLayout(w, &view.RenderInfo{
             PostPreview:  posts,
@@ -176,14 +177,14 @@ func monthlyHandler(req *web.Request, r Responder) {
     }
 }
 
-func categoryHandler(req *web.Request, r Responder) {
+func categoryHandler(req *web.Request) {
     category := req.URLParam["category"]
     posts, err := Post.FindByCategory(category)
     if err != nil {
         logger.Printf("failed finding posts with category %#v: %s", category, err)
-        serverError(r, err)
+        serverError(req, err)
     } else {
-        w := r.Respond(web.StatusOK, web.HeaderContentType, "text/html; charset=utf-8")
+        w := req.Respond(web.StatusOK, web.HeaderContentType, "text/html; charset=utf-8")
         category = strings.Title(category)
         title := fmt.Sprintf("%s Articles", category)
         view.RenderLayout(w, &view.RenderInfo{
@@ -196,20 +197,20 @@ func categoryHandler(req *web.Request, r Responder) {
     }
 }
 
-func permalinkHandler(req *web.Request, r Responder) {
+func permalinkHandler(req *web.Request) {
     slug := req.URLParam["slug"]
     year, month, day := req.URLParam["year"], req.URLParam["month"], req.URLParam["day"]
     post, err := Post.FindByPermalink(year, month, day, slug)
     if err != nil {
         switch err.(type) {
         case Post.NotFound:
-            notFound(r)
+            notFound(req)
         default:
             logger.Printf("failed finding post with year(%#v) month(%#v) day(%#v) slug(%#v): %s (%T)", year, month, day, slug, err, err)
-            serverError(r, err)
+            serverError(req, err)
         }
     } else {
-        w := r.Respond(web.StatusOK, web.HeaderContentType, "text/html; charset=utf-8")
+        w := req.Respond(web.StatusOK, web.HeaderContentType, "text/html; charset=utf-8")
         view.RenderLayout(w, &view.RenderInfo{
             Post:        post,
             Title:       post.Title,
@@ -219,14 +220,14 @@ func permalinkHandler(req *web.Request, r Responder) {
     }
 }
 
-func tagHandler(req *web.Request, r Responder) {
+func tagHandler(req *web.Request) {
     tag := req.URLParam["tag"]
     posts, err := Post.FindByTag(tag)
     if err != nil {
         logger.Printf("failed finding posts with tag %#v: %s", tag, err)
-        serverError(r, err)
+        serverError(req, err)
     } else {
-        w := r.Respond(web.StatusOK, web.HeaderContentType, "text/html; charset=utf-8")
+        w := req.Respond(web.StatusOK, web.HeaderContentType, "text/html; charset=utf-8")
         title := fmt.Sprintf("Articles tagged with %#v", tag)
         view.RenderLayout(w, &view.RenderInfo{
             PostPreview: posts,
@@ -238,19 +239,19 @@ func tagHandler(req *web.Request, r Responder) {
     }
 }
 
-func pageHandler(req *web.Request, r Responder) {
+func pageHandler(req *web.Request) {
     slug := req.URLParam["slug"]
     page, err := Page.FindBySlug(slug)
     if err != nil {
         switch err.(type) {
         case Page.NotFound:
-            notFound(r)
+            notFound(req)
         default:
             logger.Printf("failed finding page with slug %#v: %s (%T)", slug, err, err)
-            serverError(r, err)
+            serverError(req, err)
         }
     } else {
-        w := r.Respond(web.StatusOK, web.HeaderContentType, "text/html; charset=utf-8")
+        w := req.Respond(web.StatusOK, web.HeaderContentType, "text/html; charset=utf-8")
         view.RenderLayout(w, &view.RenderInfo{
             Page:        view.HTML(page.BodyHtml),
             Title:       page.Title,
@@ -260,16 +261,16 @@ func pageHandler(req *web.Request, r Responder) {
     }
 }
 
-func serverError(r Responder, err error) {
-    w := r.Respond(web.StatusInternalServerError, web.HeaderContentType, "text/html; charset=utf-8")
+func serverError(req *web.Request, err error) {
+    w := req.Respond(web.StatusInternalServerError, web.HeaderContentType, "text/html; charset=utf-8")
     view.RenderLayout(w, &view.RenderInfo{
         Error: true,
         Title: "Oh. Sorry about that.",
     })
 }
 
-func notFound(r Responder) {
-    w := r.Respond(web.StatusNotFound, web.HeaderContentType, "text/html; charset=utf-8")
+func notFound(req *web.Request) {
+    w := req.Respond(web.StatusNotFound, web.HeaderContentType, "text/html; charset=utf-8")
     view.RenderLayout(w, &view.RenderInfo{
         NotFound: true,
         Title:    "Not Found",
@@ -283,14 +284,6 @@ func redirectHandler(req *web.Request) {
     req.Respond(web.StatusMovedPermanently, web.HeaderLocation, url.String())
 }
 
-func ShortLogger(lr *server.LogRecord) {
-    if lr.Error != nil {
-        logger.Printf("%d %s %s %s\n", lr.Status, lr.Request.Method, lr.Request.URL, lr.Error)
-    } else {
-        logger.Printf("%d %s %s\n", lr.Status, lr.Request.Method, lr.Request.URL)
-    }
-}
-
 func main() {
     staticOptions := &web.ServeFileOptions{
         Header: web.Header{
@@ -299,19 +292,19 @@ func main() {
         },
     }
     router := web.NewRouter().
-        Register("/", "GET", Use(Gzip(rootHandler))).
-        Register("/opensearch.xml", "GET", Use(Gzip(opensearchHandler))).
-        Register("/search", "GET", Use(Gzip(searchHandler))).
-        Register("/feed", "GET", Use(Gzip(feedHandler))).
-        Register("/sitemap.xml<gzip:(\\.gz)?>", "GET", Use(Gzip(sitemapHandler))).
-        Register("/archive/full", "GET", Use(Gzip(fullArchiveHandler))).
-        Register("/archive/category", "GET", Use(Gzip(categoryArchiveHandler))).
-        Register("/archive/month", "GET", Use(Gzip(monthlyArchiveHandler))).
-        Register("/<year:\\d{4}>/<month:\\d{2}>", "GET", Use(Gzip(monthlyHandler))).
-        Register("/category/<category>", "GET", Use(Gzip(categoryHandler))).
-        Register("/<year:\\d{4}>/<month:\\d{2}>/<day:\\d{2}>/<slug>", "GET", Use(Gzip(permalinkHandler))).
-        Register("/tag/<tag>", "GET", Use(Gzip(tagHandler))).
-        Register("/<slug:\\w+>", "GET", Use(Gzip(pageHandler))).
+        Register("/", "GET", rootHandler).
+        Register("/opensearch.xml", "GET", opensearchHandler).
+        Register("/search", "GET", searchHandler).
+        Register("/feed", "GET", feedHandler).
+        Register("/sitemap.xml<gzip:(\\.gz)?>", "GET", sitemapHandler).
+        Register("/archive/full", "GET", fullArchiveHandler).
+        Register("/archive/category", "GET", categoryArchiveHandler).
+        Register("/archive/month", "GET", monthlyArchiveHandler).
+        Register("/<year:\\d{4}>/<month:\\d{2}>", "GET", monthlyHandler).
+        Register("/category/<category>", "GET", categoryHandler).
+        Register("/<year:\\d{4}>/<month:\\d{2}>/<day:\\d{2}>/<slug>", "GET", permalinkHandler).
+        Register("/tag/<tag>", "GET", tagHandler).
+        Register("/<slug:\\w+>", "GET", pageHandler).
         Register("/<path:.*>", "GET", web.DirectoryHandler("public", staticOptions))
 
     redirector := web.NewRouter().
@@ -320,18 +313,9 @@ func main() {
     hostRouter := web.NewHostRouter(redirector).
         Register(config.CanonicalHost, router)
 
-    listener, err := net.Listen("tcp", fmt.Sprintf("0.0.0.0:%d", config.Port))
-    if err != nil {
-        logger.Fatalf("Failed to listen: %s", err)
-    }
-    defer listener.Close()
-    server := &server.Server{
-        Listener: listener,
-        Handler:  hostRouter,
-        Logger:   server.LoggerFunc(ShortLogger),
-    }
+    http.Handle("/", LoggerHandler{GzipHandler{adapter.HTTPHandler{hostRouter}}, logger})
     logger.Printf("verboselogging is starting on 0.0.0.0:%d", config.Port)
-    err = server.Serve()
+    err := http.ListenAndServe(fmt.Sprintf("0.0.0.0:%d", config.Port), nil)
     if err != nil {
         logger.Fatalf("Failed to serve: %s", err)
     }

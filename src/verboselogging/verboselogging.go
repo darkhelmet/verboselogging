@@ -303,6 +303,7 @@ func main() {
     var handler http.Handler = adapter.HTTPHandler{router}
     handler = webutil.GzipHandler{handler}
     handler = webutil.LoggerHandler{handler, logger}
+    handler = webutil.HerokuHandler{handler, logger}
     handler = webutil.CanonicalHostHandler{handler, config.CanonicalHost, "http"}
     handler = webutil.EnsureRequestBodyClosedHandler{handler}
 

@@ -299,7 +299,13 @@ func main() {
         Register("/<slug:\\w+>", "GET", pageHandler).
         Register("/<path:.*>", "GET", web.DirectoryHandler("public", staticOptions))
 
-    http.Handle("/", CanonicalHostHandler{LoggerHandler{GzipHandler{adapter.HTTPHandler{router}}, logger}, config.CanonicalHost, "http"})
+    var handler http.Handler = adapter.HTTPHandler{router}
+    handler = GzipHandler{handler}
+    handler = LoggerHandler{handler, logger}
+    handler = CanonicalHostHandler{handler, config.CanonicalHost, "http"}
+    handler = EnsureRequestBodyClosedHandler{handler}
+
+    http.Handle("/", handler)
     logger.Printf("verboselogging is starting on 0.0.0.0:%d", config.Port)
     err := http.ListenAndServe(fmt.Sprintf("0.0.0.0:%d", config.Port), nil)
     if err != nil {

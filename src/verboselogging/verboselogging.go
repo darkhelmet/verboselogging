@@ -3,6 +3,7 @@ package main
 import (
     "config"
     "fmt"
+    "github.com/darkhelmet/webutil"
     "log"
     "net/http"
     "os"
@@ -300,10 +301,10 @@ func main() {
         Register("/<path:.*>", "GET", web.DirectoryHandler("public", staticOptions))
 
     var handler http.Handler = adapter.HTTPHandler{router}
-    handler = GzipHandler{handler}
-    handler = LoggerHandler{handler, logger}
-    handler = CanonicalHostHandler{handler, config.CanonicalHost, "http"}
-    handler = EnsureRequestBodyClosedHandler{handler}
+    handler = webutil.GzipHandler{handler}
+    handler = webutil.LoggerHandler{handler, logger}
+    handler = webutil.CanonicalHostHandler{handler, config.CanonicalHost, "http"}
+    handler = webutil.EnsureRequestBodyClosedHandler{handler}
 
     http.Handle("/", handler)
     logger.Printf("verboselogging is starting on 0.0.0.0:%d", config.Port)

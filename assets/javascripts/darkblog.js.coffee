@@ -17,25 +17,6 @@ $ ->
     closeEasing: 'easeInBack'
   })
 
-  $('.content a').embedly
-    urlRe: /http:\/\/(.*youtube\.com\/.*)/i,
-    maxWidth: 640,
-    wmode: 'opaque'
-
-  $('.content a').embedly
-    urlRe: /http:\/\/(twitter\.com\/.*\/status\/.*|twitter\.com\/.*\/statuses\/.*|mobile\.twitter\.com\/.*\/status\/.*|mobile\.twitter\.com\/.*\/statuses\/.*)/i
-    success: (oembed, dict) ->
-      dict.node.attr('title', oembed.description)
-      dict.node.click ->
-        div = $('<div class="embedly" />')
-        div.html($(oembed.code))
-        $.facebox(div)
-        false
-
-  $('.content a.twitter').embedly
-    urlRe: /http:\/\/(twitter\.com\/.*\/status\/.*|twitter\.com\/.*\/statuses\/.*|mobile\.twitter\.com\/.*\/status\/.*|mobile\.twitter\.com\/.*\/statuses\/.*)/i
-    maxWidth: 640
-
   $('p.footnote:first').addClass('first')
 
   $('.rack-gist').each ->

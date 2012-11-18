@@ -78,7 +78,13 @@ func feedHandler(req *web.Request) {
         serverError(req, err)
     } else {
         w := req.Respond(web.StatusOK, web.HeaderContentType, "application/rss+xml; charset=utf-8")
-        view.RenderPartial(w, "feed.tmpl", &view.RenderInfo{Post: posts})
+        view.RenderPartial(w, "feed.tmpl", &view.RenderInfo{
+            Post:            posts,
+            SiteTitle:       config.SiteTitle,
+            SiteDescription: config.SiteDescription,
+            SiteContact:     config.SiteContact,
+            SiteAuthor:      config.SiteAuthor,
+        })
     }
 }
 

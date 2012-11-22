@@ -10,17 +10,38 @@ $.getScriptLite = (src) ->
 $ ->
   CFInstall.check(mode: 'overlay')
 
-  $('.content a:regex(href, png|jpe?g|gif)').fancybox({
-    openEffect: 'elastic',
-    openEasing: 'easeOutBack',
-    closeEffect: 'elastic',
+  Embedly.defaults.key = 'fd17fbebd90947588f7bbf26f04bceea'
+
+  fancyBoxEffects =
+    openEffect: 'elastic'
+    openEasing: 'easeOutBack'
+    closeEffect: 'elastic'
     closeEasing: 'easeInBack'
-  })
+
+  $('.content a:regex(href, png|jpe?g|gif)').fancybox(fancyBoxEffects)
+
+  $('.content a').embedly
+    re: /(youtube|vimeo)\.com/i
+    maxWidth: 640
+    wmode: 'opaque'
+
+  $('.content a.twitter').embedly
+    re: /twitter\.com/i
+    maxWidth: 640
+
+  $('.content a').embedly
+    re: /slideshare\.net/i
+    maxWidth: 640
+
+  $('.content a').embedly re: /twitter\.com/i, (oembed, elem) ->
+      $(elem).attr('title', oembed.description)
+      $(elem).click ->
+        div = $('<div class="embedly" />')
+        div.html($(oembed.code))
+        $.fancybox(div, fancyBoxEffects)
+        false
 
   $('p.footnote:first').addClass('first')
-
-  $('.rack-gist').each ->
-    $.ajax(url: $(this).attr('rack-gist-url'), dataType: 'script', cache: true)
 
   if document.getElementsByTagName('plusone').length > 0
     $('plusone').replaceWith('<g:plusone size="medium"></g:plusone>')

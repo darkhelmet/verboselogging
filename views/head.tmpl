@@ -23,7 +23,7 @@
 {{if .Post}}
 <meta property="og:title" content="{{.Post.Title}} | {{.SiteTitle}}">
 <meta property="og:type" content="article">
-<meta property="og:url" content="{{.Post.Canonical | CanonicalUrl}}">
+<meta property="og:url" content="{{PostCanonical .Post | CanonicalUrl}}">
 <meta property="og:description" content="{{.Post.Description}}">
 <meta property="og:image" content="{{.SiteContact | Gravatar}}?s=100">
 <meta property="og:site_name" content="{{.SiteTitle}}">

@@ -3,13 +3,14 @@ package main
 import (
     "config"
     "fmt"
+    "github.com/darkhelmet/blargh/errors"
+    "github.com/darkhelmet/blargh/post"
     "github.com/darkhelmet/webutil"
     "log"
     "net/http"
     "os"
-    Page "page"
-    Post "post"
     "regexp"
+    "strconv"
     "strings"
     "time"
     "vendor/github.com/garyburd/twister/adapter"
@@ -21,10 +22,12 @@ var (
     logger        = log.New(os.Stdout, "[server] ", config.LogFlags)
     feedburner    = regexp.MustCompile("(?i)feedburner")
     feedburnerUrl = "http://feeds.feedburner.com/VerboseLogging"
+    posts         = NewRepo("posts")
+    pages         = NewRepo("pages")
 )
 
 func rootHandler(req *web.Request) {
-    posts, err := Post.FindLatest(6)
+    posts, err := posts.FindLatest(6)
     if err != nil {
         logger.Printf("failed finding latest posts: %s", err)
         serverError(req, err)
@@ -46,7 +49,7 @@ func opensearchHandler(req *web.Request) {
 
 func searchHandler(req *web.Request) {
     query := req.Param.Get("query")
-    posts, err := Post.Search(query)
+    posts, err := posts.Search(query)
     if err != nil {
         logger.Printf("failed finding posts with query %#v: %s", query, err)
         serverError(req, err)
@@ -72,7 +75,7 @@ func feedHandler(req *web.Request) {
         }
     }
 
-    posts, err := Post.FindLatest(10)
+    posts, err := posts.FindLatest(10)
     if err != nil {
         logger.Printf("failed getting posts for feed: %s", err)
         serverError(req, err)
@@ -89,7 +92,7 @@ func feedHandler(req *web.Request) {
 }
 
 func sitemapHandler(req *web.Request) {
-    posts, err := Post.FindForSitemap()
+    posts, err := posts.FindLatest(posts.Len())
     if err != nil {
         logger.Printf("failed getting posts for sitemap: %s", err)
         serverError(req, err)
@@ -100,7 +103,7 @@ func sitemapHandler(req *web.Request) {
 }
 
 func fullArchiveHandler(req *web.Request) {
-    posts, err := Post.FindForArchive()
+    posts, err := posts.FindLatest(posts.Len())
     if err != nil {
         logger.Printf("failed getting posts for full archive: %s", err)
         serverError(req, err)
@@ -118,12 +121,12 @@ func fullArchiveHandler(req *web.Request) {
 }
 
 func categoryArchiveHandler(req *web.Request) {
-    posts, err := Post.FindForArchive()
+    posts, err := posts.FindLatest(posts.Len())
     if err != nil {
         logger.Printf("failed getting posts for category archive: %s", err)
         serverError(req, err)
     } else {
-        grouped := make(map[string][]*Post.Post)
+        grouped := make(map[string][]*post.Post)
         for _, post := range posts {
             key := post.Category
             grouped[key] = append(grouped[key], post)
@@ -141,14 +144,14 @@ func categoryArchiveHandler(req *web.Request) {
 }
 
 func monthlyArchiveHandler(req *web.Request) {
-    posts, err := Post.FindForArchive()
+    posts, err := posts.FindLatest(posts.Len())
     if err != nil {
         logger.Printf("failed getting posts for monthly archive: %s", err)
         serverError(req, err)
     } else {
-        grouped := make(map[int64][]*Post.Post)
+        grouped := make(map[int64][]*post.Post)
         for _, post := range posts {
-            t := post.PublishedOn.In(config.TimeZone)
+            t := post.PublishedOn
             key := -time.Date(t.Year(), t.Month(), 1, 0, 0, 0, 0, time.Local).Unix()
             grouped[key] = append(grouped[key], post)
         }
@@ -166,7 +169,9 @@ func monthlyArchiveHandler(req *web.Request) {
 
 func monthlyHandler(req *web.Request) {
     year, month := req.URLParam["year"], req.URLParam["month"]
-    posts, err := Post.FindByMonth(year, month)
+    y, _ := strconv.Atoi(year)
+    m, _ := strconv.Atoi(month)
+    posts, err := posts.FindByMonth(y, time.Month(m))
     if err != nil {
         logger.Printf("failed finding posts in month %#v of %#v: %s", month, year, err)
         serverError(req, err)
@@ -185,7 +190,7 @@ func monthlyHandler(req *web.Request) {
 
 func categoryHandler(req *web.Request) {
     category := req.URLParam["category"]
-    posts, err := Post.FindByCategory(category)
+    posts, err := posts.FindByCategory(category)
     if err != nil {
         logger.Printf("failed finding posts with category %#v: %s", category, err)
         serverError(req, err)
@@ -206,10 +211,13 @@ func categoryHandler(req *web.Request) {
 func permalinkHandler(req *web.Request) {
     slug := req.URLParam["slug"]
     year, month, day := req.URLParam["year"], req.URLParam["month"], req.URLParam["day"]
-    post, err := Post.FindByPermalink(year, month, day, slug)
+    y, _ := strconv.Atoi(year)
+    m, _ := strconv.Atoi(month)
+    d, _ := strconv.Atoi(day)
+    post, err := posts.FindByPermalink(y, time.Month(m), d, slug)
     if err != nil {
         switch err.(type) {
-        case Post.NotFound:
+        case errors.NotFound:
             notFound(req)
         default:
             logger.Printf("failed finding post with year(%#v) month(%#v) day(%#v) slug(%#v): %s (%T)", year, month, day, slug, err, err)
@@ -220,7 +228,7 @@ func permalinkHandler(req *web.Request) {
         view.RenderLayout(w, &view.RenderInfo{
             Post:        post,
             Title:       post.Title,
-            Canonical:   post.Canonical(),
+            Canonical:   view.PostCanonical(post),
             Description: post.Description,
         })
     }
@@ -228,7 +236,7 @@ func permalinkHandler(req *web.Request) {
 
 func tagHandler(req *web.Request) {
     tag := req.URLParam["tag"]
-    posts, err := Post.FindByTag(tag)
+    posts, err := posts.FindByTag(tag)
     if err != nil {
         logger.Printf("failed finding posts with tag %#v: %s", tag, err)
         serverError(req, err)
@@ -247,10 +255,10 @@ func tagHandler(req *web.Request) {
 
 func pageHandler(req *web.Request) {
     slug := req.URLParam["slug"]
-    page, err := Page.FindBySlug(slug)
+    page, err := pages.FindBySlug(slug)
     if err != nil {
         switch err.(type) {
-        case Page.NotFound:
+        case errors.NotFound:
             notFound(req)
         default:
             logger.Printf("failed finding page with slug %#v: %s (%T)", slug, err, err)
@@ -259,9 +267,9 @@ func pageHandler(req *web.Request) {
     } else {
         w := req.Respond(web.StatusOK, web.HeaderContentType, "text/html; charset=utf-8")
         view.RenderLayout(w, &view.RenderInfo{
-            Page:        view.HTML(page.BodyHtml),
+            Page:        page,
             Title:       page.Title,
-            Canonical:   page.Canonical(),
+            Canonical:   view.PageCanonical(page),
             Description: page.Description,
         })
     }

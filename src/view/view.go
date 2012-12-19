@@ -5,15 +5,16 @@ import (
     "crypto/md5"
     "encoding/json"
     "fmt"
+    "github.com/darkhelmet/blargh/post"
     T "html/template"
     "io"
     "io/ioutil"
     "log"
     "os"
-    PostView "post/view"
     "strings"
     "time"
     "unicode"
+    "unicode/utf8"
 )
 
 var (
@@ -32,6 +33,14 @@ var (
     }
     assets = make(map[string]string)
 )
+
+type Formatter interface {
+    Format(string) string
+}
+
+type TimeZoner interface {
+    In(*time.Location) time.Time
+}
 
 type PageLink struct {
     Name, Path, Class, Icon string
@@ -89,16 +98,13 @@ func init() {
         "CanonicalUrl": func(path string) string {
             return fmt.Sprintf("http://%s%s", config.CanonicalHost, path)
         },
-        "InTimeZone": func(t time.Time) time.Time {
-            return t.In(config.TimeZone)
-        },
-        "ISO8601": func(t time.Time) string {
+        "ISO8601": func(t Formatter) string {
             return t.Format(time.RFC3339)
         },
-        "RFC822": func(t time.Time) string {
+        "RFC822": func(t Formatter) string {
             return t.Format(time.RFC822)
         },
-        "DisplayTime": func(t time.Time) string {
+        "DisplayTime": func(t Formatter) string {
             return t.Format("02 Jan 2006 15:04 MST")
         },
         "Gravatar": func(email string) string {
@@ -108,9 +114,39 @@ func init() {
             io.WriteString(hash, email)
             return fmt.Sprintf("http://www.gravatar.com/avatar/%x.png", hash.Sum(nil))
         },
-        "Titleize": strings.Title,
-        "Safe":     HTML,
-    }).Funcs(PostView.FuncMap()).ParseGlob("views/*.tmpl"))
+        "CategoryPath": func(i interface{}) string {
+            switch thing := i.(type) {
+            case *post.Post:
+                return fmt.Sprintf("/category/%s", thing.Category)
+            case string:
+                return fmt.Sprintf("/category/%s", thing)
+            default:
+                panic("YOU SHALL NOT PASS!!!")
+            }
+            panic("not reachable")
+        },
+        "UTC": func(t TimeZoner) time.Time {
+            return t.In(time.UTC)
+        },
+        "MonthlyPath": func(t Formatter) string {
+            return t.Format("/2006/01")
+        },
+        "TagPath": func(tag string) string {
+            return fmt.Sprintf("/tag/%s", tag)
+        },
+        "Truncate": func(length int, s string) string {
+            if length < utf8.RuneCountInString(s) {
+                trimmed := []rune(s)[0:length]
+                trimmed[length-1] = '…'
+                return string(trimmed)
+            }
+            return s
+        },
+        "Titleize":      strings.Title,
+        "Safe":          HTML,
+        "PostCanonical": PostCanonical,
+        "PageCanonical": PageCanonical,
+    }).ParseGlob("views/*.tmpl"))
     setupAssets()
 }
 
@@ -135,4 +171,12 @@ func RenderPartial(w io.Writer, name string, data interface{}) {
     if err != nil {
         logger.Printf("error rendering partial: %s", err)
     }
+}
+
+func PostCanonical(p *post.Post) string {
+    return fmt.Sprintf("/%s/%s", p.PublishedOn.Format("2006/01/02"), p.Slug())
+}
+
+func PageCanonical(p *post.Post) string {
+    return "/" + p.Slug()
 }

@@ -5,7 +5,7 @@
         {{range $posts}}
             <article class="main">
                 <h4 class="archive_title">
-                    <a href="{{.Canonical | CanonicalUrl}}" rel="bookmark">{{.Title}}</a>
+                    <a href="{{PostCanonical . | CanonicalUrl}}" rel="bookmark">{{.Title}}</a>
                 </h4>
             </article>
         {{end}}

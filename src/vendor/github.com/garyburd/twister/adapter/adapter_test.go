@@ -15,9 +15,9 @@
 package adapter
 
 import (
-	"testing"
+    "testing"
 )
 
 func TestNeeded(t *testing.T) {
-	// Tests needed.
+    // Tests needed.
 }

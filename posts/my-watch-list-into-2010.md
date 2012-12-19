@@ -193,7 +193,7 @@ excited.
 
 ## Heroku
 
-I &\#9829; Heroku. This blog runs on it, as well as a few other of my
+I ♥ Heroku. This blog runs on it, as well as a few other of my
 applications. I love it, and it’s only getting better. I’m in the beta
 program, so I get to see fancy things before they go completely live,
 and I can’t really talk about much of it here, except that there are

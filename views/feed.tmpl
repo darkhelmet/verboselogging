@@ -13,9 +13,9 @@
                 <title>{{.Title}}</title>
                 <category>{{.Category | Titleize}}</category>
                 <pubDate>{{.PublishedOn | RFC822 }}</pubDate>
-                <link>{{.Canonical | CanonicalUrl}}</link>
-                <guid>{{.Canonical | CanonicalUrl}}</guid>
-                <author>{{.SiteContect}} ({{.SiteAuthor}})</author>
+                <link>{{PostCanonical . | CanonicalUrl}}</link>
+                <guid>{{PostCanonical . | CanonicalUrl}}</guid>
+                <author>{{.Author}}</author>
                 <description>
                     {{`<![CDATA[` | Safe }}{{.HTML}}]]>
                 </description>

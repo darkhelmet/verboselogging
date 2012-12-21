@@ -76,13 +76,13 @@ of questionable validity in system commands. It’s like SQL injection
 Imagine you let users download things they have uploaded in a compressed
 archive, and that you let them specify a compression option:
 
-<script src="http://gist.github.com/518206.js?file=archive.rb">
-</script>
+<script src="http://gist.github.com/518206.js?file=archive.rb"></script>
+
 Have when some script kiddie passes something like this as the
 `compression_level` parameter:
 
-<script src="http://gist.github.com/518206.js?file=pain.rb">
-</script>
+<script src="http://gist.github.com/518206.js?file=pain.rb"></script>
+
 And now a your files are gone. Sweet.
 
 ### Ways around it
@@ -110,8 +110,8 @@ they give you and use it in potentially unsafe situations.
 
 The example above is ruby, and there is a better way to use `system`.
 
-<script src="http://gist.github.com/518206.js?file=better_archive.rb">
-</script>
+<script src="http://gist.github.com/518206.js?file=better_archive.rb"></script>
+
 Okay that’s maybe not 100% going to work with `7za`, but close enough.
 With ruby’s `system` command, you can pass multiple parameters. The
 first is the actual command to run, and the rest are the parameters to
@@ -152,17 +152,11 @@ You’ll want to confirm that whatever gets uploaded is, in fact, an
 image. You can do this with mime type checking or even the `file`
 command. Running `file` on an image I get:
 
-pre. public/images/cancel.png: PNG image, 24 x 24, 16-bit/color RGBA,
-non-interlaced
+    public/images/cancel.png: PNG image, 24 x 24, 16-bit/color RGBA, non-interlaced
 
 I know it’s an image.
 
-If you are using ruby and
-[paperclip](http://github.com/thoughtbot/paperclip) for your attached
-files, it has the `validates_attachment_content_type` class method which
-allows you to specify mime types that are allowed. These are checked
-before a record is saved and the record is rejected if the mime types
-doesn’t match anything you allowed.
+If you are using ruby and [paperclip](http://github.com/thoughtbot/paperclip) for your attached files, it has the `validates_attachment_content_type` class method which allows you to specify mime types that are allowed. These are checked before a record is saved and the record is rejected if the mime types doesn’t match anything you allowed.
 
 Moral of the story: don’t trust your users. Most will be fine, but
 there’s always the few that try to screw with the system.
@@ -178,8 +172,8 @@ file on the filesystem.
 While I can’t imagine why anybody would do this, the CWE example is
 pretty solid.
 
-<script src="http://gist.github.com/518206.js?file=show_info.pl">
-</script>
+<script src="http://gist.github.com/518206.js?file=show_info.pl"></script>
+
 If you store user information in a file, and then use the username to
 blindly read the file, you’ve got a problem. As they point out, if the
 username used (maybe it’s from a query parameter) includes the magic
@@ -270,6 +264,6 @@ now, and that’s what you want.
 As always, refer to the individual pages for more info and other
 mitigation techniques.
 
-[^1]: Check the “Observed Examples” section of the [weakness
+[^1]: Check the "Observed Examples" section of the [weakness
     page](http://cwe.mitre.org/data/definitions/311.html) for a good
     list of these and other problems.

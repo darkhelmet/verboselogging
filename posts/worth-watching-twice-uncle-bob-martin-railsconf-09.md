@@ -16,7 +16,7 @@ tags:
 - worth-watching
 - blip-tv
 ---
-Robert Martin’s “What Killed Smalltalk Could Kill Ruby, Too” talk at
+Robert Martin's "What Killed Smalltalk Could Kill Ruby, Too" talk at
 RailsConf 2009.
 
 [RailsConf 09: Robert Martin, What Killed Smalltalk Could Kill Ruby,

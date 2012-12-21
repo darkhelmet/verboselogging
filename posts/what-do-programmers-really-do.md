@@ -16,8 +16,8 @@ tags:
 ---
 Indeed. What do we do? Well I was curious.
 
-WTF you might say. “You’re a programmer! Shouldn’t you know what you
-do?” Well yes, I know what I do. What I mean is what do programmers do
+WTF you might say. "You're a programmer! Shouldn't you know what you
+do?" Well yes, I know what I do. What I mean is what do programmers do
 while programming ***besides programming.*** I myself [write the
 codes](http://github.com/darkhelmet) (duh) and hang out on
 [Twitter](http://twitter.com/darkhelmetlive) and listen to podcasts,
@@ -26,17 +26,17 @@ I forget to eat. I was curious to see what everybody else did while
 hacking; [twtpoll](http://twtpoll.com/) to the rescue!
 
 So I made a poll, and of course nobody read it, because nobody in the
-software community follows me (okay that’s a lie,
+software community follows me (okay that's a lie,
 [@defunkt](http://twitter.com/defunkt) follows me, as well as a couple
 friends), so I nicely asked [Scott
 Hanselman](http://twitter.com/shanselman) and that fixed the problem.
-Overnight there were just over 500 responses. Alright, now we’re in
+Overnight there were just over 500 responses. Alright, now we're in
 business! On to the results!
 
-<script src="http://twtpoll.com/js/badge.js" type="text/javascript">
-</script>
-<script src="http://twtpoll.com/badge/?twt=b5mled&r=1&s=250&b=1" type="text/javascript">
-</script>
+<script src="http://twtpoll.com/js/badge.js" type="text/javascript"></script>
+
+<script src="http://twtpoll.com/badge/?twt=b5mled&r=1&s=250&b=1" type="text/javascript"></script>
+
 Pretty straightforward, and I think it the fact that half list listening
 to music makes perfect sense.
 
@@ -78,4 +78,4 @@ The really interesting ones were:
 -   Have sex
 -   Work on plans to sing a new song to Steve Ballmer
 
-So that’s it. That’s what programmers do.
+So that's it. That's what programmers do.

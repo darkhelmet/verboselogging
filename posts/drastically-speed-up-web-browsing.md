@@ -19,7 +19,7 @@ tags:
 
 I’m seriously getting sick and tired of Firefox. Chrome for Linux can’t
 come any faster. When even with only 5 tabs open, it eats over 600 MB,
-and frequently fades out to the standard “application not responding”
+and frequently fades out to the standard "application not responding"
 state. It can’t even switch tabs without lagging. If I have a video
 playing in one tab, it frequently hangs when I switch tab, or open a new
 tab. Pain.

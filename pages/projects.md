@@ -10,7 +10,7 @@ slugs:
 ---
 # Projects
 
-These are some things I’m working on, or have done in the past.
+These are some things I'm working on, or have done in the past.
 
 ## [Tinderizer](http://Tinderizer.com/)
 
@@ -84,7 +84,7 @@ asynchronously, without blocking your page from loading.
 
 ## [goo.gl](https://github.com/darkhelmet/goo.gl)
 
-goo.gl is a little API endpoint to use Google’s URL shortener to shorten
+goo.gl is a little API endpoint to use Google's URL shortener to shorten
 URLs in the Twitter iPhone client.
 
 -   Platform: [sinatra](http://www.sinatrarb.com/)

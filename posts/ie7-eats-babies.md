@@ -15,10 +15,10 @@ tags:
 But you already knew that, right?
 
 These days, in fancy AJAX applications, you frequently want a link on a
-page to just do asynchronous things. You don’t actually want the link to
+page to just do asynchronous things. You don't actually want the link to
 go anywhere.
 
-Let’s just ignore the fact that this goes against [progressive
+Let's just ignore the fact that this goes against [progressive
 enhancement](http://en.wikipedia.org/wiki/Progressive_enhancement) okay?
 
 ## Can I see your ID please?
@@ -26,15 +26,14 @@ enhancement](http://en.wikipedia.org/wiki/Progressive_enhancement) okay?
 So sometimes the link is important enough, and you throw an `id` on it
 and you can do this in jQuery.
 
-pre. \$(‘\#important-link’).click(function() { alert(‘trololol’); });
+    $('#important-link").click(function() { alert('trololol'); });
 
 ## Stay classy
 
 Sometimes you have multiple links which need to do the same thing, so
 you give it a class.
 
-pre. \$(’.kind-of-important-link’).click(function() { alert(‘trololol’);
-});
+    $('.kind-of-important-link').click(function() { alert('trololol'); });
 
 ## App frameworks to the rescue…?
 
@@ -44,20 +43,19 @@ URL.
 
 This works fine if you are using this for its original purpose (even in
 IE7), jumping to an element with the `id` of `my-link`, but if an app
-was built using this as the way to do javascripty things, you’ll run
+was built using this as the way to do javascripty things, you'll run
 into problems.[^1]
 
 You probably want to do something like this:
 
-pre. \$(‘a[href=“\#my-link”’).click(function() { alert(‘trololol’); });
+    $('a[href="#my-link"').click(function() { alert('trololol'); });
 
 In IE7 land however (or at least this specific application), the `href`
 gets replaced with the entire current URL with the anchor fragment
-tacked onto the end, so jQuery doesn’t match `$('a[href="#my-link"')`
+tacked onto the end, so jQuery doesn't match `$('a[href="#my-link"')`
 anymore. You need to use the `attributeEndsWith` selector.
 
-pre. \$(‘a[href\$=“\#my-link”’).click(function() { alert(‘trololol’);
-});
+    $('a[href$="#my-link"').click(function() { alert('trololol'); });
 
 And there was much rejoicing.
 

@@ -18,16 +18,16 @@ Errors.](http://cwe.mitre.org/top25/index.html)
 ## [5. Improper Access Control [Authorization]](http://cwe.mitre.org/data/definitions/285.html)
 
 This is about *authorization* as opposed to *authentication*.
-Authorization is about “can this user access this resource or do this
-action”.
+Authorization is about "can this user access this resource or do this
+action".
 
 Oh sure, you locked down your app with totally sweet authentication, no
 clear text passwords for you! But then you completely overlook whether
 or not the user can do what they want to do. The most common instance of
 this in a rails application looks something like this:
 
-<script src="https://gist.github.com/763206.js?file=authenticated_resources_controller.rb">
-</script>
+<script src="https://gist.github.com/763206.js?file=authenticated_resources_controller.rb"></script>
+
 This was actually one of the big problems in the
 [diaspora](https://github.com/diaspora/diaspora) codebase when they
 first opened it up. You probably only generate links to the resources
@@ -41,7 +41,7 @@ URLs you generate and display to them.[^1]
 
 In the simple example, you should probably be doing something like:
 
-pre. current\_user.resources.find(params[:id])
+    current_user.resources.find(params[:id])
 
 Or using some sort of authorization framework. In rails land there are
 1001 different frameworks, with a few main ones taking the stage
@@ -84,8 +84,8 @@ like filling up a glass of water; if you put too much in it, it
 
 The CWE has a pretty straight forward example:
 
-<script src="https://gist.github.com/763206.js?file=overflow.c">
-</script>
+<script src="https://gist.github.com/763206.js?file=overflow.c"></script>
+
 If you enter more than 20 characters, it will put the first 20 in
 `char last_name[]`, but where do the remaining characters go? We know
 where they go; they end up past the end of the array. The problem is
@@ -99,8 +99,7 @@ and the data that gets written to the random memory is just right. It
 can lead to terrible things, like attackers getting root access to the
 target system, among other things.
 
-[Intel has some
-examples](http://software.intel.com/en-us/articles/collection-of-examples-of-64-bit-errors-in-real-programs/)
+[Intel has some examples](http://software.intel.com/en-us/articles/collection-of-examples-of-64-bit-errors-in-real-programs/)
 pertaining mainly to 64-bit systems, but they are good examples of
 things that work *by accident* in 32-bit land, but turn into buffer
 overflows in 64-bit land.
@@ -136,5 +135,5 @@ into bogus memory land.
 
 ### Ways around it
 
-[^1]: [CWE-425: Direct Request (‘Forced
-    Browsing’)](http://cwe.mitre.org/data/definitions/425.html)
+[^1]: [CWE-425: Direct Request ("Forced
+    Browsing")](http://cwe.mitre.org/data/definitions/425.html)

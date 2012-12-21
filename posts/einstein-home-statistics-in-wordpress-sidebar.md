@@ -15,7 +15,7 @@ tags:
 - wordpress
 ---
 If, like me, you participate in some sort of grid computing project,
-it’s interesting to see your progress. I take part in Einstein@Home, and
+it's interesting to see your progress. I take part in Einstein@Home, and
 I wanted to display my stats in my sidebar (on my
 [other](http://www.darkhelmetlive.com) blog). I’ll give you two ways to
 accomplish this. First way is the quick way, which involves including
@@ -26,18 +26,17 @@ own script, then moved to jQuery when I realized it could do what was
 needed in about one line, and I was already including/using jQuery.
 
 For the record, I originally did this a long time ago when jQuery was
-new and hip. Now it’s just a standard.
+new and hip. Now it's just a standard.
 
 For both options, create a php file somewhere on your server. I used my
-blog root directory, so the url is
-[http://www.darkhelmetlive.com/blog/einstein.php](http://www.darkhelmetlive.com/blog/einstein.php)
+blog root directory, so the url is [http://www.darkhelmetlive.com/blog/einstein.php](http://www.darkhelmetlive.com/blog/einstein.php)
 
 Call it whatever you want, I used einstein.php since I’m getting
 Einstein@Home stats. Anyway, paste this in:
 
-<script type="text/javascript" src="http://gist.github.com/177772.js?file=einstein.php">
-</script>
-Replace the ‘auth-key-goes-here’ with your actual auth key, which can be
+<script type="text/javascript" src="http://gist.github.com/177772.js?file=einstein.php"></script>
+
+Replace the 'auth-key-goes-here' with your actual auth key, which can be
 had from the Einstein@Home user account pages (somewhere in there).
 Also, I should add that I found the E@H XML stuff somewhere, but now I
 can’t find the page anywhere, so this is what works. You can do more,
@@ -49,8 +48,8 @@ probably do, but it’s low priority for me.
 
 Now add something like this to the sidebar.php script of your theme:
 
-<script type="text/javascript" src="http://gist.github.com/177772.js?file=sidebar.html">
-</script>
+<script type="text/javascript" src="http://gist.github.com/177772.js?file=sidebar.html"></script>
+
 You need the div tags for the script to be able to insert the returned
 HTML from the other php script.
 
@@ -60,18 +59,18 @@ That’s the basic stuff, now off to the option specific parts.
 
 Add two script includes to your header.php file in your theme.
 
-<script type="text/javascript" src="http://gist.github.com/177772.js?file=script-tags.php">
-</script>
+<script type="text/javascript" src="http://gist.github.com/177772.js?file=script-tags.php"></script>
+
 Adapt this to your needs of course. I did it this was to allow the code
 to move around. Now you can just copy and paste instead of changing the
 root url. Make sure you actually download jQuery and drop it into your
-‘wp-includes/js’ directory. Create the einstein.js file in the
-‘wp-includes/js’ directory as well. Make it look like this:
+"wp-includes/js" directory. Create the einstein.js file in the
+"wp-includes/js" directory as well. Make it look like this:
 
-<script type="text/javascript" src="http://gist.github.com/177772.js?file=einstein.js">
-</script>
-Replace ‘einstein-sb’ with whatever id you gave the div in the previous
-section, and replace the “/blog/einstein.php” with the path to your php
+<script type="text/javascript" src="http://gist.github.com/177772.js?file=einstein.js"></script>
+
+Replace 'einstein-sb' with whatever id you gave the div in the previous
+section, and replace the "/blog/einstein.php" with the path to your php
 script you pasted out.
 
 This will then, when the document is ready, make a jQuery call. It will
@@ -89,8 +88,8 @@ seriously folks. One line, c’mon! How easy is that.
 
 This is what I had:
 
-<script type="text/javascript" src="http://gist.github.com/177772.js?file=einstein-by-hand.js">
-</script>
+<script type="text/javascript" src="http://gist.github.com/177772.js?file=einstein-by-hand.js"></script>
+
 Basically it does the same thing, but it’s smaller, since it doesn’t
 have all the other stuff from jQuery which you might not use. But jQuery
 works on all browser, and I doubt my code above does.

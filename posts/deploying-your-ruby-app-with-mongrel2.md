@@ -68,10 +68,10 @@ This is the killer feature of Mongrel2.
 Let’s look at a simple config file for Mongrel2. It actually uses
 SQLite, but you start off with a config file to make life easy.
 
-<script src="http://gist.github.com/646037.js?file=mongrel2.conf">
-</script>
+<script src="http://gist.github.com/646037.js?file=mongrel2.conf"></script>
+
 Mongrel2 config files were originally python so you get a few things,
-like variables. We define a *rails\_host* **Host**, which just deals
+like variables. We define a *rails_host* **Host**, which just deals
 with the hostname, and what routes it responds to. Then for the main
 route (and hence all routes), we map a **Handler** to it. This is where
 the zeromq stuff comes in: it sends requests using TCP, binding on
@@ -81,7 +81,7 @@ to these using zeromq, start receiving requests and serving responses.
 Everything is kept track of by a connection ID (the handler writer takes
 care of that) and the UUID (you have to play with that). In this case,
 we’re just using *rails* as the UUID, but Mongrel2’s utility *m2sh* will
-generate “proper” UUIDs for you if you want.
+generate "proper" UUIDs for you if you want.
 
 Now we can define a **Server** and assign that to the list of servers
 (in an array of course). The **Server** has things like where log and
@@ -97,7 +97,7 @@ website](http://mongrel2.org/wiki?name=GettingStarted) or use
 (`brew install mongrel2`). In your rails directory, make the run
 directory (`mkdir run`) and load up the Mongrel2 config
 
-pre. \$ m2sh load
+pre. $ m2sh load
 
 It’ll whine that no SQLite DB or config file was specified but that it’s
 using defaults. That’s fine.
@@ -106,23 +106,22 @@ Now since Mongrel2 isn’t a ruby thing, we have to start it on it’s own.
 It can stay running the whole time, so don’t worry about that. Start it
 up:
 
-pre. \$ m2sh start ~~host localhost~~sudo
+pre. $ m2sh start -host localhost -sudo
 
 That `-sudo` bit just makes it daemonize. It’ll change users and chroot,
 and generally be awesome. Mongrel2 should be running now. You’ll see
 something like this:
 
-<script src="http://gist.github.com/646037.js?file=output.txt">
-</script>
+<script src="http://gist.github.com/646037.js?file=output.txt"></script>
+
 Notice the last line; everything worked!
 
 ## Running your app
 
-We need the rack handler I wrote, so throw some extra stuff in your
-`Gemfile`
+We need the rack handler I wrote, so throw some extra stuff in your `Gemfile`
 
-pre. gem “rack-mongrel2”\
-gem “json”
+pre. gem "rack-mongrel2"
+gem "json"
 
 You need something to parse JSON. I prefer Yajl since it’s nice and
 fast, but the JSON gem (pure or ext) works fine too. Also, check out the
@@ -134,20 +133,17 @@ rack handler gem to my liking. Anyway. He deserves some props.
 
 Bundle that up.
 
-pre. \$ bundle update
+pre. $ bundle update
 
 Now we can crank up the rails app.
 
-pre. \$ RACK\_MONGREL2\_UUID=rails rails s Mongrel2
+pre. $ RACK_MONGREL2_UUID=rails rails s Mongrel2
 
 You’ll see that it’s booting Mongrel2, but then it spits out the
-standard “0.0.0.0:3000” crap. Don’t worry about that. I haven’t figure
+standard "0.0.0.0:3000" crap. Don’t worry about that. I haven’t figure
 out how to prevent that from spitting out yet.
 
-Open your browser to [http://localhost:8080](http://localhost:8080)
-(remember the **Server** had `port=8080`) and you should see logs from
-Rails come flying out your console like normal, and the page load up.
-Boom. Mongrel2 + Rails.
+Open your browser to [http://localhost:8080](http://localhost:8080) (remember the **Server** had `port=8080`) and you should see logs from Rails come flying out your console like normal, and the page load up. Boom. Mongrel2 + Rails.
 
 ## More fun things
 
@@ -172,10 +168,11 @@ CTRL+C doesn’t work. It’s a zeromq thing, and they’re fixing it in the
 ## Fin
 
 That’s it! Start playing with it. Report `rack-mongrel2` bugs [on
-github](http://github.com/darkhelmet/rack-mongrel2/issues) and I’ll get
+github](http://github.com/darkhelmet/rack-mongrel2/issues) and I'll get
 at them!
 
-If you want to check a “full” app, already setup, check out
+If you want to check a "full" app, already setup, check out
 [http://github.com/darkhelmet/mongrel2-example](http://github.com/darkhelmet/mongrel2-example).
+
 Thanks to [drnic](http://twitter.com/drnic) for wrapping up the last
 couple of things on it.

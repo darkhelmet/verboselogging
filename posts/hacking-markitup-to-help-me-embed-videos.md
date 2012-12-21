@@ -28,29 +28,26 @@ don’t embed videos often enough to actually remember the exact syntax,
 so I found myself going back to posts with videos to see how I did it,
 or looking at my code.
 
-No more I say!
+**No more I say!**
 
-I also use
-“markItUp![](":http://markitup.jaysalvat.com/ for editing posts, so I have a bit of a nicer interface to editing plain Textile. Granted I chose Textile because I actually like typing it, but never you mind that...
+I also use [markItUp!](http://markitup.jaysalvat.com/) for editing posts, so I have a bit of a nicer interface to editing plain Textile. Granted I chose Textile because I actually like typing it, but never you mind that...
 
 With markItUp), you can configure the control bar, of course, so I added
 a button to process selected text, or simply return a default embed
 template:
-\
-`<div id='REPLACE-ME-video' class='swfembed' movie='URL' mheight='HEIGHT' mwidth='WIDTH'>Witty comment about needing Javascript goes here...</div>`
-\
+
+<script src="https://gist.github.com/265938.js?file=div.html"></script>
+
 Now since most embed code is pretty much the same, I can deal with the
 selected text nicely:
-\
-\<script type=”text/javascript"
-src=“http://gist.github.com/265938.js?file=markitup-youtube.js”\>
 
-</script>
+<script type="text/javascript" src="http://gist.github.com/265938.js?file=markitup-youtube.js"></script>
+
 This lets me paste in standard embed code, like this YouTube embed code
 for a [Job for a Cowboy](http://en.wikipedia.org/wiki/Job_for_a_cowboy)
 video,
 
-`<object width="853" height="505"><param name="movie" value="http://www.youtube.com/v/nl-qaTmazB0&hl=en_US&fs=1&hd=1"></param><param name="allowFullScreen" value="true"></param><param name="allowscriptaccess" value="always"></param><embed src="http://www.youtube.com/v/nl-qaTmazB0&hl=en_US&fs=1&hd=1" type="application/x-shockwave-flash" allowscriptaccess="always" allowfullscreen="true" width="853" height="505"></embed></object>`
+<script src="https://gist.github.com/265938.js?file=embed.html"></script>
 
 …highlight it, then click the button, and have it process it to my embed
 code, with the proper values all replaced, so my script can process it

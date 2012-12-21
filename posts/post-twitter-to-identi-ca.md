@@ -29,6 +29,6 @@ pipe that converted a users Twitter RSS feed to something
 [twitterfeed](http://twitterfeed.com/) can use. The Twitter RSS feed
 items are normally prefixed by the username, so for twitterfeed to use
 it, it really needs that stripped out, and the pipe does it. Check it
-out by just popping in your Twitter username and hitting “Run Pipe”.
+out by just popping in your Twitter username and hitting "Run Pipe".
 
 So now I use twitterfeed to push my Twitter stuff to identi.ca. Win.

@@ -8,9 +8,9 @@ publishedon: 18 Dec 2012 21:17 MST
 slugs: 
 - talks
 ---
-# Talks I’ve Done
+# Talks I've Done
 
-I enjoy giving talks. Here are some of the ones I’ve done (the ones with
+I enjoy giving talks. Here are some of the ones I've done (the ones with
 slides anyway).
 
 ## Edmonton Rubyists

@@ -14,8 +14,8 @@ tags:
 ---
 I always find myself needing this but never remember.
 
-`-fverbose-asm`
+    -fverbose-asm
 
-Throw that at gcc when you are outputting asm (-S flag) and you’ll get
+Throw that at gcc when you are outputting asm (-S flag) and you'll get
 some useful comments to see what some of the code is actually working
 on.

@@ -12,7 +12,7 @@ tags:
 - net
 - bugtrap
 ---
-I still haven’t used this, mainly just because I haven’t had the need.
-I’m still convinced it’s the greatest thing ever though.
+I still haven't used this, mainly just because I haven't had the need.
+I'm still convinced it's the greatest thing ever though.
 
 [BugTrap](http://www.codeproject.com/KB/applications/BugTrap.aspx)

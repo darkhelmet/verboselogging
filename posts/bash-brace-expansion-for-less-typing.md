@@ -19,16 +19,16 @@ deal.**
 What if you named a view file foo.haml instead of the proper
 foo.html.haml?
 
-pre. mv app/views/widgets/foo.{haml,html.haml}
+    mv app/views/widgets/foo.{haml,html.haml}
 
 Does exactly what you think it does. It expands to:
 
-pre. mv app/views/widgets/foo.haml app/views/widgets/foo.html.haml
+    mv app/views/widgets/foo.haml app/views/widgets/foo.html.haml
 
-Since it’s just bash, it also works with git:
+Since it's just bash, it also works with git:
 
-pre. git mv app/views/widgets/foo.{haml,html.haml}
+    git mv app/views/widgets/foo.{haml,html.haml}
 
 Works within the path too:
 
-pre. git mv app/views/{widget,whatsit}/foo.html.haml
+    git mv app/views/{widget,whatsit}/foo.html.haml

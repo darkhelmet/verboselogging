@@ -1,7 +1,7 @@
 --- 
 id: 480
 author: Daniel Huckstep
-title: "Productivity \xE2\x88\xA9 Learning = \xE2\x88\x85"
+title: Productivity ∩ Learning = ∅
 category: editorial
 description: Being productive and learning are mutually exclusive.
 published: true

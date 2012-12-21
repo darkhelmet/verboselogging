@@ -51,13 +51,13 @@ balance, check that the balance minus the withdrawal amount is greater
 than or equal to zero, and if it is, allow the transaction, and update
 the balance.
 
-<script type="text/javascript" src="http://gist.github.com/387484.js?file=balance_update.rb">
-</script>
-So what if you have \$1000, and you want to withdraw \$900? What if at
-the exact same time, in another process, you try to withdraw \$10. You
-get the balance (\$1000) and in both cases the withdrawal is allowed,
-but what if the balance gets updated twice: once to \$100 and once to
-\$990. You now have \$910 in your hand, and you bank balance says \$990.
+<script type="text/javascript" src="http://gist.github.com/387484.js?file=balance_update.rb"></script>
+
+So what if you have $1000, and you want to withdraw $900? What if at
+the exact same time, in another process, you try to withdraw $10. You
+get the balance ($1000) and in both cases the withdrawal is allowed,
+but what if the balance gets updated twice: once to $100 and once to
+$990. You now have $910 in your hand, and you bank balance says $990.
 Woohoo!
 
 ### Ways around it
@@ -86,8 +86,8 @@ other threadsafe atomic operations is the way to go.
 
 The ruby example, fixed up:
 
-<script type="text/javascript" src="http://gist.github.com/387484.js?file=better_balance_update.rb">
-</script>
+<script type="text/javascript" src="http://gist.github.com/387484.js?file=better_balance_update.rb"></script>
+
 ## [24. Use of a Broken or Risky Cryptographic Algorithm](http://cwe.mitre.org/data/definitions/327.html)
 
 It should be pretty obvious what the problems are here. If the algorithm
@@ -99,7 +99,7 @@ sucks, then it's easy to break, then all your data is out.
 
 You're probably not smart enough. If you are, why are you reading my
 blog? Shouldn't you be hanging out with [Bruce
-Schneier](http://www.schneier.com/?) Mathematicians spend years building
+Schneier](http://www.schneier.com/)? Mathematicians spend years building
 an algorithm, then more years trying to break it. AES went through 5
 years of evaluation along with others before the [National Institute of
 Standards and
@@ -133,8 +133,8 @@ they still can't break it. That's the best kind of security.
 This is blindly redirecting people to a site not your own. The CWE PHP
 example is pretty straightforward:
 
-<script type="text/javascript" src="http://gist.github.com/387484.js?file=bad_redirect.php">
-</script>
+<script type="text/javascript" src="http://gist.github.com/387484.js?file=bad_redirect.php"></script>
+
 The problems here are more for your users than anything. If you blindly
 redirect them to sites and you don't really control where they are
 going, that's kind of a dick move, honestly. An exception (sort of) is a
@@ -173,20 +173,20 @@ instead of blindly allocating memory every time.
 
 Bad:
 
-pre. if (length \> 0) { … }
+    if (length > 0) { … }
 
 Good:
 
-pre. if (length \> 0 && length \< MAX\_LENGTH) { … }
+    if (length > 0 && length < MAX\_LENGTH) { … }
 
 Bad:
 
-<script type="text/javascript" src="http://gist.github.com/387484.js?file=bad_threads.rb">
-</script>
+<script type="text/javascript" src="http://gist.github.com/387484.js?file=bad_threads.rb"></script>
+
 Good:
 
-<script type="text/javascript" src="http://gist.github.com/387484.js?file=good_threads.rb">
-</script>
+<script type="text/javascript" src="http://gist.github.com/387484.js?file=good_threads.rb"></script>
+
 ## [21. Incorrect Permission Assignment for Critical Resources](http://cwe.mitre.org/data/definitions/732.html)
 
 This problem is more towards the system admin side of things, but your
@@ -206,8 +206,3 @@ If you are reading a config file, it probably shouldn't be writable by
 everybody. Maybe you should check that, and raise an error if it is.
 
 Stay tuned for errors 20-16!
-
-<p style="display: none">
-EAVB\_DJHCMAKGZH
-
-</p>

@@ -28,30 +28,29 @@ directory, under 'javascripts' and 'stylesheets'
 
 Assuming you have the following files in public:
 
-pre.. ./stylesheets/reset.css\
-./stylesheets/fonts.css\
-./stylesheets/grid.css\
-./javascripts/jquery.js\
-./javascripts/lightbox.js\
-./javascripts/blog.js
+    ./stylesheets/reset.css
+    ./stylesheets/fonts.css
+    ./stylesheets/grid.css
+    ./javascripts/jquery.js
+    ./javascripts/lightbox.js
+    ./javascripts/blog.js
 
 You can bundle these files in your app like this:
 
 Install:
 
-pre. % [sudo] gem install sinatra-bundles
+    % [sudo] gem install sinatra-bundles
 
 In your app:
 
-<script type="text/javascript" src="http://gist.github.com/276827.js?file=basic_bundling.rb">
-</script>
+<script type="text/javascript" src="http://gist.github.com/276827.js?file=basic_bundling.rb"></script>
+
 Then in your view, you can use the view helpers to insert the proper
 script tags:
 
-pre.. = javascript\_bundle\_include\_tag(:all)\
-= stylesheet\_bundle\_link\_tag(:all)
+    = javascript_bundle_include_tag(:all)
+    = stylesheet_bundle_link_tag(:all)
 
-</pre>
 All 6 of those files will be served up in 2 files, and they'll be
 compressed and have headers set for caching.
 
@@ -59,20 +58,20 @@ compressed and have headers set for caching.
 
 The defaults are pretty good. In development/test mode:
 
-pre.. bundle\_cache\_time \# =\> 60 \* 60 \* 24 \* 365, or 1 year\
-compress\_bundles \# =\> false\
-cache\_bundles \# =\> false\
-stamp\_bundles \# =\> true
+    bundle_cache_time # => 60 * 60 * 24 * 365, or 1 year
+    compress_bundles # => false
+    cache_bundles # => false
+    stamp_bundles # => true
 
 And in production mode, compression and caching are enabled
 
-pre.. compress\_bundles \# =\> true\
-cache\_bundles \# =\> true
+    compress_bundles # => true
+    cache_bundles # => true
 
 To change any of these, use set/enable/disable
 
-<script type="text/javascript" src="http://gist.github.com/276827.js?file=bundling_configuration.rb">
-</script>
+<script type="text/javascript" src="http://gist.github.com/276827.js?file=bundling_configuration.rb"></script>
+
 That's pretty much it. My blog uses this, so check out the code for it
 if you want a more real example. [It's on
 github](http://github.com/darkhelmet/darkblog)

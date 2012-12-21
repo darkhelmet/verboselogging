@@ -19,17 +19,17 @@ running smoothly on my blog here, so I best tell you about it.
 
 First, get your bundle on:
 
-pre. % gem install sinatra-bundles
+    % gem install sinatra-bundles
 
-pre. require 'sinatra/bundles'
+    require 'sinatra/bundles'
 
 Version 0.2.0 has a couple fun things.
 
 The [sinatra](http://github.com/sinatra/sinatra) dependency is bumped up
 to 1.0, since it's out
-(yay![](), it's more awesome, and I'm not quite sure if the bug that prevented me from using earlier sinatra was fixed or not in the 0.9.6 release.
+(yay!), it's more awesome, and I'm not quite sure if the bug that prevented me from using earlier sinatra was fixed or not in the 0.9.6 release.
 
-h2. etag support
+## etag support
 
 "Patrick Hogan":http://github.com/pbhogan added "etag support":http://github.com/darkhelmet/sinatra-bundles/commit/140cd0e23285519fa03727dde9c47365824e9af2 for the caching component, since I wasn't doing it. My thought was _just use rack-etag_, but as Patrick pointed out you then have to remember to use rack-etag. Since sinatra-bundles should do the caching for you, it now does it more completely, with etags. He even wrote specs to boot)
 
@@ -40,7 +40,7 @@ whatnot for grabbing a bunch of files, but it didn't really work too
 well for me, so I messed around with it and made it work the way I felt
 it should, so now you can splat things:
 
-pre. = javascript\_bundle(:test, %w(test/\*))
+    = javascript_bundle(:test, %w(test/*))
 
 which would grab things in the test directory. You can use standard ruby
 directory globbing things in there, so have fun. I did have to write
@@ -50,7 +50,7 @@ If you want to include all files, and order isn't important (or
 alphabetical is what you want), you don't even have to specify a list of
 files!
 
-pre. = javascript\_bundle(:all)
+    = javascript_bundle(:all)
 
 That will include all files in the javascript directory.
 

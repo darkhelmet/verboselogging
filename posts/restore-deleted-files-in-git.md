@@ -27,7 +27,7 @@ file. It was just gone.
 First things first, I had to find the file. A little bit of Googling[1]
 and looking at git docs, I found this:
 
-pre. git log ~~~~diff-filter=D~~~~summary
+    git log --diff-filter=D --summary
 
 This prints the summary of all commits that have deletes. Awesome. Now
 you can look through in which commit your file was deleted.
@@ -36,6 +36,6 @@ you can look through in which commit your file was deleted.
 
 Once you have that, you can use the commit hash in the next command:
 
-pre. git checkout COMMIT\^ — file
+    git checkout COMMIT^ — file
 
 And that will restore your file. Rinse and repeat for multiple files.

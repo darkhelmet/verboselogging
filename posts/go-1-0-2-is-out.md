@@ -18,11 +18,11 @@ It's a bunch of bug fixes, including some nasty ones with hashes. It's
 completely backwards compatible with go1.0.1 and go1, so there's no
 reason not to update:
 
-pre.. cd \$GOROOT\
-hg pull\
-hg update -r go1.0.2\
-cd src\
-./all.bash
+    cd $GOROOT
+    hg pull
+    hg update -r go1.0.2
+    cd src
+    ./all.bash
 
 And you're done! You'll probably have to update some packages along the
 way. It will complain about how it was expecting a package for go1 or

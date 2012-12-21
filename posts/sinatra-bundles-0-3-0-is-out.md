@@ -19,9 +19,9 @@ and powering the blog for a week or so.
 
 It's cold out there, so bundle up:
 
-pre. % gem install sinatra-bundles
+    % gem install sinatra-bundles
 
-pre. require 'sinatra/bundles'
+    require 'sinatra/bundles'
 
 Version 0.3.0 has a new feature and a slight API change.
 
@@ -33,8 +33,8 @@ but now you can control where they live on the disk.
 [docunext](http://github.com/docunext) added this and the specs all work
 so it's good to go. You can configure this like so:
 
-pre.. set(:js, 'js')\
-set(:css, 'css')
+    set(:js, 'js')
+    set(:css, 'css')
 
 Now, instead of looking in *public/javascripts* and
 *public/stylesheets*, it will look in *public/js* and *public/css* for

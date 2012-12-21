@@ -32,20 +32,20 @@ So let's check this out.
 
 We can grab the feed like this:
 
-pre. feed = Feedzirra::Feed::fetch\_and\_parse(FEED)
+    feed = Feedzirra::Feed::fetch_and_parse(FEED)
 
 Assuming FEED contains the URL for the feed.
 
 Now we can play around. The easiest thing is just to play with each
 entry.
 
-<script type="text/javascript" src="http://gist.github.com/177764.js?file=feedzirra-example.rb">
-</script>
+<script type="text/javascript" src="http://gist.github.com/177764.js?file=feedzirra-example.rb"></script>
+
 The specifics for your feed will vary, but in this case I do a few
 things. I first print out a message so on the command line I can see
 that things are happening.
 
-Using Nokogiri I grab the img tag and it's inner HTML (the to\_html
+Using Nokogiri I grab the img tag and it's inner HTML (the to_html
 call).
 
 Parse out the link with some regular expressions. Now I have the actual
@@ -57,7 +57,3 @@ If the file *doesn't* exist, we can use another method I from my own
 module to download and save the file.
 
 Pretty simple eh? I love ruby.
-
-[darkext](http://github.com/darkhelmet/darkext)\
-[feedzirra](http://github.com/pauldix/feedzirra)\
-[ruby](http://www.ruby-lang.org/en)

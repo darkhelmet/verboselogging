@@ -97,7 +97,7 @@ website](http://mongrel2.org/wiki?name=GettingStarted) or use
 (`brew install mongrel2`). In your rails directory, make the run
 directory (`mkdir run`) and load up the Mongrel2 config
 
-pre. $ m2sh load
+    $ m2sh load
 
 It'll whine that no SQLite DB or config file was specified but that it's
 using defaults. That's fine.
@@ -106,7 +106,7 @@ Now since Mongrel2 isn't a ruby thing, we have to start it on it's own.
 It can stay running the whole time, so don't worry about that. Start it
 up:
 
-pre. $ m2sh start -host localhost -sudo
+    $ m2sh start -host localhost -sudo
 
 That `-sudo` bit just makes it daemonize. It'll change users and chroot,
 and generally be awesome. Mongrel2 should be running now. You'll see
@@ -120,8 +120,8 @@ Notice the last line; everything worked!
 
 We need the rack handler I wrote, so throw some extra stuff in your `Gemfile`
 
-pre. gem "rack-mongrel2"
-gem "json"
+    gem "rack-mongrel2"
+    gem "json"
 
 You need something to parse JSON. I prefer Yajl since it's nice and
 fast, but the JSON gem (pure or ext) works fine too. Also, check out the
@@ -133,11 +133,11 @@ rack handler gem to my liking. Anyway. He deserves some props.
 
 Bundle that up.
 
-pre. $ bundle update
+    $ bundle update
 
 Now we can crank up the rails app.
 
-pre. $ RACK_MONGREL2_UUID=rails rails s Mongrel2
+    $ RACK_MONGREL2_UUID=rails rails s Mongrel2
 
 You'll see that it's booting Mongrel2, but then it spits out the
 standard "0.0.0.0:3000" crap. Don't worry about that. I haven't figure

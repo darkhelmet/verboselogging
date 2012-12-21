@@ -33,6 +33,6 @@ If you need this functionality, use the new version 0.1.3, which can be
 found on [rubygems.org](http://rubygems.org/gems/sinatra-bundles).
 Install with
 
-pre. \$ gem install sinatra-bundles
+    $ gem install sinatra-bundles
 
 Enjoy!

@@ -28,16 +28,15 @@ In *this* post, since I use the [Textile
 2](http://idly.org/category/textile) plugin, I add this snippet at the
 top:
 
-pre. (See [(remote-inline)Part
-1](/2009/07/08/wordpress-multipart-posts-inlined-with-jquery-part-1))
+    (See [(remote-inline)Part 1](/2009/07/08/wordpress-multipart-posts-inlined-with-jquery-part-1))
 
 In textile land, that translates to a link with a class of
 *remote-inline*. Then, I add this lovely javascript:
 
-<script type="text/javascript" src="http://gist.github.com/177747.js?file=jquery-remote-inline.js">
-</script>
+<script type="text/javascript" src="http://gist.github.com/177747.js?file=jquery-remote-inline.js"></script>
+
 So what that does, is a bind an onclick event for all links with the
-*remote-inline* class. That event, loads the href, and uses jQuery to
+`remote-inline` class. That event, loads the href, and uses jQuery to
 parse out what I want, and stuff it in the DOM. This will be different
 for your blog of course. I use Disqus and Sociable, and want these
 removed from the inserted contents, so I remove them, again with the
@@ -47,10 +46,10 @@ The big second line to setup *existing* is also unique to my blog. I
 work my way up from the link, through the parents (examine the source to
 see for yourself), to get to the sidebar, which is what I put the new
 elements in front of (the new sidebar div and new content div). It's
-just the single *closest* call, which is a [jQuery 1.3
+just the single `closest` call, which is a [jQuery 1.3
 function](http://docs.jquery.com/Traversing/closest)
 
-Then I just *slideDown* the new elements and voila! A brand new post in
+Then I just `slideDown` the new elements and voila! A brand new post in
 the DOM, right above this Part 2, so you have Part 1 and Part 2 in
 proper reading order on the page, no matter where they are.
 

@@ -22,19 +22,17 @@ work](http://underpantsgnome.com/2011/01/05/how-to-install-private-gems-on-herok
 
 The important part is in your `~/.ssh/config`
 
-pre. Host heroku.com\
- ForwardAgent yes
+    Host heroku.com
+        ForwardAgent yes
 
 After that it's no big deal. Just use an ssh URL to Github (or wherever,
 the Github part doesn't really matter) in your `Gemfile` and off you go!
 
-pre.. source :rubygems
-
-ruby '1.9.3'\
-gem 'sinatra', :git =\>
-'[git@github.com](mailto:git@github.com):darkhelmet/sinatra.git'\
-gem 'thin'\
-gem 'heroku'
+    source :rubygems
+    ruby '1.9.3'
+    gem 'sinatra', :git => 'git@github.com:darkhelmet/sinatra.git'
+    gem 'thin'
+    gem 'heroku'
 
 The code [here](https://github.com/darkhelmet/private-gem) is running on
 Heroku:

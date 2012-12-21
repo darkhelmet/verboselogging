@@ -42,8 +42,7 @@ So you run this little daemon that watches the files, and then instead
 of running aptitude, you run auo-apt, and it will pass things off
 through the daemon. So you can do this:
 
-pre. apt-runner install foo; apt-runner install bar; apt-runner install
-baz
+    apt-runner install foo; apt-runner install bar; apt-runner install baz
 
 And all those programs will get installed, *eventually*. The commands
 get run one by one, not necessarily in order.

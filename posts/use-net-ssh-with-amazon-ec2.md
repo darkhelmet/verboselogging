@@ -21,10 +21,10 @@ examples for [Net::SSH](http://net-ssh.rubyforge.org/) show using just a
 username and password, which is all good, but the Amazon stuff requires
 a key file. Here's how to do it:
 
-pre. Net::SSH.start('my.amazon.hostname.amazonaws.com', 'user', :keys
-=\> '/path/to/keypair.pem') { |ssh| … }
+    Net::SSH.start('my.amazon.hostname.amazonaws.com', 'user', :keys
+=> '/path/to/keypair.pem') { |ssh| … }
 
-According to the docs, the :keys named param takes
+According to the docs, the `:keys` named param takes
 
 > an array of file names of private keys to use for publickey and
 > hostbased authentication

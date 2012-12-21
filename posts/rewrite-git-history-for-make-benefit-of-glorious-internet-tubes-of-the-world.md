@@ -45,8 +45,7 @@ quite useful in helping remove some silly files.
 
 It comes down to:
 
-pre. git filter-branch —index-filter 'git rm ~~rcached~~-ignore-unmatch
-BIGTHING' HEAD
+    git filter-branch —index-filter 'git rm -r --cached --ignore-unmatch BIGTHING' HEAD
 
 You can replace BIGTHING with a path to a file or folder, and that thing
 will be purged completely from the repository. This rewrites history all

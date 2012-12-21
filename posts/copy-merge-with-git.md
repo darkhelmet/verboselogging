@@ -23,7 +23,7 @@ Since you are in branch A, it is referred to as *ours*. Branch B is
 referred to as *theirs*. In git land, you can do this, assuming you are
 in branch A:
 
-pre. git merge ~~s recursive~~-strategy-option theirs B
+    git merge -s recursive --strategy-option theirs B
 
 This will merge, and take whatever B has as the word of Linus Torvalds.
 

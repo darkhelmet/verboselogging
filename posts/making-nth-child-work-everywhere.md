@@ -34,7 +34,7 @@ The nth-child selector is one of them.
 Basically then nth-child selector allows you to do stuff like this in
 CSS3:
 
-pre. table.highlight tr:nth-child(2n+1)
+    table.highlight tr:nth-child(2n+1)
 
 This will select all the odd rows in the table. You can then give them a
 different background color, to make the table easier to read. Like I
@@ -47,10 +47,10 @@ completely cross browser compatible (read: works in Internet Explorer).
 
 Now you can change your CSS rule to something poor IE can understand:
 
-pre. table.highlight tr.odd
+    table.highlight tr.odd
 
 Top it off with some jQuery sauce…
 
-pre. \$('table.highlight tr:nth-child(2n+1)').addClass('odd');
+    $('table.highlight tr:nth-child(2n+1)').addClass('odd');
 
 Now you have the same effect. In all browsers. Win.

@@ -20,43 +20,43 @@ really a valid excuse. [It can be seen
 here.](http://github.com/darkhelmet/darkblog/commit/f2eb11f9a07355a1de9e28ad8a1e4618445f75be)
 
 I had a thought the other day that it would be much better handled by
-the *[Range](http://ruby-doc.org/core/classes/Range.html_) class, and
+the [Range](http://ruby-doc.org/core/classes/Range.html) class, and
 boy was I right, although it involved a tweak.
-\
-The*Range\_ class allows to request values from some value to another
+
+The `Range` class allows to request values from some value to another
 value (inclusive or exclusive) using this syntax:
 
-pre. 1..10
+    1..10
 
-See the little dots in the middle? That would return me a *Range* with
+See the little dots in the middle? That would return me a `Range` with
 the numbers 1 up to 10 (inclusive). If I use 3 dots like this:
 
-pre. 1…10
+    1...10
 
 I would get 1 up to 9, or 1 to 10 exclusive.
 
 Inclusive and exclusive in this case refer to the last value in the
-*Range*.
+`Range`.
 
-How does *Range* get the values to put in there? The *\#succ* method!
+How does `Range` get the values to put in there? The `#succ` method!
 
 The successor is the thing that follows something, so the successor of 1
-is 2 (in the Integer space anyway), and *Range* uses this to generate
+is 2 (in the Integer space anyway), and `Range` uses this to generate
 the list of items.
 
-You can leverage this too, since *\#succ* is just another method.
+You can leverage this too, since `#succ` is just another method.
 
-I created an *ArchiveDate* class which inherits from *Date* and defined
-*\#succ* to be:
+I created an `ArchiveDate` class which inherits from `Date` and defined
+`#succ` to be:
 
-pre. self + 1.month
+    self + 1.month
 
-I require active\_support for the *\#month* method. So now, if I do
+I require active_support for the `#month` method. So now, if I do
 something like this:
 
-pre. ArchiveDate.new(2009,4,1)..ArchiveDate.new(2010,1,1)
+    ArchiveDate.new(2009,4,1)..ArchiveDate.new(2010,1,1)
 
-I'll get a list of *ArchiveDate* objects, which are by extension *Date*
+I'll get a list of `ArchiveDate` objects, which are by extension `Date`
 objects, each one representing the first of the month. So I get April,
 May, June, etc. Then I can loop through them and print out the required
 archive links in my sidebar. Much better than the old code!

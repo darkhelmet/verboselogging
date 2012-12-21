@@ -18,5 +18,4 @@ the same or not), you have to give ruby 1.9 a program suffix, but
 
 So you need something like this:
 
-pre. ./configure ~~~~prefix=\$HOME/local~~~~program-suffix=1.9
-~~~~with-baseruby=ruby~~~~enable-pthread
+    ./configure --prefix=\$HOME/local --program-suffix=1.9 --with-baseruby=ruby --enable-pthread

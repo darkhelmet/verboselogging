@@ -25,6 +25,6 @@ The gist of it?
 
 Add
 
-pre. OpenID::Util.logger = RAILS\_DEFAULT\_LOGGER
+    OpenID::Util.logger = RAILS_DEFAULT_LOGGER
 
 To environment.rb, and you're good!

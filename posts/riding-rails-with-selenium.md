@@ -36,13 +36,13 @@ some fixes for them.
 1.  **All users have wrong passwords, no data in DB.** You can't have
     transactional fixtures when using selenium, so turn those off in
     your env.rb file. You can use
-    [database\_cleaner](https://github.com/bmabey/database_cleaner/tree)
+    [database_cleaner](https://github.com/bmabey/database_cleaner/tree)
     to try and help with that, but I'm still working out kinks with that
     too it seems. A step in the right direction.
-2.  **current\_url checks fail randomly.** Sometimes selenium doesn't
+2.  **`current_url` checks fail randomly.** Sometimes selenium doesn't
     wait long enough for pages to load, especially after form POST's.
     You need to tell selenium to wait after certain things by calling
-    **selenium.wait\_for\_page\_to\_load** This of course only works
+    `selenium.wait_for_page_to_load` This of course only works
     when using selenium so wrap it up to only call this if you are using
     selenium, so that you can still run your tests in normal
     rails/webrat mode and not die in a fire.
@@ -52,7 +52,7 @@ some fixes for them.
     transactional fixtures problem, but it occurred with me even when
     they were turned off.
 4.  **Catch those confirms.** You have to catch confirms in selenium,
-    with selenium.get\_confirmation, so wrap that up, and put it in your
+    with `selenium.get_confirmation`, so wrap that up, and put it in your
     step definitions after things that you know pop up confirmation
     dialogs.
 

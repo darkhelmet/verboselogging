@@ -31,4 +31,4 @@ I'm going through the packages alphabetically so `archive`, `bufio`,
 Head over to
 [http://thestandardlibrary.com/go.html](http://thestandardlibrary.com/go.html)
 to subscribe to the mailing list and to pick up the book. It's only
-\$29, but that's going to go up when the book is done.
+$29, but that's going to go up when the book is done.

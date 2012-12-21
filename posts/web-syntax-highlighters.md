@@ -31,8 +31,8 @@ care of business.
 
 Some downsides include the fact that you have to include the brushes.
 They are separate, so you can include selectively, or just include all
-of them. Also, as the docs say, you should replace the '\<' character
-with the HTML equivalent '\<'
+of them. Also, as the docs say, you should replace the '<' character
+with the HTML equivalent '<'
 
 ## [Pastie.org](http://pastie.org/)
 

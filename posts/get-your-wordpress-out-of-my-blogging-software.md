@@ -87,7 +87,7 @@ most have been little stupid bugs on my part.
 
 I use etags (rack-etag middleware) and max-age so that the Heroku system
 and other systems can cache everything they need. Static assets are set
-to 1 year with the rack-static\_cache middleware.
+to 1 year with the `rack-static_cache` middleware.
 
 The top panel holds my shared items from Google Reader, my latest
 bookmarks from Delicious, my latest posts to Twitter, and some of my

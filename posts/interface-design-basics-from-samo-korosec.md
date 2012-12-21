@@ -1,9 +1,9 @@
 --- 
 id: 420
 author: Daniel Huckstep
-title: "Interface Design Basics From Samo Koro\xC5\xA1ec"
+title: Interface Design Basics From Samo Korošec
 category: software
-description: "Get your interface design basics from Samo Koro\xC5\xA1ec. Great slides."
+description: Get your interface design basics from Samo Korošec. Great slides.
 published: true
 publishedon: 02 Nov 2009 20:00 MST
 slugs: 

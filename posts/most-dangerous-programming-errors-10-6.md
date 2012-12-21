@@ -217,7 +217,7 @@ this. The CWE gives you some examples:
 
 #### Jail
 
-Do not pass Go, do not collect \$200.
+Do not pass Go, do not collect $200.
 
 Okay not quite, but you can run application servers in a `chroot` or
 jail, to make it seem like, to the application, they're the only thing

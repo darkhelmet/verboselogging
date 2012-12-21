@@ -43,9 +43,9 @@ that crap that comes with being a contractor.
 ## Diva
 
 I'd whine so much about things not going my way. Or I'd just charge the
-customer more money. Oh you don't use GitHub? How about \$5/hr more. Oh
+customer more money. Oh you don't use GitHub? How about $5/hr more. Oh
 you don't use git at all? Mercurial? That's fine, at least it's a DVCS.
-SVN? Maybe \$20/hr more. I really hate SVN.
+SVN? Maybe $20/hr more. I really hate SVN.
 
 **Life's too short to work with shitty tools.**
 

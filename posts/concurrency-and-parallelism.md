@@ -11,14 +11,14 @@ slugs:
 tags: []
 
 ---
-[http://supertech.csail.mit.edu/cilk](http://supertech.csail.mit.edu/cilk)/\
-[http://threadingbuildingblocks.org](http://threadingbuildingblocks.org)/\
-go/csp\
-fork/exec (standard stuff)\
-fork/join (java?)\
-async/await (c\#)\
+http://supertech.csail.mit.edu/cilk
+http://threadingbuildingblocks.org
+go/csp
+fork/exec (standard stuff)
+fork/join (java?)
+async/await (C#)
 haskell?
 
-[https://speakerdeck.com/u/multicoreworld/p/james-reinders-intel-united-states](https://speakerdeck.com/u/multicoreworld/p/james-reinders-intel-united-states)\
-pragma simd/auto vectorization\
+https://speakerdeck.com/u/multicoreworld/p/james-reinders-intel-united-states
+pragma simd/auto vectorization
 opencl

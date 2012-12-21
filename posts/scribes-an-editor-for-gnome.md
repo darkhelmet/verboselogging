@@ -30,14 +30,10 @@ editing (although I didn't get to try that out).
 
 It is fairly new, and as such still lacks a few features:
 
--   Indent control is global, so I can't have 4 space indents for C, and
-    2 for ruby.
--   Doesn't chmod *x files that have a shebang.\
-    \* I can't select words at a time with the arrow keys, by pressing
-    Shift* Ctrl and moving the arrows; might be a bug.
--   If I remember right, I can't use Ctrl + Backspace either. Again, it
-    might be a bug, and I think this and the previous item are quite
-    important, as I would imagine most of you.
+* Indent control is global, so I can't have 4 space indents for C, and 2 for ruby.
+* Doesn't `chmod +x` files that have a shebang.
+* I can't select words at a time with the arrow keys, by pressing Shift+Ctrl and moving the arrows; might be a bug.
+* If I remember right, I can't use Ctrl+Backspace either. Again, it might be a bug, and I think this and the previous item are quite important, as I would imagine most of you.
 
 It's pretty good, and has some potential but I switched back to emacs.
 Maybe in 6 months I'll try it again and see what has come of it. I

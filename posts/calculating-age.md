@@ -21,7 +21,7 @@ This is a strange way to do it, but if you format the date to yyyymmdd
 and subtract the date of birth from the current date then drop the last
 4 digits you've got the age :)
 
-I don't know c\#, but i believe this will work in any language.
+I don't know C#, but i believe this will work in any language.
 
 20080814 - 19800703 = 280111
 

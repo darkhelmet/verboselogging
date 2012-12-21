@@ -177,7 +177,7 @@ Bad:
 
 Good:
 
-    if (length > 0 && length < MAX\_LENGTH) { … }
+    if (length > 0 && length < MAX_LENGTH) { … }
 
 Bad:
 

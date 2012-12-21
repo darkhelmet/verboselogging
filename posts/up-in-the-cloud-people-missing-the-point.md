@@ -98,5 +98,5 @@ to think about. It gives you more time to think about the important
 things. It gives you global, 24/7 (for argument sake, realistically it's
 like 99.9% of the time) access to your 'stuff'.
 
-Spending \$100 on a new hard drive won't give you any of that, just more
+Spending $100 on a new hard drive won't give you any of that, just more
 data to backup.

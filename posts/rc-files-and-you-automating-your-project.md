@@ -59,10 +59,8 @@ I run postgres and memcached, so I have functions to start and stop both of thos
 
 We also use an `rc` file at work, but it's much shorter, yet more powerful.
 
-<pre>
-alias rake='bundle exec rake'
-eval "$(./sub/bin/ys init -)"
-</pre>
+    alias rake='bundle exec rake'
+    eval "$(./sub/bin/ys init -)"
 
 That's weird...what's that `eval "$(./sub/bin/ys init -)"` nonsense?
 

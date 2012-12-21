@@ -22,25 +22,21 @@ great little repo showing how you can do it.
 
 The README
 
-<blockquote>
-<p>
-Usage:
+> Usage:
+>
+> Add:
+>
+> require 'ruby-debug'
+> require 'cucumber_rails_debug/steps'
+>
+> To features/support/env.rb
+>
+> Then use:
+>
+> Then debug # opens the debugger
+>
+> or
+>
+> Then what # prints out params, url and html
 
-Add:
-
-require 'ruby-debug'\
-require 'cucumber\_rails\_debug/steps'
-
-To features/support/env.rb
-
-Then use:
-
-Then debug \# opens the debugger
-
-or
-
-Then what \#prints out params, url and html
-
-</p>
-</blockquote>
 Check it out [here](http://github.com/mischa/cucumber_rails_debug)

@@ -123,7 +123,7 @@ take over as a dominant VM, but it bridges the gap between ruby and the
 .NET world, allowing developers to use the best language to solve a
 problem, even if the problem requires different languages. IronRuby also
 allows ruby to be used in other .NET application, so you could write a
-C\# app, and throw some ruby in. Sweet!
+C# app, and throw some ruby in. Sweet!
 
 [IronRuby](http://www.slideshare.net/BenHalluk/ironruby)
 

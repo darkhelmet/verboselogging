@@ -62,7 +62,7 @@ up into MongoDB and they look a little like this:
 <script type="text/javascript" src="http://gist.github.com/346635.js?file=schema-example.js"></script>
 
 This is an example of a segment progress metric. It says that the user
-with the specific uid watched the segment named*Intro welcome\_ to 75%.
+with the specific uid watched the segment named *Intro welcome* to 75%.
 There are also events for the 0% (initially start playing) and 25 and 50
 percent markers. The *time* field is the time the event came in as per
 the server clock.

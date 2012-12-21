@@ -17,13 +17,12 @@ tags:
 I've had this problem before, but never wrote down how I fixed it. emacs
 would whine about not being able to open a termcap database file, and
 wouldn't start on the console. The X version worked fine, but using the
-~~nw option resulted it in dying.
-\
-The fix!
-\
-\<pre\>infocmp~~C rxvt-unicode | sudo tee /etc/termcap
+`-nw` option resulted it in dying.
 
-</pre>
+The fix!
+
+    infocmp -C rxvt-unicode | sudo tee /etc/termcap
+
 If you strace emacs when you start it, you'll see it tries to open that
 file, which doesn't exist on Ubuntu by default. I tried everything else,
 the big suggestion from 1996 being install some compat library, which is

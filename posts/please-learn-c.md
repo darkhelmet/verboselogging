@@ -22,7 +22,7 @@ a different part of the
 problem](http://oppugn.us/posts/1270855147.html).
 
 The point he makes is that there are people who claim to be coders out
-there when all they do is write ruby code. Ruby, python, C\#, perl, or
+there when all they do is write ruby code. Ruby, python, C#, perl, or
 whatever are all good and fun. They are useful, powerful languages, each
 with their strong and weak points.
 
@@ -39,7 +39,7 @@ good stuff.
 Throughout the rest of my school career (including work terms) I covered
 (in one form or another) Java, perl, ruby, C++ (Borland and Visual
 varieties), VBScript, HTML/CSS (if you want to count that), SQL,
-Javascript, shell scripting, MATLAB, C\#, and assembly. I might have
+Javascript, shell scripting, MATLAB, C#, and assembly. I might have
 missed a couple but you get the idea.
 
 I can write this blog in ruby, and I can understand what the VM is doing

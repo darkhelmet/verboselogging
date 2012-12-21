@@ -39,8 +39,8 @@ Rails 3.x [^1]
 
 Anyway, it's stupid simple, but here it is.
 
-<script src="https://gist.github.com/781345.js?file=rack-sinatra.rb">
-</script>
+<script src="https://gist.github.com/781345.js?file=rack-sinatra.rb"></script>
+
 Drop that in your lib directory. You can make a class, inherit from
 `Rack::Sinatra`, doll it up like any Sinatra application, and the `use`
 that as rack middleware. Now it basically works just like using Sinatra

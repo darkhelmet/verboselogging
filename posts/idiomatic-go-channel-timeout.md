@@ -39,8 +39,8 @@ in, say 10 seconds.
 Boom. Straight from the [slides of Rob
 Pike](http://golang.org/doc/GoCourseDay3.pdf):
 
-<script src="https://gist.github.com/1032762.js?file=timeout.go">
-</script>
+<script src="https://gist.github.com/1032762.js?file=timeout.go"></script>
+
 The pattern in the `Process()` function is from page 32 of 47 of Rob
 Pike's slides, and is a pretty slick way to timeout receiving from a
 channel. Using the `After()` function in the `time` package in the

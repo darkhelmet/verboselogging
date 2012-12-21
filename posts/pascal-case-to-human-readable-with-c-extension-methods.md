@@ -17,5 +17,4 @@ converted to human readable text, are useful messages.
 
 Here's how I did it.
 
-<script type="text/javascript" src="http://gist.github.com/177769.js?file=pascal_to_human.cs">
-</script>
+<script type="text/javascript" src="http://gist.github.com/177769.js?file=pascal_to_human.cs"></script>

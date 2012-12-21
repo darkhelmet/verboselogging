@@ -16,8 +16,8 @@ tags:
 Here's something I cooked up this evening. Nothing too epic, but it's a
 neat illustration of metaprogramming with ruby.
 
-<script src="https://gist.github.com/958433.js?file=pipes.rb">
-</script>
+<script src="https://gist.github.com/958433.js?file=pipes.rb"></script>
+
 Ruby allows you to reopen classes and add methods to them. You can also
 make a `Module` and `include` that in a class to add methods. I've added
 four methods to the `Symbol` class and overridden one method in the

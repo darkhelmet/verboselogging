@@ -21,8 +21,8 @@ run, and have Chromium on your Ubuntu setup.
 
 So, on with the script:
 
-<script type="text/javascript" src="http://gist.github.com/144141.js?file=chromium-install.sh">
-</script>
+<script type="text/javascript" src="http://gist.github.com/144141.js?file=chromium-install.sh"></script>
+
 The comments speak for themselves. Basically, get prerequisites, get
 tools, get source, build away. This process will take awhile, so once it
 starts go flirt with your significant other for a bit :)

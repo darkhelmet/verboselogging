@@ -23,15 +23,14 @@ Forum which fixed the problem.
 
 Relevant code.
 
-<script type="text/javascript" src="http://gist.github.com/177751.js?file=gtk.rb">
-</script>
-Basically, you call the Gtk.init\_thread\_protect method first when you
+<script type="text/javascript" src="http://gist.github.com/177751.js?file=gtk.rb"></script>
+
+Basically, you call the `Gtk.init_thread_protect` method first when you
 start things up, then, whenever you need to do GUI update stuff, just
-wrap it in a Gtk.thread\_protect {} block. Voila! It works. No more
+wrap it in a `Gtk.thread_protect {}` block. Voila! It works. No more
 crashes. In looking at this code again now, some things could be made
 more Rubyesque, but we'll go with it.
 
 My version with minor changes:
 
-<script type="text/javascript" src="http://gist.github.com/177751.js?file=gtk-mod.rb">
-</script>
+<script type="text/javascript" src="http://gist.github.com/177751.js?file=gtk-mod.rb"></script>

@@ -84,10 +84,10 @@ application needs work.
 ## [18. Incorrect Calculation of Buffer Size](http://cwe.mitre.org/data/definitions/131.html)
 
 This error occurs in languages where you need to explicitly allocate a
-certain amount of memory. C, C++, Java, C\# all require you, in certain
+certain amount of memory. C, C++, Java, C# all require you, in certain
 cases, to make a decision about how much memory to allocate. Ruby
 arrays, as an example, can expand dynamically, as well as some types in
-C\# and Java. Know your datatypes!
+C# and Java. Know your datatypes!
 
 If you allocate a certain amount of memory, but then try to read more
 data into that block of memory than it can hold, ~~hilarity~~ chaos
@@ -95,8 +95,8 @@ ensues.
 
 Bad:
 
-<script type="text/javascript" src="http://gist.github.com/395758.js?file=buffer_size.c">
-</script>
+<script type="text/javascript" src="http://gist.github.com/395758.js?file=buffer_size.c"></script>
+
 The `gets` function just reads stuff into a buffer up to the newline
 character. What if I feed in a TON of data? FAIL!
 
@@ -122,8 +122,8 @@ Use safe methods that accept sizes for inputs, like `fgets`.
 
 Good:
 
-<script type="text/javascript" src="http://gist.github.com/395758.js?file=better_buffer_size.c">
-</script>
+<script type="text/javascript" src="http://gist.github.com/395758.js?file=better_buffer_size.c"></script>
+
 Some other things they recommend are just good practice, like examining
 compiler warnings. If your compiler is spitting out warnings about
 casting and other things, you should probably give it a look see. I

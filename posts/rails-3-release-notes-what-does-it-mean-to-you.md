@@ -42,8 +42,8 @@ Basically, you have to put all the config.gem stuff from your
 environment.rb file into a Gemfile in the root of your app. For my blog
 (which isn't rails, remember), it looks like this:
 
-<script type="text/javascript" src="http://gist.github.com/296564.js?file=gistfile1.rb">
-</script>
+<script type="text/javascript" src="http://gist.github.com/296564.js?file=gistfile1.rb"></script>
+
 Not a big deal, and don't worry, you'll like the system more anyway.
 Like I said, it's a *ruby* system, not rails, so it's the same wherever
 you go.
@@ -61,8 +61,8 @@ The new syntax for routes basically makes the routes file look nicer. It
 makes a bit more sense, and you feel that warm fuzzy feeling when you
 write it.
 
-<script type="text/javascript" src="http://gist.github.com/296564.js?file=gistfile2.rb">
-</script>
+<script type="text/javascript" src="http://gist.github.com/296564.js?file=gistfile2.rb"></script>
+
 Now, normally you'd probably have more routes, but as an example, those
 two routes handle creating a blog post. Doesn't the new way look much
 better. You like that, don't you?

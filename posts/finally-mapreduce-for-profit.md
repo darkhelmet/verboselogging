@@ -59,8 +59,7 @@ people are signing up for their **Super Fantastic Cloud Hosting**. So we
 make them a conversation, and start getting metrics back. We load them
 up into MongoDB and they look a little like this:
 
-<script type="text/javascript"
-src="http://gist.github.com/346635.js?file=schema-example.js"\>\</script\>
+<script type="text/javascript" src="http://gist.github.com/346635.js?file=schema-example.js"></script>
 
 This is an example of a segment progress metric. It says that the user
 with the specific uid watched the segment named*Intro welcome\_ to 75%.

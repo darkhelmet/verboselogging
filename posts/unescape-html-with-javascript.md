@@ -24,6 +24,6 @@ textarea.
 
 My function:
 
-<script type="text/javascript" src="http://gist.github.com/228398.js?file=unescape.js">
-</script>
+<script type="text/javascript" src="http://gist.github.com/228398.js?file=unescape.js"></script>
+
 Good Stuff.&trade;

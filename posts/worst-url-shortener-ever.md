@@ -21,7 +21,7 @@ Anyway, this uses riak just to store the URL, and the riak key as the
 *short* URL key. There is no error checking, UI, or anything fancy. It's
 pretty much the simplest thing that could possibly work.
 
-<script src="https://gist.github.com/1047235.js?file=shrt.rb">
-</script>
+<script src="https://gist.github.com/1047235.js?file=shrt.rb"></script>
+
 Also, it's kind of a lie, since the URLs it makes are actually a little
 long. Whatever.

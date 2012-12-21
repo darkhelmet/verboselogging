@@ -32,16 +32,16 @@ something.
 
 Voila
 
-<script type="text/javascript" src="http://gist.github.com/255263.js?file=gistfile1.rb">
-</script>
+<script type="text/javascript" src="http://gist.github.com/255263.js?file=gistfile1.rb"></script>
+
 Hacked that up pretty quick. It assumes you have a single bundle enabled
 for your app, which is free. I destroy any bundle there, create a new
 one, download it, and push it up to Amazon's S3 service (which I'm
 confident in).
 
 Quick and dirty, but much better than nothing. It's a full dump,
-including source code for that branch (with Heroku you just \`git
-push\`).
+including source code for that branch (with Heroku you just `git
+push`).
 
 There's no error checking so if something breaks, I'll see it in my cron
 email. I'll get an email regardless, since it does output stuff to the

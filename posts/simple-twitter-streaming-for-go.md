@@ -39,8 +39,8 @@ it like that, or dump it into a goroutine and use it asynchronously too.
 Install with `go get github.com/darkhelmet/twitterstream` and use like
 this:
 
-<script src="https://gist.github.com/2928036.js?file=test.go">
-</script>
+<script src="https://gist.github.com/2928036.js?file=test.go"></script>
+
 For the full docs, head to
 [http://go.pkgdoc.org/github.com/darkhelmet/twitterstream](http://go.pkgdoc.org/github.com/darkhelmet/twitterstream)
 

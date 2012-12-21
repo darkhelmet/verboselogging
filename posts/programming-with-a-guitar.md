@@ -22,20 +22,18 @@ chopsticks and a keyboard, but using Devexpress. Cool!
 Now they step it up and they have a Guitar Hero controller to write
 code. Badass!
 
-<p id='devexpress-movie' style='height: 400px'>
-</p>
-<script type='text/javascript' src='/javascripts/flowplayer.js'>
-</script>
+<p id='devexpress-movie' style='height: 400px'></p>
+<script type='text/javascript' src='/javascripts/flowplayer.js'></script>
 <script type='text/javascript'>
 flowplayer('devexpress-movie', { src: '/swf/flowplayer.swf', wmode:
-'opqaue' }, { clip: {\
- url:
-'[http://tv.devexpress.com/Content/PDC09/GuitarCodeInterview/GuitarCodeInterview.flv'](http://tv.devexpress.com/Content/PDC09/GuitarCodeInterview/GuitarCodeInterview.flv'),\
- autoPlay: false,\
- autoBuffering: true,\
- scaling: 'fit' }\
-});\
+'opqaue' }, { clip: {
+ url: 'http://tv.devexpress.com/Content/PDC09/GuitarCodeInterview/GuitarCodeInterview.flv',
+ autoPlay: false,
+ autoBuffering: true,
+ scaling: 'fit' }
+});
 
 </script>
+
 [Guitars and Code with Mark and
 Mehul](http://tv.devexpress.com/GuitarCodeInterview.movie)

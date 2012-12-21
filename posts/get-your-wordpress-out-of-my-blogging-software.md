@@ -35,7 +35,7 @@ They are pretty much my tools of choice as of late, so of course.
 
 Haml for HTML, builder for sitemap and the RSS feed.
 
-### will\_paginate
+### will_paginate
 
 For paging things. I had to grab the branch for non-rails usage, since
 it doesn't play nice otherwise.
@@ -44,7 +44,7 @@ it doesn't play nice otherwise.
 
 The ORM. I love AR, and it plays with…
 
-### acts\_as\_taggable\_on\_steroids
+### acts_as_taggable_on_steroids
 
 For handling tags on posts.
 
@@ -98,8 +98,8 @@ database contents if the item is still valid, or if the item is old,
 yields a block, stores that result in the database and then returns it.
 Basically my little poor-man's memcached. The entire cache code is:
 
-<script type="text/javascript" src="http://gist.github.com/187098.js?file=cache.rb">
-</script>
+<script type="text/javascript" src="http://gist.github.com/187098.js?file=cache.rb"></script>
+
 I also implemented a simple redirection system. When I update a post, if
 will check to see if the permalink is going to change, and if it does,
 it creates a Redirection. When you hit the old URL, it first checks to

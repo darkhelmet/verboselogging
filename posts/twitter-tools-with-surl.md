@@ -26,5 +26,4 @@ EDIT: Yay it works. Win!
 
 And here's the code:
 
-<script type="text/javascript" src="http://gist.github.com/177761.js?file=surl.php">
-</script>
+<script type="text/javascript" src="http://gist.github.com/177761.js?file=surl.php"></script>

@@ -71,8 +71,8 @@ Run it like so: <code>ruby delicious2Google.rb
 [johndoe@gmail.com](mailto:johndoe@gmail.com) password
 delicious-12345.htm</code>
 
-<script src="https://gist.github.com/744356.js?file=delicious2Google.rb">
-</script>
+<script src="https://gist.github.com/744356.js?file=delicious2Google.rb"></script>
+
 Before I exported, I added the **delicious** tag to all my bookmarks so
 I'd know which ones came from Delicious. I'd recommend this too, and
 then you can refresh the Google Bookmarks page in another window to

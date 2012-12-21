@@ -25,12 +25,12 @@ You can probably copy and paste this, but I make no promises that it
 will work, only that it [Works on My
 Machine.](http://www.codinghorror.com/blog/archives/000818.html)
 
-<script type="text/javascript" src="http://gist.github.com/177748.js?file=setup.sh">
-</script>
+<script type="text/javascript" src="http://gist.github.com/177748.js?file=setup.sh"></script>
+
 And that should output something like
 
-<script type="text/javascript" src="http://gist.github.com/177748.js?file=output.txt">
-</script>
+<script type="text/javascript" src="http://gist.github.com/177748.js?file=output.txt"></script>
+
 The last part about the LLVM build is the important part. It still
 doesn't quite work with llvmruby, but maybe it's because I used the 2.5
 version and the llvmruby page says 2.4. Just something else…

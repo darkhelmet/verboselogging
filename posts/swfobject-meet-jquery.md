@@ -21,8 +21,8 @@ programmer I had to do something about it. Enter
 
 Check this out:
 
-<script type="text/javascript" src="http://gist.github.com/234339.js?file=jquery-swfobject.js">
-</script>
+<script type="text/javascript" src="http://gist.github.com/234339.js?file=jquery-swfobject.js"></script>
+
 Some embed tags that are provided are only of one type: either object or
 embed. This is no good since that means some browsers are excluded and
 it won't work. Lame! Swfobject solves the problem by using JavaScript to

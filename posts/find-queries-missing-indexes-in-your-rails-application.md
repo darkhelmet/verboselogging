@@ -34,8 +34,8 @@ gives you some nice output. As an example, here's the result of
 `EXPLAIN SELECT * FROM tf_users WHERE user_id = 'darkhelmet';` on the
 `users` table from [TorrentFlux](http://www.torrentflux.com/). [^1]
 
-<script type="text/javascript" src="http://gist.github.com/397868.js?file=explain.sql">
-</script>
+<script type="text/javascript" src="http://gist.github.com/397868.js?file=explain.sql"></script>
+
 As you can see, it has the column named `possible_keys` which is `NULL`,
 as well as the `key` column, also showing `NULL`.[^2]
 
@@ -46,10 +46,10 @@ Bad [DBA](http://en.wikipedia.org/wiki/Database_administrator!)
 If you run `SHOW INDEX` on the database, it will tell you what indexes
 you already have:
 
-<script type="text/javascript" src="http://gist.github.com/397868.js?file=show_lack_of_indexes.sql">
-</script>
+<script type="text/javascript" src="http://gist.github.com/397868.js?file=show_lack_of_indexes.sql"></script>
+
 This one just has the primary key on the `uid` column. If your app is
-actually finding people by user\_id (and TorrentFlux does when you
+actually finding people by user_id (and TorrentFlux does when you
 login), this is a big slowdown when you have lots of users. **Any query
 not using an index will take longer than a query using proper indexes.**
 As a downside, indexes result in slightly slower inserts (more so if the
@@ -62,8 +62,8 @@ Anyway.
 
 If we add an index to this table, we can see the differences:
 
-<script type="text/javascript" src="http://gist.github.com/397868.js?file=with_index.sql">
-</script>
+<script type="text/javascript" src="http://gist.github.com/397868.js?file=with_index.sql"></script>
+
 Now `possible_keys` and `keys` are populated with the key name we set
 up.
 
@@ -74,8 +74,8 @@ Rails application*, and so far I've just explained why you should use
 indexes and shown some MySQL syntax to make them. Here comes the Rails
 part.
 
-<script type="text/javascript" src="http://gist.github.com/397868.js?file=find_bad_queries.rb">
-</script>
+<script type="text/javascript" src="http://gist.github.com/397868.js?file=find_bad_queries.rb"></script>
+
 Put that in your script directory and smoke it. Seriously. It's for
 Rails 3, but I'm sure you can change that top line to make it work in
 Rails 2.x.

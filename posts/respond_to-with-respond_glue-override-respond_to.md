@@ -45,8 +45,8 @@ methods in the
 [WidgetsController](http://github.com/darkhelmet/respond_glue-example/blob/9da9d47ad0b79aea7e1b06ed4f5aed5b63f79bd4/app/controllers/widgets_controller.rb)
 and it would probably work out. Then you just do some [fun things in the
 views](http://github.com/darkhelmet/respond_glue-example/commit/9da9d47ad0b79aea7e1b06ed4f5aed5b63f79bd4)
-to generate the right paths (fancy\_widget\_path instead of
-widget\_path).
+to generate the right paths (`fancy_widget_path` instead of
+`widget_path`).
 
 But that's no fun. Then you have all this duplicate code, and it's still
 a pain to override methods in the Fancy and Weird Widget controllers
@@ -58,19 +58,19 @@ Who cares, because we have blocks. Tasty ruby blocks that when mixed
 with anything result in a tasty meal.
 
 So I threw together
-[respond\_glue](http://github.com/darkhelmet/respond_glue/tree)
+[respond_glue](http://github.com/darkhelmet/respond_glue/tree)
 
 A little plugin to fix this problem, with minimal crap.
 
 In its simplest form, it's this
 
-<script type="text/javascript" src="http://gist.github.com/177740.js?file=respond_glue.rb">
-</script>
+<script type="text/javascript" src="http://gist.github.com/177740.js?file=respond_glue.rb"></script>
+
 This gets included into ActionController::Base, which lets you do stuff
 like this:
 
-<script type="text/javascript" src="http://gist.github.com/177740.js?file=controllers.rb">
-</script>
+<script type="text/javascript" src="http://gist.github.com/177740.js?file=controllers.rb"></script>
+
 The `respond_glue` lines setup blocks to be used when calling
 format.html (or js, xml, whatever. In the example, format.html). The
 `glue_for` line sets up the glue for the index action. This must be
@@ -92,10 +92,10 @@ FancyWidgetsController? It's pretty straightforward:
 8.  …which replaces the html handler originally defined in
     `WidgetsController#index`
 9.  …which returns, and then the new method (defined by the `glue_for`)
-    calls the respond\_to block
+    calls the `respond_to` block
 
 So. You get nice inheritance where you can reuse code in the parent
-class, and still override the respond\_to stuff.
+class, and still override the `respond_to` stuff.
 
 Opinions? Ideas? Did I just do a bunch of work to solve a problem that
 is better solved another way?

@@ -20,8 +20,8 @@ do it.
 Whatever. jQuery is so awesome that it doesn't matter, because here's
 what I came up with.
 
-<script type="text/javascript" src="http://gist.github.com/177742.js?file=jquery-timeout-animate.js">
-</script>
+<script type="text/javascript" src="http://gist.github.com/177742.js?file=jquery-timeout-animate.js"></script>
+
 EDIT 28-Nov-2009
 
 In retrospect, all I wanted was a jQuery like syntax, but leveraging
@@ -29,8 +29,8 @@ jQuery to do the timeout is sort of wrong. After all, Javascript does
 have a setTimeout function. I must have been in a *jQuery must do all of
 this* mindset. This is better.
 
-<script type="text/javascript" src="http://gist.github.com/177742.js?file=jquery-timeout-basic.js">
-</script>
+<script type="text/javascript" src="http://gist.github.com/177742.js?file=jquery-timeout-basic.js"></script>
+
 EDIT 19-Jan-2010
 
 Even then, with that implementation, all it does is pass the arguments

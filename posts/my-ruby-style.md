@@ -31,7 +31,7 @@ programming style in some cases).
     arguments, otherwise, no dice!
 -   I only use parens when calling a method which I need to pass
     arguments to.
--   I prefer *class \<\< self* over *def self.name*.
+-   I prefer `class << self` over `def self.name`.
 -   I use single quotes unless I need to interpolate. Interpolation is
     [faster](http://www.igvita.com/2008/07/08/6-optimization-tips-for-ruby-mri/)
     anyway.
@@ -45,23 +45,23 @@ programming style in some cases).
     situation.
 -   I don't enforce LOC count on methods, but I keep them short enough
     to be manageable.
--   I don't use the *return* keyword unless I need it. It's faster, but
+-   I don't use the `return` keyword unless I need it. It's faster, but
     I can't find the benchmark.
--   I love *.each* and use enumeration operators whenever possible.
+-   I love `.each` and use enumeration operators whenever possible.
 -   I use self only when I need it.
 -   I love metaprogramming, but I try to not overdo it.
--   I love method\_missing, but again, try to not overdo it.
--   I like *map* over *collect* because I feel *collect* just makes no
+-   I love `method_missing`, but again, try to not overdo it.
+-   I like `map` over `collect` because I feel `collect` just makes no
     sense.
--   I prefer *object.nil?* when it clarifies meaning, but embrace the
+-   I prefer `object.nil?` when it clarifies meaning, but embrace the
     implicit cast.
 -   I use the singular (or a really short name) for the argument to an
-    *each* block.
--   I like the *\#try* syntax.
+    `each` block.
+-   I like the `#try` syntax.
 -   I like NULL in the database for strings, but not other things.
 -   I usually write a down method for migrations, unless it just doesn't
     make sense.
--   I raise an *IrreversibleMigration* exception if the migration calls
+-   I raise an `IrreversibleMigration` exception if the migration calls
     for it.
 -   I try to remember to index foreign key columns, but it usually comes
     down to doing it if there is a performance problem.
@@ -72,7 +72,7 @@ programming style in some cases).
 -   I don't vender gems, unless I need to change code in the gem.
 -   I put global partials in a 'shared' folder.
 -   I use the RESTful names, but add others when needed.
--   I use *:except* in *routes.rb* to prevent mapping of routes I don't
+-   I use `:except` in `routes.rb` to prevent mapping of routes I don't
     want.
 -   If code isn't in a library designed to be used by other developers,
     I usually don't document it. If it's complicated enough that you
@@ -83,5 +83,4 @@ programming style in some cases).
 
 Well, that's me. Here's a bit of an example:
 
-<script type="text/javascript" src="http://gist.github.com/259248.js?file=style.rb">
-</script>
+<script type="text/javascript" src="http://gist.github.com/259248.js?file=style.rb"></script>

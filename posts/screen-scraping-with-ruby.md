@@ -35,10 +35,10 @@ First, there is a main page which lists all the other pages
 (thankfully), so I can grab that page and get the main list of things to
 download. They are all the links that match a certain regex:
 
-<script type="text/javascript" src="http://gist.github.com/223929.js?file=links-matching.rb">
-</script>
+<script type="text/javascript" src="http://gist.github.com/223929.js?file=links-matching.rb"></script>
+
 It's been a while since I wrote the code, but I uniq'd and flatten'd the
-main\_links array too. Can't remember why.
+`main_links` array too. Can't remember why.
 
 There are also multiple pages per item, if that makes sense. The main
 page would have links for Foo, Bar, and Baz, but then there might be
@@ -46,8 +46,8 @@ foo-2.htm, foo-3.htm, etc. These aren't linked nicely, so I just sort of
 iterated up to 20 and checked to see if the page was there, and added
 those too:
 
-<script type="text/javascript" src="http://gist.github.com/223929.js?file=multiple-pages.rb">
-</script>
+<script type="text/javascript" src="http://gist.github.com/223929.js?file=multiple-pages.rb"></script>
+
 I had to check for the unavailability of the page that way, since they
 did it weird, doing a redirect and then showing a 404 page, but never
 giving a 404 response code. Weird.
@@ -62,8 +62,8 @@ function in ruby.
 
 Now I was ready to process things more thoroughly:
 
-<script type="text/javascript" src="http://gist.github.com/223929.js?file=download.rb">
-</script>
+<script type="text/javascript" src="http://gist.github.com/223929.js?file=download.rb"></script>
+
 Iterate through, find the links I want, pull out the relevant 'code' and
 decode it, visit ***that*** link, find the image I want, then download
 it.

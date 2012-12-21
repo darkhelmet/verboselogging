@@ -15,10 +15,10 @@ tags:
 *This post is part 2 in the Super MongoDB MapReduce Max Out! series.
 [Read Part 1](/2010/03/22/super-mongodb-mapreduce-max-out)*
 
-Now, from the last post, you might still be wondering what’s the whole
+Now, from the last post, you might still be wondering what's the whole
 point behind this MapReduce stuff? What can you really do with it?
 
-Well hold on, I’m going to tell you.
+Well hold on, I'm going to tell you.
 
 But first, some back story.
 
@@ -48,12 +48,12 @@ for this exact purpose.
 MongoDB and CouchDB.
 
 Using MongoDB seemed like the natural choice to start getting into these
-databases. We’re not using this in production, it was just a side
+databases. We're not using this in production, it was just a side
 project for me between work and home to learn MongoDB.
 
-Anyway, enough history, let’s reduce some maps! Or whatever…
+Anyway, enough history, let's reduce some maps! Or whatever…
 
-So let’s pretend we are making a CodeBaby Conversation for **Fizzbin
+So let's pretend we are making a CodeBaby Conversation for **Fizzbin
 Cloud Services** and the problem they are having is that not enough
 people are signing up for their **Super Fantastic Cloud Hosting**. So we
 make them a conversation, and start getting metrics back. We load them
@@ -68,12 +68,12 @@ There are also events for the 0% (initially start playing) and 25 and 50
 percent markers. The *time* field is the time the event came in as per
 the server clock.
 
-There’s actually a bit more information, but that’s all that’s relevant
+There's actually a bit more information, but that's all that's relevant
 for this article.
 
 ## Segment retention
 
-Something that’s quite relevant is *segment retention*. This tells us if
+Something that's quite relevant is *segment retention*. This tells us if
 people are actually watching the segments. If everybody only makes it to
 50%:
 
@@ -86,7 +86,7 @@ Regardless, we want to see how many unique users hit each stage (0, 25,
 50, 75, and 100 percent) of a segment. This type of thing is important
 in various other places too: are people paying attention to our shit?
 
-## MongoDB’s *group* command
+## MongoDB's *group* command
 
 Using the group functionality of MongoDB, we can count **all events**,
 but not unique users. This means that if every user watches each segment
@@ -130,9 +130,9 @@ your shards, how awesome is that.
 
 All in all, MongoDB has some very powerful features, not the least of
 which is its built in MapReduce functionality. If you are in that range
-where using Hadoop might be overkill, but MySQL just can’t hack it
+where using Hadoop might be overkill, but MySQL just can't hack it
 (either in volume of data or processing capability), then MongoDB is
 probably your choice. Put it to work, shard it, MapReduce it.
 
-Then make a weird 10 minute music video of it. I’m looking at you Lady
+Then make a weird 10 minute music video of it. I'm looking at you Lady
 Gaga.

@@ -15,8 +15,8 @@ tags:
 ---
 A copy merge is basically where you take all of *their* changes.
 
-Say you’re in branch A and want to merge in branch B. Their might be
-conflicts, but you don’t care, as you want whatever is in branch B.
+Say you're in branch A and want to merge in branch B. Their might be
+conflicts, but you don't care, as you want whatever is in branch B.
 Almost as if you are copying from B to A.
 
 Since you are in branch A, it is referred to as *ours*. Branch B is

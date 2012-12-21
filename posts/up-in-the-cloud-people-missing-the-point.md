@@ -96,7 +96,7 @@ What it comes down to is some people are just missing the point of the
 cloud. It's out there to help you solve problems that you shouldn't have
 to think about. It gives you more time to think about the important
 things. It gives you global, 24/7 (for argument sake, realistically it's
-like 99.9% of the time) access to your ‘stuff'.
+like 99.9% of the time) access to your 'stuff'.
 
 Spending \$100 on a new hard drive won't give you any of that, just more
 data to backup.

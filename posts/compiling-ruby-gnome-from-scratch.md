@@ -13,8 +13,8 @@ tags:
 - gnome
 - gtk
 ---
-If you go download the ruby-gnome stuff, and GTK fails to compile, it’s
+If you go download the ruby-gnome stuff, and GTK fails to compile, it's
 easy to fix.
 
 It whines about some defines, and you can just comment out the block
-that’s causing the problem.
+that's causing the problem.

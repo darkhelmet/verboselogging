@@ -13,13 +13,13 @@ tags:
 - star-wars
 - serverfault
 ---
-Have you check out Google Sets? It’s great.
+Have you check out Google Sets? It's great.
 
-I really don’t know how long it’s been around, but it’s pretty slick.
+I really don't know how long it's been around, but it's pretty slick.
 
 If you were looking for server names, like in
 [this](http://serverfault.com/questions/45734/the-coolest-server-names)
-serverfault question, you’ll realize the power of [Google
+serverfault question, you'll realize the power of [Google
 Sets.](http://labs.google.com/sets)
 
 Go there, and try out a few things, like characters from Star Wars.

@@ -12,7 +12,7 @@ tags:
 - tutorial
 - python
 ---
-I found this a long time ago (in a galaxy far, far, away), and it’s
+I found this a long time ago (in a galaxy far, far, away), and it's
 still up and still good. If you want to learn python, fly through this
 article and you should be good.
 

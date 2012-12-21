@@ -13,7 +13,7 @@ tags:
 - git
 ---
 Speaking of git, you can get it on Windows, using msysgit. It works
-pretty well, in that I haven’t had any problems with it, except some
+pretty well, in that I haven't had any problems with it, except some
 minor line ending things.
 
 [msysgit](http://code.google.com/p/msysgit/)\

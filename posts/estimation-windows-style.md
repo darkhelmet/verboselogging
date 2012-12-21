@@ -16,7 +16,7 @@ tags:
 You thought this would be some epic post? Well maybe later. For now,
 just some xkcd.
 
-Everybody hates the fact that Windows can’t seem to estimate file
+Everybody hates the fact that Windows can't seem to estimate file
 transfers at even remotely well, and finally somebody has made it into
 something funny.
 

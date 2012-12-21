@@ -27,13 +27,13 @@ code. Badass!
 <script type='text/javascript' src='/javascripts/flowplayer.js'>
 </script>
 <script type='text/javascript'>
-flowplayer(‘devexpress-movie’, { src: ‘/swf/flowplayer.swf’, wmode:
-‘opqaue’ }, { clip: {\
+flowplayer('devexpress-movie', { src: '/swf/flowplayer.swf', wmode:
+'opqaue' }, { clip: {\
  url:
-‘[http://tv.devexpress.com/Content/PDC09/GuitarCodeInterview/GuitarCodeInterview.flv'](http://tv.devexpress.com/Content/PDC09/GuitarCodeInterview/GuitarCodeInterview.flv'),\
+'[http://tv.devexpress.com/Content/PDC09/GuitarCodeInterview/GuitarCodeInterview.flv'](http://tv.devexpress.com/Content/PDC09/GuitarCodeInterview/GuitarCodeInterview.flv'),\
  autoPlay: false,\
  autoBuffering: true,\
- scaling: ’fit’ }\
+ scaling: 'fit' }\
 });\
 
 </script>

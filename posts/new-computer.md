@@ -16,7 +16,7 @@ tags:
 - asus
 - antec
 ---
-Well I’ve have it up and running for a little while now, but finally got
+Well I've have it up and running for a little while now, but finally got
 around to writing about it.
 
 After 5 years in university (coop program), and coming out with an

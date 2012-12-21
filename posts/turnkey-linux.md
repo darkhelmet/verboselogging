@@ -28,5 +28,5 @@ updates are supported until sometime in 2011. They even provide a base
 setup of either plain JeOS or the the basic stack.
 
 Looks pretty slick, and once I get my new server going (once I get a new
-computer that is) with the dual core and 4GB of RAM, I’ll probably play
+computer that is) with the dual core and 4GB of RAM, I'll probably play
 with some of these.

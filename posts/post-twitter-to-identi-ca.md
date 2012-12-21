@@ -17,7 +17,7 @@ So I signed up at [identi.ca](http://identi.ca/) a while ago, but never
 really did anything with it. I also found [Yahoo
 Pipes](http://pipes.yahoo.com/) a while ago, and put it on my [Todo
 List](http://getontracks.org/) to look at, but that was about it. I
-don’t know why I didn’t think to look at it to do this.
+don't know why I didn't think to look at it to do this.
 
 Anyway. Pipes lets you manipulate pretty much anything, RSS feeds being
 one of them. You can feed things around, or *pipe* them, and alter

@@ -30,7 +30,7 @@ First off, Michael Braude seems a bit off his rocker. A few bits short
 of a full Unicode character, if you will. If you *just* read the parts
 quoted by Atwood, you'd think this. If you read the full post and also
 [this](http://michaelbraude.blogspot.com/2009/05/why-ill-never-be-web-guy.html?showComment=1249410673541#c6988159394024799701)
-comment by Braude, you'll see that by *web ‘programming'* he mainly
+comment by Braude, you'll see that by *web 'programming'* he mainly
 means the HTML and Javascript portion, not the server side portion. In
 his post he does, however, whine about throwing together a simple
 ASP.NET page. But really, somebody could just as easily drop some
@@ -63,7 +63,7 @@ programming will be web programming, but certainly not all programming.
 I think what I like most about these two blog posts are the comments.
 Some point obvious flaws in the logic of the writer, like how Braude
 says web programming isn't difficult, but also complains for a paragraph
-on all the difficulties one would face being a ‘web guy'. How Atwood
+on all the difficulties one would face being a 'web guy'. How Atwood
 says not all applications should be web applications, but then ends with
 his post title. The fact is, web programming (I include the server side
 portion in my umbrella of web programming), is hard, and so is

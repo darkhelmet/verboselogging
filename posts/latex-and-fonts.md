@@ -21,7 +21,7 @@ quite useful and insightful.
 One of the most interesting bits was this note:
 
 > The dirty little secret here is that when you do this, you might not
-> be getting the true Helvetica but rather it’s very close cousin Nimbus
+> be getting the true Helvetica but rather it's very close cousin Nimbus
 > Sans. That might depend on your system, and LaTex setup though.
 > Nevertheless, Nimbus is still far better font type than Arial.
 

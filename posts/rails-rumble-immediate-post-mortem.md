@@ -13,7 +13,7 @@ tags:
 - ruby
 - railsrumble
 ---
-It’s 10 minutes past 6 on Sunday evening, and [we](http://gemrage.com/)
+It's 10 minutes past 6 on Sunday evening, and [we](http://gemrage.com/)
 just wrapped up our Rails Rumble 2010 project.
 
 Check it out at [http://gemrage.com/](http://gemrage.com/). Check out
@@ -24,7 +24,7 @@ too.
 This. Shit. Was. Real.
 
 We had a rough start with lack of internet for 3 hours, had a few
-depressing times thinking we’d never finish, but we rocked our socks off
+depressing times thinking we'd never finish, but we rocked our socks off
 with Windows and Internet Explorer, MacBooks, Twitter and Campfire, and
 produced a pretty cool application.
 

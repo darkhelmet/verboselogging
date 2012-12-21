@@ -21,5 +21,5 @@ professional online presence to be hosted on
 ([http://www.darkhax.com](http://www.darkhax.com)), but now it should be
 just a bit snappier, and easier for me to deploy to.
 
-If you haven’t at least checked out [Heroku](http://heroku.com) by
+If you haven't at least checked out [Heroku](http://heroku.com) by
 visiting the site, do so now.

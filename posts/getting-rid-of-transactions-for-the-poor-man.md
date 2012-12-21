@@ -16,11 +16,11 @@ tags:
 ---
 A quick post for today.
 
-Want to get rid of transactions from ActiveRecord for something? Here’s
+Want to get rid of transactions from ActiveRecord for something? Here's
 a cheap way to do it.
 
 <script type='text/javascript' src="http://gist.github.com/373215.js?file=no_transactions.rb">
 </script>
 It only works for MySQL obviously, but you can roll your own if you are
-on postgres. I’ll make it a bit less crappy and make it a gem or
+on postgres. I'll make it a bit less crappy and make it a gem or
 something.

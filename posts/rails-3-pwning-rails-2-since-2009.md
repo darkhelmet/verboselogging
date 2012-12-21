@@ -14,7 +14,7 @@ tags:
 - ruby
 - yehuda-katz
 ---
-Yehuda Katz’s slides from SD.rb on Rails 3. I can’t wait!
+Yehuda Katz's slides from SD.rb on Rails 3. I can't wait!
 
 [Vaporware To
 Awesome](http://www.slideshare.net/wycats/vaporware-to-awesome)

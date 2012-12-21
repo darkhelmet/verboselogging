@@ -78,7 +78,7 @@ described, we can do different things with it. You write your PEG to
 recognize the text exactly as it is, so to recognize an if statement
 you'd do something like this:
 
-    rule if_start: ‘if' space lparen if_body rparen
+    rule if_start: 'if' space lparen if_body rparen
 
 This would **not** match an if statement with two spaces between the
 `if` token and the left paren.

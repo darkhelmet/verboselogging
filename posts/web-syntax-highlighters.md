@@ -31,8 +31,8 @@ care of business.
 
 Some downsides include the fact that you have to include the brushes.
 They are separate, so you can include selectively, or just include all
-of them. Also, as the docs say, you should replace the ‘\<’ character
-with the HTML equivalent ‘\<’
+of them. Also, as the docs say, you should replace the '\<' character
+with the HTML equivalent '\<'
 
 ## [Pastie.org](http://pastie.org/)
 
@@ -41,17 +41,17 @@ it takes care of storing it, and highlighting everything for you. You
 then just put the embed code in your blog, and away it goes.
 
 The downside for something like this, is that if Pastie is down, your
-blog hangs while it’s trying to load the script. On top of that, your
-code isn’t in the post. It won’t show up in RSS feeds (probably,
-depending on how awesome your reader is), and therefore won’t be seen by
+blog hangs while it's trying to load the script. On top of that, your
+code isn't in the post. It won't show up in RSS feeds (probably,
+depending on how awesome your reader is), and therefore won't be seen by
 search engines (good or bad, whatever).
 
 ## [gist](http://gist.github.com/)
 
-I moved everything from WP-CodeBox to GitHub’s gist. I have faith that
-GitHub isn’t going anywhere anytime soon, and despite some minor issues
+I moved everything from WP-CodeBox to GitHub's gist. I have faith that
+GitHub isn't going anywhere anytime soon, and despite some minor issues
 as of late (which will hopefully be remedied by the move off Engine
-Yard), the scripts load reliably and quick. As an added bonus, gists’s
+Yard), the scripts load reliably and quick. As an added bonus, gists's
 are all backed by git, so you can check them out and edit in your own
 text editor, fork them, and comment on the progress as you change them.
 Awesome.

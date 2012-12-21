@@ -15,7 +15,7 @@ tags:
 - video
 - worth-watching
 ---
-It’s an older talk, but it’s still awesome. If you’ve never heard of git
+It's an older talk, but it's still awesome. If you've never heard of git
 before, [check it out.](http://git-scm.com)
 
 [Tech Talk: Linus Torvalds on

@@ -16,7 +16,7 @@ tags:
 - debugging
 ---
 I like frameworks, but sometimes debugging them is more entertaining. I
-don’t know why I didn’t think of this method before, but
+don't know why I didn't think of this method before, but
 [mischa](http://github.com/mischa) on [github](http://github.com/) has a
 great little repo showing how you can do it.
 
@@ -28,8 +28,8 @@ Usage:
 
 Add:
 
-require ‘ruby-debug’\
-require ‘cucumber\_rails\_debug/steps’
+require 'ruby-debug'\
+require 'cucumber\_rails\_debug/steps'
 
 To features/support/env.rb
 

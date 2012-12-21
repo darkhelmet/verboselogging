@@ -14,10 +14,10 @@ tags:
 - jquery
 ---
 I needed [jQuery](http://jquery.com/) to fadeout an item after a certain
-timeout, and I found it odd that I couldn’t find a native jQuery way to
+timeout, and I found it odd that I couldn't find a native jQuery way to
 do it.
 
-Whatever. jQuery is so awesome that it doesn’t matter, because here’s
+Whatever. jQuery is so awesome that it doesn't matter, because here's
 what I came up with.
 
 <script type="text/javascript" src="http://gist.github.com/177742.js?file=jquery-timeout-animate.js">
@@ -41,5 +41,5 @@ stop a spinner, or if anything just to encapsulate the functionality
 into jQuery. Maybe on some browsers there is a problem with setTimeout
 and what you want to do, specifically, so you could put your logic to
 *not* use it on that browser, and yet still have the same syntax for
-running something after x amount of time. I also don’t like the
-parameter ordering in setTimeout, but that’s just me.
+running something after x amount of time. I also don't like the
+parameter ordering in setTimeout, but that's just me.

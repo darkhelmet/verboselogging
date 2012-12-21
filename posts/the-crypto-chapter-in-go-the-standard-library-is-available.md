@@ -25,4 +25,4 @@ Late Wednesday night I finished the `crypto` chapter in [Go, The Standard Librar
 
 There's a mailing list, [Twitter account](https://twitter.com/TheStdLib), and a [feedback form](http://thestandardlibrary.com/feedback.html), so head over to [The Standard Library](http://thestandardlibrary.com/) for all things related to that.
 
-You can buy the book for only **$39**, and please do, because that’s going to go up when the book is done. Get it while it's hot!
+You can buy the book for only **$39**, and please do, because that's going to go up when the book is done. Get it while it's hot!

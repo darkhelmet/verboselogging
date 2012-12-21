@@ -15,14 +15,14 @@ tags:
 Many people ask me a variety of questions. Some are about programming,
 some about mountain bikes, some about reptiles.
 
-Some are about something that’s bigger than me or any single source file
-or database dump. It’s about a matter that should be at the highest
+Some are about something that's bigger than me or any single source file
+or database dump. It's about a matter that should be at the highest
 importance to every software developer:
 
 **My hair.**[^1]
 
-Yes, my hair. I’m not even going to not brag, I have some pretty awesome
-hair. If you then factor in the beard…well…I just can’t be stopped.
+Yes, my hair. I'm not even going to not brag, I have some pretty awesome
+hair. If you then factor in the beard…well…I just can't be stopped.
 
 ## The essentials
 
@@ -48,7 +48,7 @@ regular wear and tear. Using the T-shirt keeps your pillow clean.
 
 ## The progress
 
-Since a picture’s worth a thousand words:
+Since a picture's worth a thousand words:
 
 <object width="600" height="450">
 <param name="flashvars" value="offsite=true&lang=en-us&page_show_url=%2Fphotos%2Fdarkhelmetlive%2Fsets%2F72157623642645340%2Fshow%2F&page_show_back_url=%2Fphotos%2Fdarkhelmetlive%2Fsets%2F72157623642645340%2F&set_id=72157623642645340&jump_to="></param>
@@ -58,9 +58,9 @@ Since a picture’s worth a thousand words:
 </object>
 ## The future
 
-I intend to keep these for a long, long time. I’d like to get them to my
+I intend to keep these for a long, long time. I'd like to get them to my
 ankles, and then decide what to do. Maybe trim them, or maybe just
-figure out a new way to wrap them to get them off the ground. I don’t
-know yet, but it’ll be a while before they get that long.
+figure out a new way to wrap them to get them off the ground. I don't
+know yet, but it'll be a while before they get that long.
 
 [^1]: Also, I like the Legally Blonde movies.

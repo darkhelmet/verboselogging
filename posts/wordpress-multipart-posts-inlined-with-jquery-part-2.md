@@ -17,7 +17,7 @@ tags:
 (See [(remote-inline)Part
 1](http://blog.darkhax.com/2009/07/08/wordpress-multipart-posts-inlined-with-jquery-part-1))
 
-And we’re back!
+And we're back!
 
 So, just take a look up below the title…see that little link? Yeah go
 ahead and click that. If I did my job right (tested in Safari on
@@ -46,7 +46,7 @@ magic of jQuery.
 The big second line to setup *existing* is also unique to my blog. I
 work my way up from the link, through the parents (examine the source to
 see for yourself), to get to the sidebar, which is what I put the new
-elements in front of (the new sidebar div and new content div). It’s
+elements in front of (the new sidebar div and new content div). It's
 just the single *closest* call, which is a [jQuery 1.3
 function](http://docs.jquery.com/Traversing/closest)
 
@@ -58,18 +58,18 @@ Other little tidbits:
 
 -   I change the text and eventually remove the element containing the
     link to part 1. There is just a little bit of feedback to show that
-    it’s doing something, but I don’t want that link getting clicked a
+    it's doing something, but I don't want that link getting clicked a
     bunch, so once we load, we can just remove it.
 -   I setup the inlining again after loading the new stuff. This allows
     chaining things, so I could have a 6 part post, and the 6th part
     could load 5, which could load 4, etc, etc.
--   I return false from the onclick function, so the browser doesn’t
+-   I return false from the onclick function, so the browser doesn't
     follow the link.
 -   Since I bind the onclick with jQuery, the link still works normally
     for those of you without javascript. Horray for graceful
     degradation!
 
-Enjoy. It shouldn’t take too much to get it into your own blog.
+Enjoy. It shouldn't take too much to get it into your own blog.
 
 The code for all this can be found on [Github](http://github.com) in my
 [wp-darkhax](http://github.com/darkhelmet/wp-darkhax/tree) repository.

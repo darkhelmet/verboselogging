@@ -22,13 +22,13 @@ since Google
 their URL shortener.
 
 I originally had logic to shorten the permalinks with tr.im, then post
-to Twitter, but since FeedBurner can do this now, I’m not going to do
-it. I like to outsource that kind of stuff, which I’ll talk about in a
+to Twitter, but since FeedBurner can do this now, I'm not going to do
+it. I like to outsource that kind of stuff, which I'll talk about in a
 later post.
 
 Also in the news today, Github is [having some
-problems](http://twitter.com/github/status/6687542565), but they’ll be
-back soon, so don’t you worry.
+problems](http://twitter.com/github/status/6687542565), but they'll be
+back soon, so don't you worry.
 
 All in all, this is more of a test to see how fast FeedBurner sorts this
-stuff out. I’m sure it’ll be fine.
+stuff out. I'm sure it'll be fine.

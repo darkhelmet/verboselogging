@@ -27,4 +27,4 @@ Add
 
 pre. OpenID::Util.logger = RAILS\_DEFAULT\_LOGGER
 
-To environment.rb, and you’re good!
+To environment.rb, and you're good!

@@ -12,11 +12,11 @@ tags:
 - rss
 - feedburner
 ---
-In that, my feed doesn’t get updated fast enough.
+In that, my feed doesn't get updated fast enough.
 
 I had a post go out at 8 AM, then at 8:47 AM, and they both showed up at
 just after noon.
 
 Anybody else experiencing this?
 
-I’ll probably follow up if I fix this.
+I'll probably follow up if I fix this.

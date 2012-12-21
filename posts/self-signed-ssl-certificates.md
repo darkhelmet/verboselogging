@@ -12,10 +12,10 @@ tags:
 - apache
 - ssl
 ---
-I don’t really care, I just want a certificate. Gimme!
+I don't really care, I just want a certificate. Gimme!
 
-For my stuff, I just want the SSL for my own personal use. It’s not for
-a variety of random people I don’t know, just me, so I don’t care.
+For my stuff, I just want the SSL for my own personal use. It's not for
+a variety of random people I don't know, just me, so I don't care.
 
 How?
 

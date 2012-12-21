@@ -18,13 +18,13 @@ made my eye twitch a bit.
 
 ### Keyboard and mice
 
-Obviously they aren’t programmers. I have a hard time imagining that in
-only 10 years, programmers won’t be using keyboards.
+Obviously they aren't programmers. I have a hard time imagining that in
+only 10 years, programmers won't be using keyboards.
 
-### Desktop PC’s
+### Desktop PC's
 
-I like how the third sentence is a admittance that it won’t die, and yes
-it’s on the list. The upgradability and extendability of desktop PC’s is
+I like how the third sentence is a admittance that it won't die, and yes
+it's on the list. The upgradability and extendability of desktop PC's is
 one big advantage they have over laptops. One thing I could see is where
 a laptop would dock with some desktop component to boost power and what
 not. That would be cool.
@@ -33,6 +33,6 @@ not. That would be cool.
 
 Sure, we might not run Windows, but once again, they say in the blurb
 that there will be an operating system underlying things. An operating
-system is something you just can’t get away from.
+system is something you just can't get away from.
 
-On a side note, I’m a sucker for linkbait.
+On a side note, I'm a sucker for linkbait.

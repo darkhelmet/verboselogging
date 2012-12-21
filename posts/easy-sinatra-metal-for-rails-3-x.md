@@ -15,9 +15,9 @@ tags:
 - web
 ---
 I was doing some optimizing the other day on a Rails 2.3.x application
-with a metal controller. I didn’t feel like writing a straight rack
+with a metal controller. I didn't feel like writing a straight rack
 application, so I used sinatra. A pretty good explanation of how this
-works can be seen in Adam Wiggins’ slides, [Rails Metal, Rack, and
+works can be seen in Adam Wiggins' slides, [Rails Metal, Rack, and
 Sinatra](http://www.slideshare.net/adamwiggins/rails-metal-rack-and-sinatra)
 
 In Rails 3, they still have *metal* controllers, in that the
@@ -32,12 +32,12 @@ The metal was just a rack application that was called before the regular
 application, and if it returned a 404, the request continued on to the
 main rails application.
 
-I wanted this same technique for Rails 3.x stuff, since that’s how I
+I wanted this same technique for Rails 3.x stuff, since that's how I
 could nicely integrate
 [sinatra-bundles](https://github.com/darkhelmet/sinatra-bundles) into
 Rails 3.x [^1]
 
-Anyway, it’s stupid simple, but here it is.
+Anyway, it's stupid simple, but here it is.
 
 <script src="https://gist.github.com/781345.js?file=rack-sinatra.rb">
 </script>

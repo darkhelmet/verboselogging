@@ -15,7 +15,7 @@ tags:
 - ruby
 ---
 I wish I could see this guy speak. I learn so much just reading his
-slides and other writings, I can’t even imagine what I’d learn if I was
+slides and other writings, I can't even imagine what I'd learn if I was
 actually there.
 
 [Debugging Ruby](http://www.slideshare.net/tmm1/debugging-ruby)

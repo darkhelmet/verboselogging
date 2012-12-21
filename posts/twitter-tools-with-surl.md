@@ -19,12 +19,12 @@ Tools use my URL shortener, [surl](http://s.darkhax.com)
 
 Hopefully it works.
 
-It’s kind of unfortunate, since I have to post to test, and I really
-don’t want all my test posts going out to Twitter, and yet they have to…
+It's kind of unfortunate, since I have to post to test, and I really
+don't want all my test posts going out to Twitter, and yet they have to…
 
 EDIT: Yay it works. Win!
 
-And here’s the code:
+And here's the code:
 
 <script type="text/javascript" src="http://gist.github.com/177761.js?file=surl.php">
 </script>

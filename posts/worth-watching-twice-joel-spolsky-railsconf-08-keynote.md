@@ -16,7 +16,7 @@ tags:
 - blip-tv
 - joel-spolsky
 ---
-Great talk from Joel Spolsky at last year’s RailsConf.
+Great talk from Joel Spolsky at last year's RailsConf.
 
 [Joel Spolsky, Fog Creek Software: Friday
 Keynote](http://blip.tv/file/1164086/)

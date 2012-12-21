@@ -16,5 +16,5 @@ tags:
 I keep coming back to asking myself what the difference between stub and
 mock objects are and I have it figured out, so here it is:
 
-Stubs just return whatever you tell them do, and that’s it. Mocks have
-expectations and cause tests to fail if those expectations aren’t met.
+Stubs just return whatever you tell them do, and that's it. Mocks have
+expectations and cause tests to fail if those expectations aren't met.

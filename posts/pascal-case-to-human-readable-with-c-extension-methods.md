@@ -11,11 +11,11 @@ slugs:
 tags: 
 - csharp
 ---
-I wrote this a while ago on my old blog, so I’m just reposting here.
-It’s useful since you can have an enum of error codes, which also, when
+I wrote this a while ago on my old blog, so I'm just reposting here.
+It's useful since you can have an enum of error codes, which also, when
 converted to human readable text, are useful messages.
 
-Here’s how I did it.
+Here's how I did it.
 
 <script type="text/javascript" src="http://gist.github.com/177769.js?file=pascal_to_human.cs">
 </script>

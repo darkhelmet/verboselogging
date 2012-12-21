@@ -18,15 +18,15 @@ The Rails 3 Beta got dropped a few days ago, and the release notes for
 Rails were put out [a bit before
 that](http://guides.rails.info/3_0_release_notes.html).
 
-The list of changes is long; this is a big release. There’s a lot to
+The list of changes is long; this is a big release. There's a lot to
 sift through, a lot to change to upgrade your existing application, and
 a lot to learn whether you are upgrading or starting a new app.
 
 The big question is: WTF does all this mean to me?
 
-Don’t worry, I’m going to tell you. If you want to read the full release
-notes, go for it, and I recommend you do, but I’m just going to cover
-the stuff (in the same order that it’s in the release notes) that has
+Don't worry, I'm going to tell you. If you want to read the full release
+notes, go for it, and I recommend you do, but I'm just going to cover
+the stuff (in the same order that it's in the release notes) that has
 the bigger impact on you, the developer.
 
 ## No config.gem, only ~~Zool~~ bundler
@@ -36,20 +36,20 @@ now, and they [just released
 0.9](http://yehudakatz.com/2010/02/01/bundler-0-9-heading-toward-1-0/)
 (and 0.9.2 shortly after). Bundler is a generic ruby gem dependency
 system. Note I said *ruby* and not *rails*. It works on any ruby
-application; I’m using in on this blog (which is sinatra based).
+application; I'm using in on this blog (which is sinatra based).
 
 Basically, you have to put all the config.gem stuff from your
 environment.rb file into a Gemfile in the root of your app. For my blog
-(which isn’t rails, remember), it looks like this:
+(which isn't rails, remember), it looks like this:
 
 <script type="text/javascript" src="http://gist.github.com/296564.js?file=gistfile1.rb">
 </script>
-Not a big deal, and don’t worry, you’ll like the system more anyway.
-Like I said, it’s a *ruby* system, not rails, so it’s the same wherever
+Not a big deal, and don't worry, you'll like the system more anyway.
+Like I said, it's a *ruby* system, not rails, so it's the same wherever
 you go.
 
-Oh, and there’s [a plugin](http://github.com/rails/rails_upgrade) to do
-the work converting to the new syntax for you. Aren’t you glad you work
+Oh, and there's [a plugin](http://github.com/rails/rails_upgrade) to do
+the work converting to the new syntax for you. Aren't you glad you work
 with ruby?
 
 WTF does it mean? Less rails-specific system, better dependency
@@ -63,9 +63,9 @@ write it.
 
 <script type="text/javascript" src="http://gist.github.com/296564.js?file=gistfile2.rb">
 </script>
-Now, normally you’d probably have more routes, but as an example, those
-two routes handle creating a blog post. Doesn’t the new way look much
-better. You like that, don’t you?
+Now, normally you'd probably have more routes, but as an example, those
+two routes handle creating a blog post. Doesn't the new way look much
+better. You like that, don't you?
 
 You can do other fancy things, like easily map other rack applications
 to routes. [Check out all the new
@@ -77,9 +77,9 @@ WTF does it mean? Prettier, more readable code, which means we all win.
 
 Action View now has Unobtrusive Javascript Support and
 [DHH](http://twitter.com/dhh) [tells
-why](http://twitter.com/dhh/status/8391549740). Oh, and it’s awesome. It
-means you don’t need a hack to use jQuery instead of prototype; it just
-works. It also means that your HTML isn’t filled with
+why](http://twitter.com/dhh/status/8391549740). Oh, and it's awesome. It
+means you don't need a hack to use jQuery instead of prototype; it just
+works. It also means that your HTML isn't filled with
 `onclick="omg('hax');"` stuff. Everything is nice, and *unobtrusive*. It
 uses HTML5 goodness to accomplish things, and we all love HTML5. Well,
 except for, you know, Adobe.
@@ -106,7 +106,7 @@ better and make more sense. Queries should be able to be optimized
 better, lazily executed, and therefore your queries might end up faster,
 and your app should be faster too.
 
-And it’s so very sexy.
+And it's so very sexy.
 
 ## ActionMailer Awesomeness
 
@@ -115,18 +115,18 @@ ActionMailer performs like a controller now. There is a good write up
 here](http://lindsaar.net/2010/1/26/new-actionmailer-api-in-rails-3)
 that explains most of the good stuff.
 
-They are in a nice location, namely ‘app/mailers’.
+They are in a nice location, namely 'app/mailers'.
 
 They return nice `Mail::Message` objects.
 
 What more can you want?
 
-WTF does it mean? You’ll be happier writing mailers, it’ll make more
+WTF does it mean? You'll be happier writing mailers, it'll make more
 sense, and the world will rejoice.
 
 ## What else?
 
-Most everything else is pretty awesome, but doesn’t overly affect your
+Most everything else is pretty awesome, but doesn't overly affect your
 day to day work when writing your rails app. ActiveRecord is cleaned up
 so you can add validations and callbacks to any ruby class.
 ActiveSupport is cleaned up so you can require something, and it pulls

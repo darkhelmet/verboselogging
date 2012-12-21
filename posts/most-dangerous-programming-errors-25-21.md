@@ -25,21 +25,21 @@ least some of them. A lot of them bit me in university and I still get
 nipped by some of them today.
 
 Proper education is the first step, and the CWE have done a good job of
-describing their top 25, along with code samples of what not to do. I’d
+describing their top 25, along with code samples of what not to do. I'd
 like to cover them here, not only for myself (since by explaining you
 understand more fully), but for new programmers as well.
 
 When it comes to learning about safe and secure software, the sooner the
 better. CWE shows examples of breaking code, and they have mitigation
-techniques, but I couldn’t find code examples of how to fix the problem,
-so I’ll try to include some of those.
+techniques, but I couldn't find code examples of how to fix the problem,
+so I'll try to include some of those.
 
-**Disclaimer:** I don’t pretend to be a security expert. If you are
-working on a banking or other similar system, don’t take my word! In
+**Disclaimer:** I don't pretend to be a security expert. If you are
+working on a banking or other similar system, don't take my word! In
 fact, take all of this with a grain of salt, and think for yourself
 before blindly implementing things I think are pretty good. The code
-shown might not work exactly, and probably doesn’t do much other error
-checking. Treat it like pseudo-code, and please don’t copy and paste too
+shown might not work exactly, and probably doesn't do much other error
+checking. Treat it like pseudo-code, and please don't copy and paste too
 much.
 
 ## [25. Race condition](http://cwe.mitre.org/data/definitions/362.html)
@@ -91,14 +91,14 @@ The ruby example, fixed up:
 ## [24. Use of a Broken or Risky Cryptographic Algorithm](http://cwe.mitre.org/data/definitions/327.html)
 
 It should be pretty obvious what the problems are here. If the algorithm
-sucks, then it’s easy to break, then all your data is out.
+sucks, then it's easy to break, then all your data is out.
 
 ### Ways around it
 
-#### Don’t write your own cryptography algorithm. Ever.
+#### Don't write your own cryptography algorithm. Ever.
 
-You’re probably not smart enough. If you are, why are you reading my
-blog? Shouldn’t you be hanging out with [Bruce
+You're probably not smart enough. If you are, why are you reading my
+blog? Shouldn't you be hanging out with [Bruce
 Schneier](http://www.schneier.com/?) Mathematicians spend years building
 an algorithm, then more years trying to break it. AES went through 5
 years of evaluation along with others before the [National Institute of
@@ -106,29 +106,29 @@ Standards and
 Technology](http://en.wikipedia.org/wiki/National_Institute_of_Standards_and_Technology)
 approved it. You think you can do better? Probably not.
 
-Don’t worry though, it’s nothing to be ashamed of. Writing cryptography
+Don't worry though, it's nothing to be ashamed of. Writing cryptography
 algorithms is hard. Leave it up to those smart math folks, and we can
 get on with our day writing the next big Facebook.
 
-#### Don’t use broken algorithms
+#### Don't use broken algorithms
 
 Some algorithms are broken. If you are picking one to use, go find out
-what’s good, and what’s broken. MD5 (a hash function) is basically
+what's good, and what's broken. MD5 (a hash function) is basically
 broken, so maybe you should use SHA1, or more preferably SHA256 or
-SHA512 instead if you need a hash function. Don’t use DES as it’s
+SHA512 instead if you need a hash function. Don't use DES as it's
 basically broken too. Right now, AES is the way to go.
 
-#### Don’t hope for security by obscurity
+#### Don't hope for security by obscurity
 
 This goes back to the first point, but if you run your data through a
-couple XOR and SHIFT operations and think it’s secure just because your
-potential attackers don’t know what algorithm you used, think again.
+couple XOR and SHIFT operations and think it's secure just because your
+potential attackers don't know what algorithm you used, think again.
 Your potential attackers are also probably smarter than you and will eat
 your application for breakfast, and crap out your supposedly secure
 data. AES is awesome because the the algorithm is out in the open and
-they still can’t break it. That’s the best kind of security.
+they still can't break it. That's the best kind of security.
 
-## [23. URL Redirection to Untrusted Site (‘Open Redirect’)](http://cwe.mitre.org/data/definitions/601.html)
+## [23. URL Redirection to Untrusted Site ('Open Redirect')](http://cwe.mitre.org/data/definitions/601.html)
 
 This is blindly redirecting people to a site not your own. The CWE PHP
 example is pretty straightforward:
@@ -136,14 +136,14 @@ example is pretty straightforward:
 <script type="text/javascript" src="http://gist.github.com/387484.js?file=bad_redirect.php">
 </script>
 The problems here are more for your users than anything. If you blindly
-redirect them to sites and you don’t really control where they are
-going, that’s kind of a dick move, honestly. An exception (sort of) is a
+redirect them to sites and you don't really control where they are
+going, that's kind of a dick move, honestly. An exception (sort of) is a
 URL shortening site, like bit.ly, which is the whole point of the site.
 
 ### Ways around it
 
-The first two CWE mitigations are pretty solid, and I don’t have much to
-add, so I’ll summarize:
+The first two CWE mitigations are pretty solid, and I don't have much to
+add, so I'll summarize:
 
 1.  Use a whitelist, input validation or spam checking service to reject
     bad inputs (URLs).
@@ -157,16 +157,16 @@ their site if you want.
 #### [22. Allocation of Resources Without Limits or Throttling](http://cwe.mitre.org/data/definitions/770.html)
 
 This one can be fun. Blindly forking (or creating threads) without any
-concept of how many times you’ve forked (or how many threads are out
+concept of how many times you've forked (or how many threads are out
 there). Stuff like that. Another example given is check that a length is
-greater than zero…but that’s it. What if the length is `INT_MAX`? Are
+greater than zero…but that's it. What if the length is `INT_MAX`? Are
 you going to `malloc` that shit?
 
 ### Ways around it
 
 #### Have limits. Obey them.
 
-If you can only handle 500 connections, make sure your app doesn’t deal
+If you can only handle 500 connections, make sure your app doesn't deal
 with more than that. If you are working with threads, use a thread pool
 to cap the max number of threads. Have a memory pool that you can reuse
 instead of blindly allocating memory every time.
@@ -202,7 +202,7 @@ but not something a lot of software does, as far as I know. Wordpress
 warns you (if I remember right) if your config file has weird
 permissions.
 
-If you are reading a config file, it probably shouldn’t be writable by
+If you are reading a config file, it probably shouldn't be writable by
 everybody. Maybe you should check that, and raise an error if it is.
 
 Stay tuned for errors 20-16!

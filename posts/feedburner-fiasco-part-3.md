@@ -17,9 +17,9 @@ tags:
 Well I found the proper ping URL,
 [http://ping.feedburner.google.com/](http://ping.feedburner.google.com/),
 and it looks like everything is supposedly working as advertised. No
-doubt I’ll be keeping an eye on things for the next little while…
+doubt I'll be keeping an eye on things for the next little while…
 
 Google Reader also seems to be a bit slow too.
 
 EDIT: Nope. 37 minutes after publishing even with the ping and
-Feedburner doesn’t have it yet. Changing plugins for giggles.
+Feedburner doesn't have it yet. Changing plugins for giggles.

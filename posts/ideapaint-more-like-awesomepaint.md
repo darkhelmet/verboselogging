@@ -22,9 +22,9 @@ Video](http://www.youtube.com/watch?v=WQXjaI4BeWw&feature=player_embedded)
 Are you kidding me? One coat of this stuff and I can turn a wall into a
 whiteboard? Not only a whiteboard, but one of the highest performing
 whiteboard surfaces ever? Nice! This stuff comes with a warranty too, so
-they aren’t even kidding.
+they aren't even kidding.
 
 When I get an actual house that I care about and can have my own little
-room with my computers and whatnot, this is what’s going on the wall.
+room with my computers and whatnot, this is what's going on the wall.
 
 [IdeaPaint](http://ideapaint.com/site/index.html)

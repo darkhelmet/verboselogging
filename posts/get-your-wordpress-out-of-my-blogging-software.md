@@ -14,7 +14,7 @@ tags:
 - heroku
 - wordpress
 ---
-Hopefully you didn’t notice much, except the speed increase, but my blog
+Hopefully you didn't notice much, except the speed increase, but my blog
 is no longer on the behemoth that is Wordpress.
 
 While Wordpress served me well for quite some time on my [other
@@ -38,7 +38,7 @@ Haml for HTML, builder for sitemap and the RSS feed.
 ### will\_paginate
 
 For paging things. I had to grab the branch for non-rails usage, since
-it doesn’t play nice otherwise.
+it doesn't play nice otherwise.
 
 ### ActiveRecord
 
@@ -74,7 +74,7 @@ Some extra things I use are:
 Those are mainly to handle the top panel.
 
 I had the theme HTML and CSS already done from my Wordpress setup, so
-that was easy to port over. I didn’t even touch the stylesheet. Using
+that was easy to port over. I didn't even touch the stylesheet. Using
 haml and partials made life easy, especially when it came to porting my
 jQuery post inline script ([in
 action](http://blog.darkhax.com/2009/07/09/wordpress-multipart-posts-inlined-with-jquery-part-2)),
@@ -82,7 +82,7 @@ since I could just render the partial when the request was made from
 jQuery. In Wordpress I rendered the entire page and parsed out the part
 I wanted. Lame.
 
-Heroku hosts everything, and I’ve had a few problems here and there, but
+Heroku hosts everything, and I've had a few problems here and there, but
 most have been little stupid bugs on my part.
 
 I use etags (rack-etag middleware) and max-age so that the Heroku system
@@ -96,7 +96,7 @@ these items are retrieved and then cached in the database using
 ActiveRecord. The cache checks the age of items, and returns either the
 database contents if the item is still valid, or if the item is old,
 yields a block, stores that result in the database and then returns it.
-Basically my little poor-man’s memcached. The entire cache code is:
+Basically my little poor-man's memcached. The entire cache code is:
 
 <script type="text/javascript" src="http://gist.github.com/187098.js?file=cache.rb">
 </script>
@@ -122,7 +122,7 @@ ActiveRecord stores things in UTC, and display times are all
     snappier. Wordpress was a dog, even with all the caching tweaks I
     added to it.
 -   My blog has the bandwidth. Running my Wordpress based blog from home
-    wasn’t a problem when it came to CPU power. My server is a dual core
+    wasn't a problem when it came to CPU power. My server is a dual core
     AMD running 64-bit Ubuntu 8.04.2 with 4 GB of RAM, so my upload
     bandwidth was the bottleneck. With Heroku, at least I have some
     bandwidth.

@@ -20,7 +20,7 @@ original post started with
 
 And now, on Monday, I get to start my new job playing with Rails all day
 long. Funny how things change. Regardless, the quality of this tutorial
-hasn’t changed, so here it is again.
+hasn't changed, so here it is again.
 
 [Rails Envy: Ruby on Rails Rake
 Tutorial](http://www.railsenvy.com/2007/6/11/ruby-on-rails-rake-tutorial)

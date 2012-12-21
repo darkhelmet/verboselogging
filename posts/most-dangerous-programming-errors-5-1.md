@@ -11,7 +11,7 @@ slugs:
 tags: 
 - authorization
 ---
-Since it’s thoroughly into the new year, I guess I should get off my ass
+Since it's thoroughly into the new year, I guess I should get off my ass
 and wrap up the [Top 25 Most Dangerous Software
 Errors.](http://cwe.mitre.org/top25/index.html)
 
@@ -32,11 +32,11 @@ This was actually one of the big problems in the
 [diaspora](https://github.com/diaspora/diaspora) codebase when they
 first opened it up. You probably only generate links to the resources
 that the user owns, but if they throw some *curl-fu* your way, they can
-delete anything they want, even if they don’t own it.
+delete anything they want, even if they don't own it.
 
 ### Ways around it
 
-You don’t want to fall into the mindset that users can only access the
+You don't want to fall into the mindset that users can only access the
 URLs you generate and display to them.[^1]
 
 In the simple example, you should probably be doing something like:
@@ -60,25 +60,25 @@ have some working authenticated cookie, they can do whatever they want.
 
 ### Ways around it
 
-If you’re using a web framework, it probably has this built in. In
+If you're using a web framework, it probably has this built in. In
 rails, you just need to add `before_filter :verify_authenticity_token`
-in `application_controller.rb`. If you are doing AJAX stuff, you’ll need
+in `application_controller.rb`. If you are doing AJAX stuff, you'll need
 some extra magic, but a little Google action can fix that.
 
 The basic premise is you generate a fresh random token for each full
 `GET` request (per user), stuff that in generated forms, and when you
 `POST` back to the server, the token gets sent back and checked.
 
-It’s not the hardest thing in the world, but I wouldn’t call it trivial
+It's not the hardest thing in the world, but I wouldn't call it trivial
 either. If something is provided by your framework, use it. If you
-aren’t using a framework, or it doesn’t have anything built in, go read
+aren't using a framework, or it doesn't have anything built in, go read
 some more extensive material on the subject to make sure you get the
 implementation correct.
 
 ## [3. Buffer Copy without Checking Size of Input [Classic Buffer Overflow]](http://cwe.mitre.org/data/definitions/120.html)
 
 The buffer overflow is a classic. Essentially, when you try to put more
-data into a block than the block can hold, it *overflows*. It’s just
+data into a block than the block can hold, it *overflows*. It's just
 like filling up a glass of water; if you put too much in it, it
 *overflows*.
 
@@ -89,7 +89,7 @@ The CWE has a pretty straight forward example:
 If you enter more than 20 characters, it will put the first 20 in
 `char last_name[]`, but where do the remaining characters go? We know
 where they go; they end up past the end of the array. The problem is
-that memory doesn’t belong to the array `last_name`. Who it belongs to
+that memory doesn't belong to the array `last_name`. Who it belongs to
 can be somewhat of a mystery. Is it program data (code), or is it
 another variable? Regardless, writing data to this memory willy nilly is
 **not** cool.
@@ -106,7 +106,7 @@ overflows in 64-bit land.
 
 ### Ways around it
 
-Buffer overflows can be avoided, though some aren’t as obvious as
+Buffer overflows can be avoided, though some aren't as obvious as
 others. There are a few things you can force yourself to do in order to
 avoid the majority of buffer overflows.
 
@@ -115,7 +115,7 @@ avoid the majority of buffer overflows.
 Using the *safe* versions of most functions can get you out of a lot of
 trouble. Instead of `strcpy`, use `strncpy`. The latter accepts a length
 parameter and only looks that far. If you use the unsafe version, it
-looks for a `NULL` terminator. If the `NULL` terminator isn’t there
+looks for a `NULL` terminator. If the `NULL` terminator isn't there
 (sneaky hackers!), then it will probably run off the end of the string
 into bogus memory land.
 

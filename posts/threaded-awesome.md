@@ -18,7 +18,7 @@ tags:
 [`tmm1":http://twitter.com/tmm1 and "`joedamato](http://twitter.com/joedamato)
 put up a good slide show on slideshare about ruby threading issues, and
 their fixes. These things have been around for a while, but now they are
-here in slideshow form. Definitely check them out, even if you don’t
+here in slideshow form. Definitely check them out, even if you don't
 program ruby, as there are some interesting profiling/debugging
 shenanigans shown, among other things.
 

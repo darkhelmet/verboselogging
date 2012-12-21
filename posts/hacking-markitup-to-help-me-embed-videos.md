@@ -19,12 +19,12 @@ tags:
 I use [swfobject](http://code.google.com/p/swfobject/) to embed videos
 because, as I explained [back
 here](http://blog.darkhax.com/2009/11/13/swfobject-meet-jquery), just
-blindly copying the embed code doesn’t work that well half the time, and
+blindly copying the embed code doesn't work that well half the time, and
 videos end up being different sizes, etc.
 
 I was getting kind of fed up with having to go back and remember how to
 do it every time though. The format is pretty straightforward, but I
-don’t embed videos often enough to actually remember the exact syntax,
+don't embed videos often enough to actually remember the exact syntax,
 so I found myself going back to posts with videos to see how I did it,
 or looking at my code.
 

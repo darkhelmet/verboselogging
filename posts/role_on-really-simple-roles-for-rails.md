@@ -22,7 +22,7 @@ whatever.
 
 So I made [role_on](https://github.com/darkhelmet/role_on)
 
-The instructions are on Github, so I won’t repeat them here, but it’s
+The instructions are on Github, so I won't repeat them here, but it's
 pretty straight forward. You control your roles yourself (which are just
 habtm between User, and identified by a string), and this just allows
 you to say something like this in your controller:

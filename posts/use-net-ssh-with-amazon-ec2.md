@@ -14,15 +14,15 @@ tags:
 - ec2
 - ssh
 ---
-I’m writing up some scripts to automate some
+I'm writing up some scripts to automate some
 [EC2](http://aws.amazon.com/ec2/) setup, and
 [SSH](http://en.wikipedia.org/wiki/Secure_Shell) is required. All the
 examples for [Net::SSH](http://net-ssh.rubyforge.org/) show using just a
 username and password, which is all good, but the Amazon stuff requires
-a key file. Here’s how to do it:
+a key file. Here's how to do it:
 
-pre. Net::SSH.start(‘my.amazon.hostname.amazonaws.com’, ‘user’, :keys
-=\> ‘/path/to/keypair.pem’) { |ssh| … }
+pre. Net::SSH.start('my.amazon.hostname.amazonaws.com', 'user', :keys
+=\> '/path/to/keypair.pem') { |ssh| … }
 
 According to the docs, the :keys named param takes
 

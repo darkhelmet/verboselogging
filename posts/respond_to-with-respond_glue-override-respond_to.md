@@ -15,7 +15,7 @@ tags:
 - oop
 ---
 So check this: you have a nice little Rails app. You have some stuff for
-a JSON API type system. You’ve got an
+a JSON API type system. You've got an
 [STI](http://juixe.com/techknow/index.php/2006/06/03/rails-single-table-inheritance/)
 setup with the
 [Widget](http://github.com/darkhelmet/respond_glue-example/blob/822086637d7360594a615da4a928fa8acc1d3211/app/models/widget.rb)
@@ -23,7 +23,7 @@ model class and the more concrete
 [FancyWidget](http://github.com/darkhelmet/respond_glue-example/blob/822086637d7360594a615da4a928fa8acc1d3211/app/models/fancy_widget.rb)
 and
 [WeirdWidget](http://github.com/darkhelmet/respond_glue-example/blob/822086637d7360594a615da4a928fa8acc1d3211/app/models/weird_widget.rb)
-classes. You’ve got a
+classes. You've got a
 [WidgetsController](http://github.com/darkhelmet/respond_glue-example/blob/822086637d7360594a615da4a928fa8acc1d3211/app/controllers/widgets_controller.rb),
 and the corresponding
 [FancyWidgetsController](http://github.com/darkhelmet/respond_glue-example/blob/822086637d7360594a615da4a928fa8acc1d3211/app/controllers/fancy_widgets_controller.rb)
@@ -35,7 +35,7 @@ Yay. It works. You can deal with both types of Widgets using JSON.
 Now you need an HTML interface to it.
 
 Fine, you can just throw in a *format.html* in the *emit* method. Oh
-wait that won’t work. The JSON just returns the same thing all the time,
+wait that won't work. The JSON just returns the same thing all the time,
 since it has that valid method on there, so if a save fails, valid will
 be false, and then whatever deals with the JSON can handle when valid is
 false.
@@ -48,10 +48,10 @@ views](http://github.com/darkhelmet/respond_glue-example/commit/9da9d47ad0b79aea
 to generate the right paths (fancy\_widget\_path instead of
 widget\_path).
 
-But that’s no fun. Then you have all this duplicate code, and it’s still
+But that's no fun. Then you have all this duplicate code, and it's still
 a pain to override methods in the Fancy and Weird Widget controllers
-since you can’t really call super, since there is that format.html and
-render call and they don’t exactly replace each other. Pain. And
+since you can't really call super, since there is that format.html and
+render call and they don't exactly replace each other. Pain. And
 Suffering
 
 Who cares, because we have blocks. Tasty ruby blocks that when mixed
@@ -62,7 +62,7 @@ So I threw together
 
 A little plugin to fix this problem, with minimal crap.
 
-In its simplest form, it’s this
+In its simplest form, it's this
 
 <script type="text/javascript" src="http://gist.github.com/177740.js?file=respond_glue.rb">
 </script>
@@ -80,7 +80,7 @@ index, show and new actions. The `superglue_for` call sets up the other
 actions so they run the default superclass action, and actually render.
 
 So what happens when the app hits the index action on the
-FancyWidgetsController? It’s pretty straightforward:
+FancyWidgetsController? It's pretty straightforward:
 
 1.  `FancyWidgetsController#index` gets called
 2.  …which is actually defined by the `glue_for` line

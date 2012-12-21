@@ -12,7 +12,7 @@ tags:
 - javascript
 - html
 ---
-I’m just passing this on, as I didn’t do it, I just found it.
+I'm just passing this on, as I didn't do it, I just found it.
 
 Over [here](http://erlend.oftedal.no/blog/?blogid=14) is a pretty slick
 way to unescape HTML. I ran into the need for this when I was working on

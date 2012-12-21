@@ -19,7 +19,7 @@ citizens in ruby, it makes it so much easier.
 I found this [Code Golf
 question](http://stackoverflow.com/questions/928563/code-golf-evaluating-mathematical-expressions)
 on [Stackoverflow](http://stackoverflow.com/) and threw together a quick
-method to do it. I can’t take all the credit, since I needed to search a
+method to do it. I can't take all the credit, since I needed to search a
 bit to figure out if I could do matching parenthesis in ruby, and found
 that I could, but only in ruby 1.9, which [ruby forum
 topic](http://www.ruby-forum.com/topic/132091) showed me. Then a
@@ -30,4 +30,4 @@ to get the other regex just right.
 Check out my answer
 [here](http://stackoverflow.com/questions/928563/code-golf-evaluating-mathematical-expressions/928791#928791)
 
-Oh yeah, and vote that thing up! It’s ruby 1.9 for crying out loud! :D
+Oh yeah, and vote that thing up! It's ruby 1.9 for crying out loud! :D

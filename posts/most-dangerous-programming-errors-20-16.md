@@ -15,12 +15,12 @@ tags:
 - c
 ---
 I continue the look at 5 more of the [Top 25 Most Dangerous Programming
-Errors](http://cwe.mitre.org/top25/index.html). [Here’s part 1
+Errors](http://cwe.mitre.org/top25/index.html). [Here's part 1
 (25-21)](/2010/05/03/most-dangerous-programming-errors-25-21)
 
 ## [20. Download of Code Without Integrity Check](http://cwe.mitre.org/data/definitions/494.html)
 
-You might not think of this at first, but it’s a doozy. If you are
+You might not think of this at first, but it's a doozy. If you are
 downloading things, like files, code, updates, whatever, they could be
 compromised. DNS poisoning or redirects could make your request for a
 file go to a different location. There could be a [man in the
@@ -42,14 +42,14 @@ algorithm like AES) your downloaded content.
 Doing all three is not that much work when you think about it. Checking
 a hash is an extra method call and an extra `if` statement to confirm
 the hash. Doing the DNS lookups is a small method. Doing the full
-decryption isn’t that bad either, as most encryption algorithms have
+decryption isn't that bad either, as most encryption algorithms have
 nice APIs for whatever language you are working in.
 
-The point is: don’t just download stuff and execute it. It’s not cool.
+The point is: don't just download stuff and execute it. It's not cool.
 
 ## [19. Missing Authentication for Critical Function](http://cwe.mitre.org/data/definitions/306.html)
 
-This one is a little more tricky. You can’t just add some code in a few
+This one is a little more tricky. You can't just add some code in a few
 spots to make this happen. All of the CWE recommendations are
 architecture related, in that you have to think about them before you go
 and write a bunch of code.
@@ -59,21 +59,21 @@ and write a bunch of code.
 The latter two points the CWE makes regarding mitigation are more
 obvious.
 
-1.  Duplicate client side security checks on the sever side. Duh. Don’t
+1.  Duplicate client side security checks on the sever side. Duh. Don't
     ever rely on just client side authentication. If you authenticate
-    solely on the client side, it’s sending a message to the server at
+    solely on the client side, it's sending a message to the server at
     some point saying that everything is all good. If the client has
     full control over this message, an attacker pretty much owns your
     system. Have fun with that.
 2.  Avoid custom authentication systems. If you are using a framework
-    that provides authentication, use it. If you can’t, but the
+    that provides authentication, use it. If you can't, but the
     operating system provides features you can leverage, use them.
 
 The first point they make is a little more interesting, and harder to
 implement. If you have a C library, for example, and you only expose so
-much in your header file, it doesn’t really matter. There are ways to
+much in your header file, it doesn't really matter. There are ways to
 see what functions are defined and you can create your own header file
-to expose *those* functions to your program. If they don’t require
+to expose *those* functions to your program. If they don't require
 authentication…
 
 Same thing with web applications. Assume you have your authentication
@@ -136,17 +136,17 @@ Oh integer overflow. We all know this one. You add a couple of numbers
 and get a horrible negative number. This is usually more of a problem in
 the C family of languages, but can occur in something like Java too.
 Just because Java is this magical compiled bytecode garbage collecting
-language doesn’t make it immune to integer overflow. Ruby, on the other
+language doesn't make it immune to integer overflow. Ruby, on the other
 hand, seamlessly switches between *normal* integers and *big decimals*.
-Ruby has native support for arbitrarily large numbers, so you don’t have
+Ruby has native support for arbitrarily large numbers, so you don't have
 to worry about it.
 
 ### Ways around it
 
-First steps, think about your datatypes and check your inputs. Don’t
+First steps, think about your datatypes and check your inputs. Don't
 accept inputs you know will cause overflows. If you have to be able to
 accept those inputs, use large types (long, or long long, instead of
-int, for example). You can double your range if you don’t have to worry
+int, for example). You can double your range if you don't have to worry
 about negatives either; use the unsigned varieties.
 
 The CWE also points out libraries such as SafeInt and IntegerLib for
@@ -158,10 +158,10 @@ naturally do this, ensure bounds checking warnings are enabled.
 
 ## [16. Information Exposure Through an Error Message](http://cwe.mitre.org/data/definitions/209.html)
 
-This is pretty straightforward. You shouldn’t blindly throw error
+This is pretty straightforward. You shouldn't blindly throw error
 messages up on the screen. If something is going on the screen, you
 should think about it, and putting every random exception message up
-there isn’t going to help anybody. It might even hurt.
+there isn't going to help anybody. It might even hurt.
 
 Maybe your database user and password are in that message (for some
 stupid reason). Then what?
@@ -183,4 +183,4 @@ accept those.
 These techniques ensure with a number of safegaurds that no user should
 ever see any gross error messages meant for the eyes of a programmer.
 
-This is really caused by programmers being lazy, so just don’t be lazy!
+This is really caused by programmers being lazy, so just don't be lazy!

@@ -18,8 +18,8 @@ My URL shortener, Surl, which is located [here](http://s.darkhax.com)
 now has Ubiquity support. Hit the page, and if you have
 [Ubiquity](http://wiki.mozilla.org/Labs/Ubiquity) installed for Firefox,
 it will recognize the command and you can subscribe to it. In Ubiquity,
-you can then use ’s.darkhax’ (which will complete sooner due to the fact
-that there aren’t many commands with a dot) to shorten URLs. It replaces
+you can then use 's.darkhax' (which will complete sooner due to the fact
+that there aren't many commands with a dot) to shorten URLs. It replaces
 the highlighted URL and copies to the clipboard.
 
 Check it out!

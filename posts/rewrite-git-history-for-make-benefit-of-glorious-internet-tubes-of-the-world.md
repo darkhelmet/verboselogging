@@ -16,7 +16,7 @@ tags:
 ---
 Sometimes you do silly things.
 
-Like check big binary files into source control. Ones that shouldn’t be
+Like check big binary files into source control. Ones that shouldn't be
 in source control.
 
 This causes problems. Okay, well not really *problems*, but it has some
@@ -26,9 +26,9 @@ Cloning the repository takes longer, of course, since there are big
 files, and other operations can take longer too.
 
 But fret not! If you need to purge files from Git, you can. Now, you
-can’t just remove the file, since it’s still technically in there, and
+can't just remove the file, since it's still technically in there, and
 because git deals with directories (and basically the repository) as a
-whole, instead of single files like CVS, SVN, and Perforce, there isn’t
+whole, instead of single files like CVS, SVN, and Perforce, there isn't
 an
 [obliterate](http://www.perforce.com/perforce/doc.091/manuals/cmdref/obliterate.html)
 command. There is *filter-branch* though.
@@ -45,8 +45,8 @@ quite useful in helping remove some silly files.
 
 It comes down to:
 
-pre. git filter-branch —index-filter ‘git rm ~~rcached~~-ignore-unmatch
-BIGTHING’ HEAD
+pre. git filter-branch —index-filter 'git rm ~~rcached~~-ignore-unmatch
+BIGTHING' HEAD
 
 You can replace BIGTHING with a path to a file or folder, and that thing
 will be purged completely from the repository. This rewrites history all

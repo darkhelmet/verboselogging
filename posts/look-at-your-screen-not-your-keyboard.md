@@ -22,12 +22,12 @@ Why do you need to look at your keyboard at all?
 
 I use a [Das Keyboard](http://www.daskeyboard.com/) version 1 at work
 and a version 2 at home (the current version 3 is most similar to
-version 2). They are both blank. They don’t require any resource hogging
-drivers. They don’t have any flashing lights, extra dials, programmable
+version 2). They are both blank. They don't require any resource hogging
+drivers. They don't have any flashing lights, extra dials, programmable
 buttons, or scrolling LCDs. The one downside is there is are no USB
 ports either, but the newest version remedies that.
 
-Logitech makes excellent products, and I swear by their mice, but I’ve
+Logitech makes excellent products, and I swear by their mice, but I've
 never liked their keyboards, especially the high end *gaming* keyboards.
 You have to install the extra piece of software to make the LCD and
 extra buttons do anything useful, and really all it does is use

@@ -18,7 +18,7 @@ and you should too.
 
 [Jaml](http://github.com/edspencer/jaml) has only been around [since
 October](http://github.com/edspencer/jaml/commit/6a67767d08ac78f1c07487ac60587bfd033fe50c)
-but it’s already pretty damn awesome.
+but it's already pretty damn awesome.
 
 Combining these two powers like peanut butter and jelly results in
 **awesome**.
@@ -32,7 +32,7 @@ Jaml is a templating engine for Javascript based loosely on
 </script>
 So you can call this:
 
-pre. Jaml.render(‘simple’);
+pre. Jaml.render('simple');
 
 To output this:
 
@@ -48,7 +48,7 @@ Anyway.
 Or any other badge for that matter. I have some Github repos and my
 latest shared items from Google Reader in the top panel area. I used to
 grab them from the server, and cache them in the database. This means
-they didn’t get updated as often, and it was just another thing the
+they didn't get updated as often, and it was just another thing the
 server *had* to do that the client *could* do.
 
 So I made them into Javascript badges.
@@ -56,7 +56,7 @@ So I made them into Javascript badges.
 ## A URL
 
 First you need a URL. Something that gets you the information you want.
-For Github it’s something like this:
+For Github it's something like this:
 
 pre.
 [http://github.com/api/v1/json/darkhelmet](http://github.com/api/v1/json/darkhelmet)
@@ -67,29 +67,29 @@ with
 
 ## A Callback
 
-The other thing you need is a callback function. The place you’re
+The other thing you need is a callback function. The place you're
 getting JSON from has to support this, and the syntax might be
 different, but you pass the name of a callback function which the JSON
-gets wrapped in, so the script that’s getting loaded is a function call,
+gets wrapped in, so the script that's getting loaded is a function call,
 with the only param being the JSON with all your data. So now your URL
 looks like this:
 
 pre.
 [http://github.com/api/v1/json/darkhelmet?callback=GithubBadge](http://github.com/api/v1/json/darkhelmet?callback=GithubBadge)
 
-And it’ll come back looking like this:
+And it'll come back looking like this:
 
 pre. GithubBadge({ … });
 
-So let’s define the callback:
+So let's define the callback:
 
 <script type="text/javascript" src="http://gist.github.com/321408.js?file=GithubBadge.js">
 </script>
 Ignore some of that, but basically I take the JSON, select repositories
-that aren’t forks and have a description, sort them randomly, and take
+that aren't forks and have a description, sort them randomly, and take
 12 of them. The important part is:
 
-pre. \$(‘\#github-badge’).html(Jaml.render(‘github-badge’, badge));
+pre. \$('\#github-badge').html(Jaml.render('github-badge', badge));
 
 This sets the HTML of the element with the id `github-badge` to the
 output of Jaml rendering the `github-badge` template with the badge
@@ -106,15 +106,15 @@ list item. Then I tack on a link to my profile page on Github.
 To make it all work, you use jQuery and do this:
 
 pre.
-\$.getScript(‘[http://github.com/api/v1/json/darkhelmet?callback=GithubBadge')](http://github.com/api/v1/json/darkhelmet?callback=GithubBadge'));
+\$.getScript('[http://github.com/api/v1/json/darkhelmet?callback=GithubBadge')](http://github.com/api/v1/json/darkhelmet?callback=GithubBadge'));
 \
 This loads the script as though you included a script tag in your page,
-except you do this in your body load stuff so it doesn’t block the page
+except you do this in your body load stuff so it doesn't block the page
 load. It has to wait until the page is loaded anyway to it can be sure
-to find the element to insert the HTML. Don’t forget to put in an
+to find the element to insert the HTML. Don't forget to put in an
 element in your page with the proper id:
 \
-pre. \<div id=’github-badge’\>Loading repositories…
+pre. \<div id='github-badge'\>Loading repositories…
 
 </div>
 Boom. Github badge on your page. I do the same thing for the Google

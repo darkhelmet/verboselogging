@@ -11,4 +11,4 @@ slugs:
 tags: []
 
 ---
-Don’t Be a Good Ruby Developer, Be a Good Software Developer
+Don't Be a Good Ruby Developer, Be a Good Software Developer

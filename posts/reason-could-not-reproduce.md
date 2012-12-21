@@ -11,6 +11,6 @@ slugs:
 tags: 
 - xkcd
 ---
-I couldn’t resist.
+I couldn't resist.
 
 [xkcd](http://xkcd.com/583)

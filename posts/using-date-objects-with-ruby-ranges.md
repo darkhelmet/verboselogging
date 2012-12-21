@@ -15,7 +15,7 @@ tags:
 I used to have some *really* ugly code to generate the archive links you
 see on the right column of this blog. It was terrible. Granted it was
 some of the first code I wrote on this blog, and I was cruising through
-it because I just wanted to get it done and working, but still, it’s not
+it because I just wanted to get it done and working, but still, it's not
 really a valid excuse. [It can be seen
 here.](http://github.com/darkhelmet/darkblog/commit/f2eb11f9a07355a1de9e28ad8a1e4618445f75be)
 
@@ -56,7 +56,7 @@ something like this:
 
 pre. ArchiveDate.new(2009,4,1)..ArchiveDate.new(2010,1,1)
 
-I’ll get a list of *ArchiveDate* objects, which are by extension *Date*
+I'll get a list of *ArchiveDate* objects, which are by extension *Date*
 objects, each one representing the first of the month. So I get April,
 May, June, etc. Then I can loop through them and print out the required
 archive links in my sidebar. Much better than the old code!

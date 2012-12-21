@@ -15,8 +15,8 @@ tags:
 - chromium
 - command-line
 ---
-So what I have here is nothing fancy. It’s basically cut and paste from
-the Chromium site, but if you don’t want to think, just download and
+So what I have here is nothing fancy. It's basically cut and paste from
+the Chromium site, but if you don't want to think, just download and
 run, and have Chromium on your Ubuntu setup.
 
 So, on with the script:
@@ -28,10 +28,10 @@ tools, get source, build away. This process will take awhile, so once it
 starts go flirt with your significant other for a bit :)
 
 The first thing you see when you start up Chromium is that, of course,
-it’s horribly incomplete software (not that it explodes, it actually
-says this on the start page), and a few things don’t work. But basic
+it's horribly incomplete software (not that it explodes, it actually
+says this on the start page), and a few things don't work. But basic
 browsing and javascript is there (no Flash or other plugins). The point
 is, they are making progress, and this excites me.
 
-So to get up and running, just download the script (click the ‘view raw’
+So to get up and running, just download the script (click the 'view raw'
 up above), make it executable, and run it!

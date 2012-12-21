@@ -23,24 +23,24 @@ language you want, really), and have that execute as code. Put those
 together with webrat and rspec and you have a pretty mean stack to test
 your ruby on rails web application with. Sort of.
 
-I’ve been having some problems with it, getting it set up, but it’s
+I've been having some problems with it, getting it set up, but it's
 coming along.
 
-This isn’t a post about how to setup Selenium from scratch. There are
+This isn't a post about how to setup Selenium from scratch. There are
 other resources out there for that, like [this
 page](http://wiki.github.com/aslakhellesoy/cucumber/setting-up-selenium)
 
-I’m just going to rant about some of the problems I’ve come across and
+I'm just going to rant about some of the problems I've come across and
 some fixes for them.
 
-1.  **All users have wrong passwords, no data in DB.** You can’t have
+1.  **All users have wrong passwords, no data in DB.** You can't have
     transactional fixtures when using selenium, so turn those off in
     your env.rb file. You can use
     [database\_cleaner](https://github.com/bmabey/database_cleaner/tree)
-    to try and help with that, but I’m still working out kinks with that
+    to try and help with that, but I'm still working out kinks with that
     too it seems. A step in the right direction.
-2.  **current\_url checks fail randomly.** Sometimes selenium doesn’t
-    wait long enough for pages to load, especially after form POST’s.
+2.  **current\_url checks fail randomly.** Sometimes selenium doesn't
+    wait long enough for pages to load, especially after form POST's.
     You need to tell selenium to wait after certain things by calling
     **selenium.wait\_for\_page\_to\_load** This of course only works
     when using selenium so wrap it up to only call this if you are using

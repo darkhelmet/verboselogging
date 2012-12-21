@@ -11,6 +11,6 @@ slugs:
 tags: 
 - ddr
 ---
-I’ll take 10.
+I'll take 10.
 
 [DDRdrive](http://www.ddrdrive.com/)

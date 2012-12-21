@@ -12,7 +12,7 @@ tags:
 - dns
 ---
 intoDNS replaces DNS Tools, which used to be free, then became pay for,
-but now looks like it’s back to being free, but whatever. intoDNS
+but now looks like it's back to being free, but whatever. intoDNS
 provides a bunch of nice information, and seems quite useful. Check it
 out.
 

@@ -13,8 +13,8 @@ tags:
 - ufw
 ---
 I was setting up [ufw](https://wiki.ubuntu.com/UbuntuFirewall) on my
-server and noticed my xen instances couldn’t do anything. Simple fix,
-and if you [Google](http://lmgtfy.com/?q=ubuntu+ufw+xen) that, you’ll
+server and noticed my xen instances couldn't do anything. Simple fix,
+and if you [Google](http://lmgtfy.com/?q=ubuntu+ufw+xen) that, you'll
 find this link at the top. Solves the problem straight up.
 
 [Xen and UFW on

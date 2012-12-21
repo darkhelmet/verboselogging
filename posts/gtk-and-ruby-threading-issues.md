@@ -29,7 +29,7 @@ Basically, you call the Gtk.init\_thread\_protect method first when you
 start things up, then, whenever you need to do GUI update stuff, just
 wrap it in a Gtk.thread\_protect {} block. Voila! It works. No more
 crashes. In looking at this code again now, some things could be made
-more Rubyesque, but we’ll go with it.
+more Rubyesque, but we'll go with it.
 
 My version with minor changes:
 

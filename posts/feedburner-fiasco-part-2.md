@@ -19,5 +19,5 @@ My initial thought was that Feedburner was just getting redirected to
 itself, but the code is there in the plugin, and does work, but added a
 ping, so hopefully this actually makes it update a bit faster…
 
-It’s probably some sort of caching issue, which I’m investigating as
+It's probably some sort of caching issue, which I'm investigating as
 well.

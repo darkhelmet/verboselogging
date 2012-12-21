@@ -14,7 +14,7 @@ tags:
 - video
 - ide
 ---
-This is seriously cool, and makes me want to write Java code. I’d at
+This is seriously cool, and makes me want to write Java code. I'd at
 least like to try it out. Read up on it at
 [codebubbles.org](http://codebubbles.org/).
 

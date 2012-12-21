@@ -17,11 +17,11 @@ tags:
 If, like me, you participate in some sort of grid computing project,
 it's interesting to see your progress. I take part in Einstein@Home, and
 I wanted to display my stats in my sidebar (on my
-[other](http://www.darkhelmetlive.com) blog). I’ll give you two ways to
+[other](http://www.darkhelmetlive.com) blog). I'll give you two ways to
 accomplish this. First way is the quick way, which involves including
 the jQuery Javascript library, and a second which involves writing your
 own Javascript. The second option results in a smaller file, but the
-jQuery file is already pretty small. It’s up to you. I started with my
+jQuery file is already pretty small. It's up to you. I started with my
 own script, then moved to jQuery when I realized it could do what was
 needed in about one line, and I was already including/using jQuery.
 
@@ -31,7 +31,7 @@ new and hip. Now it's just a standard.
 For both options, create a php file somewhere on your server. I used my
 blog root directory, so the url is [http://www.darkhelmetlive.com/blog/einstein.php](http://www.darkhelmetlive.com/blog/einstein.php)
 
-Call it whatever you want, I used einstein.php since I’m getting
+Call it whatever you want, I used einstein.php since I'm getting
 Einstein@Home stats. Anyway, paste this in:
 
 <script type="text/javascript" src="http://gist.github.com/177772.js?file=einstein.php"></script>
@@ -39,12 +39,12 @@ Einstein@Home stats. Anyway, paste this in:
 Replace the 'auth-key-goes-here' with your actual auth key, which can be
 had from the Einstein@Home user account pages (somewhere in there).
 Also, I should add that I found the E@H XML stuff somewhere, but now I
-can’t find the page anywhere, so this is what works. You can do more,
-but I don’t know how :(
+can't find the page anywhere, so this is what works. You can do more,
+but I don't know how :(
 
 Anyway, this php script returns the unordered list and list items to sit
 in the sidebar. You could write this into a widget, which I should
-probably do, but it’s low priority for me.
+probably do, but it's low priority for me.
 
 Now add something like this to the sidebar.php script of your theme:
 
@@ -53,7 +53,7 @@ Now add something like this to the sidebar.php script of your theme:
 You need the div tags for the script to be able to insert the returned
 HTML from the other php script.
 
-That’s the basic stuff, now off to the option specific parts.
+That's the basic stuff, now off to the option specific parts.
 
 **Option 1**
 
@@ -84,13 +84,13 @@ loads like a dog. This works better.
 **Option 2**
 
 You can write your own JS file to do the job the jQuery does, but
-seriously folks. One line, c’mon! How easy is that.
+seriously folks. One line, c'mon! How easy is that.
 
 This is what I had:
 
 <script type="text/javascript" src="http://gist.github.com/177772.js?file=einstein-by-hand.js"></script>
 
-Basically it does the same thing, but it’s smaller, since it doesn’t
+Basically it does the same thing, but it's smaller, since it doesn't
 have all the other stuff from jQuery which you might not use. But jQuery
 works on all browser, and I doubt my code above does.
 

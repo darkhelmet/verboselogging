@@ -12,7 +12,7 @@ tags:
 - patterns
 ---
 The good thing about design pattern writings is that they never really
-go out of date. Hence this link. It actually doesn’t have a date, but I
+go out of date. Hence this link. It actually doesn't have a date, but I
 found it a long time ago.
 
 Anyway, here it is. Use them already!

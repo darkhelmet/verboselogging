@@ -25,9 +25,9 @@ Check this out:
 </script>
 Some embed tags that are provided are only of one type: either object or
 embed. This is no good since that means some browsers are excluded and
-it won’t work. Lame! Swfobject solves the problem by using JavaScript to
+it won't work. Lame! Swfobject solves the problem by using JavaScript to
 insert the correct code for the browser. You need JavaScript, so get
-with the times if you don’t have it turned on.h3. Your title here…
+with the times if you don't have it turned on.h3. Your title here…
 
 What I do is use jQuery to make a friendlier interface to swfobject. I
 can then hook up a document ready hook to look for div elements I

@@ -13,7 +13,7 @@ tags:
 - google
 - video
 ---
-It’s for the 4.x version line, but whatever. Old but good.
+It's for the 4.x version line, but whatever. Old but good.
 
 [An Overview of the MySQL Engine and its Latest
 Features](http://video.google.com/videoplay?docid=-6510132373772175248&hl=en)

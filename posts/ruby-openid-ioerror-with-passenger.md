@@ -23,8 +23,4 @@ I found the fix
 
 The gist of it?
 
-Add
-
-    OpenID::Util.logger = RAILS_DEFAULT_LOGGER
-
-To environment.rb, and you're good!
+Add `OpenID::Util.logger = RAILS_DEFAULT_LOGGER` to environment.rb, and you're good!

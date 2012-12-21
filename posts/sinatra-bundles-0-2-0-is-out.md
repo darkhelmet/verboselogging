@@ -31,7 +31,7 @@ to 1.0, since it's out
 
 ## etag support
 
-"Patrick Hogan":http://github.com/pbhogan added "etag support":http://github.com/darkhelmet/sinatra-bundles/commit/140cd0e23285519fa03727dde9c47365824e9af2 for the caching component, since I wasn't doing it. My thought was _just use rack-etag_, but as Patrick pointed out you then have to remember to use rack-etag. Since sinatra-bundles should do the caching for you, it now does it more completely, with etags. He even wrote specs to boot)
+[Patrick Hogan](http://github.com/pbhogan) added [etag support](http://github.com/darkhelmet/sinatra-bundles/commit/140cd0e23285519fa03727dde9c47365824e9af2) for the caching component, since I wasn't doing it. My thought was *just use rack-etag*, but as Patrick pointed out you then have to remember to use rack-etag. Since sinatra-bundles should do the caching for you, it now does it more completely, with etags. He even wrote specs to boot)
 
 ## Wildcards and globbing
 

@@ -14,7 +14,7 @@ tags:
 - ide
 - fml
 ---
-I'm pretty sure Borland's C*+ Builder 5 is the worst IDE ever.
+I'm pretty sure Borland's C++ Builder 5 is the worst IDE ever.
 
 It's **slow**. If you try to use tooltips or code completion, it takes a
 good 5 seconds before anything shows up. On top of that, since they

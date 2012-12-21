@@ -18,7 +18,10 @@ images:
     large: http://cdn.verboselogging.com/transloadit/large/5d/2a6a8fb5b7019f193cbb6d434a6495/cloudberry-explorer.png
     original: http://cdn.verboselogging.com/transloadit/original/00/3fd0822bda8ac0b0dd04846d473408/cloudberry-explorer.png
 ---
-<p>I was looking around for an Amazon S3 browser and cam across <a href="http://www.labnol.org/software/amazon-s3-client-for-windows-free/5431/">digital inspiration</a> talking about CloudBerry Explorer. The first thing that caught my eye was this screenshot.</p>
-<p><figure><img src="http://cdn.verboselogging.com/transloadit/large/5d/2a6a8fb5b7019f193cbb6d434a6495/cloudberry-explorer.png" class=" large" alt="" /></figure></p>
-<p>If you read around it, you can see you have two options of moving files between S3 instances. While options are nice, I&#8217;m not sure why anybody in their right mind would want to select the slow and expensive way. If you move between S3 instances on S3, it costs zero dollars. If you do it the old fashioned way, of downloading and then uploading to the new instance, it costs bandwidth both ways, as well as the costs to hit the files (although this is minor).</p>
-<p>Maybe somebody can enlighten me, but I see no reason to use the second option there, and hence wonder why it&#8217;s an option at all.</p>
+I was looking around for an Amazon S3 browser and cam across [digital inspiration](http://www.labnol.org/software/amazon-s3-client-for-windows-free/5431/) talking about CloudBerry Explorer. The first thing that caught my eye was this screenshot.
+
+<img src="{{.cloudberry_explorer.large}}" class="large" />
+
+If you read around it, you can see you have two options of moving files between S3 instances. While options are nice, I'm not sure why anybody in their right mind would want to select the slow and expensive way. If you move between S3 instances on S3, it costs zero dollars. If you do it the old fashioned way, of downloading and then uploading to the new instance, it costs bandwidth both ways, as well as the costs to hit the files (although this is minor).
+
+Maybe somebody can enlighten me, but I see no reason to use the second option there, and hence wonder why it's an option at all.

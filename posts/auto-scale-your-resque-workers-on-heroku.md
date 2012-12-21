@@ -48,10 +48,10 @@ billed by the second.
 So let's get some auto-scale [up in this
 bitch](http://www.explosm.net/comics/1311/) shall we? [^3]
 
--First off, grab my [fork of
+~~First off, grab my [fork of
 resque](http://github.com/darkhelmet/resque/tree/after_enqueue). I added
 `after_enqueue` hook support, which is needed for the auto-scaling.
-[^4]-
+[^4]~~
 
 **Update:** Chris Wanstrath pulled in my changes, so any version of
 resque greater than or equal to 1.10 has `after_enqueue` support.

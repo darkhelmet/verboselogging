@@ -36,6 +36,6 @@ you can look through in which commit your file was deleted.
 
 Once you have that, you can use the commit hash in the next command:
 
-    git checkout COMMIT^ — file
+    git checkout COMMIT^ —- file
 
 And that will restore your file. Rinse and repeat for multiple files.

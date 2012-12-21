@@ -13,9 +13,9 @@ tags:
 ---
 Create a branch locally, and push it to origin:
 
-`git checkout -b branchname`\
-`git push origin branchname`
+    git checkout -b branchname
+    git push origin branchname
 
 Get at that branch from elsewhere:
 
-`git checkout -t -b branchname origin/branchname`
+    git checkout -t -b branchname origin/branchname

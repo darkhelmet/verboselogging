@@ -19,5 +19,4 @@ a variety of random people I don't know, just me, so I don't care.
 
 How?
 
-<code>openssl req ~~new~~x509 ~~days 365~~nodes ~~out out.pem~~keyout
-out.pem</code>
+    openssl req -new -x509 -days 365 -nodes -out out.pem -keyout out.pem

@@ -51,6 +51,4 @@ SVN? Maybe $20/hr more. I really hate SVN.
 
 On another note, happy birthday mom! Love you!
 
-[^1]: There are differences between the two terms, and there is even a
-    third, the consultant, but I'm concentrating on the fact that you're
-    working for yourself.
+[^1]: There are differences between the two terms, and there is even a third, the consultant, but I'm concentrating on the fact that you're working for yourself.

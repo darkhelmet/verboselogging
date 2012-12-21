@@ -39,7 +39,7 @@ some fixes for them.
     [database_cleaner](https://github.com/bmabey/database_cleaner/tree)
     to try and help with that, but I'm still working out kinks with that
     too it seems. A step in the right direction.
-2.  **`current_url` checks fail randomly.** Sometimes selenium doesn't
+2.  **current_url checks fail randomly.** Sometimes selenium doesn't
     wait long enough for pages to load, especially after form POST's.
     You need to tell selenium to wait after certain things by calling
     `selenium.wait_for_page_to_load` This of course only works

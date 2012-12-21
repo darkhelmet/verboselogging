@@ -19,30 +19,53 @@ images:
     original: http://cdn.verboselogging.com/transloadit/original/c0/eb484a3e3e543262eb884ec0ae692c/vinnie.jpg
     large: http://cdn.verboselogging.com/transloadit/large/3a/5b1ab613b31ffc526d548f8fe7ecff/vinnie.jpg
 ---
-<p><figure><img src="http://cdn.verboselogging.com/transloadit/medium/82/e37bbd0d09a85b24b1265f4a046160/vinnie.jpg" class="fright bleft bbottom round medium" alt="" /></figure></p>
-<p>Ruby 1.9 has 4 different ways to deal with closures.</p>
-<p><strong>Cue music</strong></p>
-<h2>Proc</h2>
-<p>Procs are the weird ones of the bunch. Technically, all of these things I&#8217;m going to describe are Procs. By that I mean, if you check the <code>class</code>, it&#8217;s a <code>Proc</code>.</p>
-<p>A <code>Proc</code> is made by using <code>Proc.new</code> and passing a block, <code>Proc.new { |x| x }</code>, or by using the <code>proc</code> keyword, <code>proc { |x| x }</code>.</p>
-<p>A <code>return</code> from inside exits completely out of the method enclosing the <code>Proc</code>.</p>
-<p>A <code>Proc</code> doesn&#8217;t care about the arguments passed. If you define a <code>Proc</code> with two parameters, and you pass only 1, or possibly 3, it keeps on trucking. In the case of 1 argument, the second parameter will have the value <code>nil</code>. If you pass extra arguments, they will be ignored and lost.</p>
-<h2>Block</h2>
-<p>Blocks are when you pass an anonymous closure to a method:</p>
-<pre>def my_method
-  my_other_method(1) do |x, y|
-    return x + y
-  end
-end</pre>
-<p>They work exactly like a <code>Proc</code>. It wouldn&#8217;t matter how many arguments <code>my_other_method</code> called <code>yield</code> with, the block would execute just fine.<sup class="footnote" id="fnr1"><a href="#fn1">1</a></sup> The <code>return</code> will also return out of <code>my_method</code>.</p>
-<h2>Lambda</h2>
-<p>A <code>lambda</code> is probably what you deal with most of time. You make them with the <code>lambda</code> keyword: <code>f = lambda { |x| x + 1 }</code>. They are a bit different.</p>
-<p>Unlike a <code>Proc</code>, using <code>return</code> in a <code>lambda</code> will simply return from the <code>lambda</code>, pretty much like you&#8217;d expect.</p>
-<p>Also unlike a <code>Proc</code>, <code>lambda</code> likes to whine if you pass an incorrect number of arguments. It will blow up with an <code>ArgumentError</code>.</p>
-<h2>Stabby</h2>
-<p>The stabby is new in Ruby 1.9, and is just syntactic sugar for <code>lambda</code>. These are equivalent:</p>
-<pre>f = lambda { |x| x + 1 }</pre>
-<pre>f2 = -&gt;(x) { x + 1 }</pre>
-<h2>What&#8217;s all this then?</h2>
-<p>So anyway I wrote some specs, and here they are (or rather their output). If you want to check out the actual specs, or run them for yourself, head on over to <a href="https://github.com/darkhelmet/proc-block">Github</a>.</p>
-<script src="https://gist.github.com/1224675.js?file=out.txt"></script><p class="footnote" id="fn1"><a href="#fnr1"><sup>1</sup></a> The addition won&#8217;t work too well, but hey.</p>
+<img src="{{.vinnie.medium}}" class="fright bleft bbottom round medium" />
+
+Ruby 1.9 has 4 different ways to deal with closures.
+
+*Cue music*
+
+## Proc
+
+Procs are the weird ones of the bunch. Technically, all of these things I'm going to describe are Procs. By that I mean, if you check the `class`, it's a `Proc`.
+
+A `Proc` is made by using `Proc.new` and passing a block, `Proc.new { |x| x }`, or by using the `proc` keyword, `proc { |x| x }`.
+
+A `return` from inside exits completely out of the method enclosing the `Proc`.
+
+A `Proc` doesn't care about the arguments passed. If you define a `Proc` with two parameters, and you pass only 1, or possibly 3, it keeps on trucking. In the case of 1 argument, the second parameter will have the value `nil`. If you pass extra arguments, they will be ignored and lost.
+
+## Block
+
+Blocks are when you pass an anonymous closure to a method:
+
+    def my_method
+      my_other_method(1) do |x, y|
+        return x + y
+      end
+    end
+
+They work exactly like a `Proc`. It wouldn't matter how many arguments `my_other_method` called `yield` with, the block would execute just fine.[^1] The `return` will also return out of `my_method`.
+
+## Lambda
+
+A `lambda` is probably what you deal with most of time. You make them with the `lambda` keyword: `f = lambda { |x| x + 1 }`. They are a bit different.
+
+Unlike a `Proc`, using `return` in a `lambda` will simply return from the `lambda`, pretty much like you'd expect.
+
+Also unlike a `Proc`, `lambda` likes to whine if you pass an incorrect number of arguments. It will blow up with an `ArgumentError`.
+
+## Stabby
+
+The stabby is new in Ruby 1.9, and is just syntactic sugar for `lambda`. These are equivalent:
+
+    f = lambda { |x| x + 1 }
+    f2 = ->(x) { x + 1 }
+
+## What's all this then?
+
+So anyway I wrote some specs, and here they are (or rather their output). If you want to check out the actual specs, or run them for yourself, head on over to "Github":https://github.com/darkhelmet/proc-block.
+
+<script src="https://gist.github.com/1224675.js?file=out.txt"></script>
+
+[^1]: The addition won't work too well, but hey.

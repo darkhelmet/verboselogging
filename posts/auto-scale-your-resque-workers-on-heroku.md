@@ -17,7 +17,7 @@ tags:
 ---
 Let's get some background information out of the way.
 
-I'm working on a new application, and am using crazy new things that I haven't had a chance to *really* use before. Rails 3, MongoDB, Redis and Resque, HTML5, etc. [^1]
+I'm working on a new application, and am using crazy new things that I haven't had a chance to *really* use before. Rails 3, MongoDB, Redis and Resque, HTML5, etc. <sup>[1](#fn1)</sup>
 
 With all these things, I figured I'll just use [EngineYard](http://www.engineyard.com/) since I can pretty much do whatever I want with the server, and they have a lot of the "stuff" taken care of. But they don't support MongoDB out of the box, and you have to some magic with [chef](http://wiki.opscode.com/display/chef/Home) scripts, and then to keep your [Resque](http://github.com/defunkt/resque) workers running, you need to write stuff for that too, and so on.
 
@@ -31,30 +31,17 @@ Now, there's nothing wrong with EngineYard, but I want to deal with as little in
 
 ## redistogo
 
-Along comes [redistogo](http://redistogo.com/) with their Heroku
-integration (for beta users, which I am) and a [blog
-post](http://blog.redistogo.com/2010/07/26/resque-with-redis-to-go/) on
-how to use Resque with Heroku. What, what, what? You can just alias the
-rake task and Heroku's system doesn't know the difference. Oh Em Gee.
+Along comes [redistogo](http://redistogo.com/) with their Heroku integration (for beta users, which I am) and a [blog post](http://blog.redistogo.com/2010/07/26/resque-with-redis-to-go/) on how to use Resque with Heroku. What, what, what? You can just alias the rake task and Heroku's system doesn't know the difference. Oh Em Gee.
 
-## My wife has been quite adamant about the money [^2]
+## My wife has been quite adamant about the money <sup>[2](#fn2)</sup>
 
-This app I'm working on, I'm hopefully going to have to pay for at some
-point, as I hope enough people will want to use it that the free stuff
-from Heroku just won't cut it. However, the less I can pay the better,
-and background job workers aren't free on Heroku. They are, fortunately,
-billed by the second.
+This app I'm working on, I'm hopefully going to have to pay for at some point, as I hope enough people will want to use it that the free stuff from Heroku just won't cut it. However, the less I can pay the better, and background job workers aren't free on Heroku. They are, fortunately, billed by the second.
 
-So let's get some auto-scale [up in this
-bitch](http://www.explosm.net/comics/1311/) shall we? [^3]
+So let's get some auto-scale [up in this bitch](http://www.explosm.net/comics/1311/) shall we? <sup>[3](#fn3)</sup>
 
-~~First off, grab my [fork of
-resque](http://github.com/darkhelmet/resque/tree/after_enqueue). I added
-`after_enqueue` hook support, which is needed for the auto-scaling.
-[^4]~~
+~~First off, grab my [fork of resque](http://github.com/darkhelmet/resque/tree/after_enqueue). I added `after_enqueue` hook support, which is needed for the auto-scaling. <sup>[4](#fn4)</sup>~~
 
-**Update:** Chris Wanstrath pulled in my changes, so any version of
-resque greater than or equal to 1.10 has `after_enqueue` support.
+**Update:** Chris Wanstrath pulled in my changes, so any version of resque 1.10 or higher has `after_enqueue` support.
 
 You can use this in a `Gemfile` like so:
 
@@ -68,31 +55,16 @@ Now throw this in your `lib` directory,
 
 <script src="http://gist.github.com/501160.js?file=scaling_job.rb"></script>
 
-You'll need to set some [Heroku config
-variables](http://docs.heroku.com/config-vars) for your application
-name, username (email), and password. You can also of course alter the
-scaling logic to do whatever you need it to do. Mine scales up workers
-after a job is enqueued based on the number of pending jobs, and after a
-job finishes, turns off the workers if there are no more jobs pending.
+You'll need to set some [Heroku config variables](http://docs.heroku.com/config-vars) for your application name, username (email), and password. You can also of course alter the scaling logic to do whatever you need it to do. Mine scales up workers after a job is enqueued based on the number of pending jobs, and after a job finishes, turns off the workers if there are no more jobs pending.
 
-Make sure to set the workers to 1 on your command line just to make sure
-it works, since if you haven't done anything before that requires
-payment, Heroku might require you to confirm, in which case the
-auto-scaling fails.
+Make sure to set the workers to 1 on your command line just to make sure it works, since if you haven't done anything before that requires payment, Heroku might require you to confirm, in which case the auto-scaling fails.
 
-Now, your workers only run when they need to. You don't need to have a
-bunch of workers running for those times the job queue does get a little
-backed up, and you don't even need to keep track of it, because it will
-scale itself without you having to mess with it. Enjoy.
+Now, your workers only run when they need to. You don't need to have a bunch of workers running for those times the job queue does get a little backed up, and you don't even need to keep track of it, because it will scale itself without you having to mess with it. Enjoy.
 
-[^1]: Let's see how many other buzzwords I can cram into this post…
+<p class="footnote" id="fn1"><a href="#fnr1"><sup>1</sup></a> Let's see how many other buzzwords I can cram into this post…</p>
 
-[^2]: Homer pays off the mob to get rid of competition for Marge's
-    pretzel business, and Fat Tony comes back claiming "[his] wife has
-    been quite adamant about the money" in [The Twisted World of Marge
-    Simpson](http://en.wikipedia.org/wiki/The_Twisted_World_of_Marge_Simpson)
+<p class="footnote" id="fn2"><a href="#fnr2"><sup>2</sup></a> Homer pays off the mob to get rid of competition for Marge's pretzel business, and Fat Tony comes back claiming "[his] wife has been quite adamant about the money" in <a href="http://en.wikipedia.org/wiki/The_Twisted_World_of_Marge_Simpson">The Twisted World of Marge Simpson</a></p>
 
-[^3]: By auto-scaling, I mean spin up workers when we have work to do,
-    and shut them down when there are no jobs.
+<p class="footnote" id="fn3"><a href="#fnr3"><sup>3</sup></a> By auto-scaling, I mean spin up workers when we have work to do, and shut them down when there are no jobs.</p>
 
-[^4]: I sent a pull request. If anything changes, I'll update this post.
+<p class="footnote" id="fn4"><a href="#fnr4"><sup>4</sup></a> I sent a pull request. If anything changes, I'll update this post.</p>

@@ -35,7 +35,7 @@ I built one. It only took a couple hours to throw together and clean up. It's su
 
 <script src="https://gist.github.com/4618013.js"></script>
 
-It's not my best code, but whatever it works. The `rescue`/`retry` stuff was a last minute eye roller because I got an SSL error of sorts. Just keep an eye on it if it gets out of hand. It migrates completed lists too, so you have a record of that stuff too.
+It's not my best code, but whatever it works. The `rescue`/`retry` stuff was a last minute eye roller because I got an SSL error of sorts. Just keep an eye on it if it gets out of hand. Completed lists are migrated as well, so you have a record of that stuff too.
 
 It migrated my 800+ todos in my Basecamp Next project to Basecamp Personal in about 24 minutes. Now I can save some bucks in the long run. 
 

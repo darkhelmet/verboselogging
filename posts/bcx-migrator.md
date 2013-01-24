@@ -4,7 +4,7 @@ title: Basecamp Next Todo Migrator
 category: programming
 description: Basecamp Personal came out, and there's no easy way to migrate todos. Until now.
 published: true
-publishedon: 24 Jan 2013 10:00 MDT
+publishedon: 24 Jan 2013 10:00 MST
 slugs: 
 - basecamp-next-todo-migrator
 - bcx-todo-migrator

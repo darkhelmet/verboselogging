@@ -64,7 +64,7 @@ The stabby is new in Ruby 1.9, and is just syntactic sugar for `lambda`. These a
 
 ## What's all this then?
 
-So anyway I wrote some specs, and here they are (or rather their output). If you want to check out the actual specs, or run them for yourself, head on over to "Github":https://github.com/darkhelmet/proc-block.
+So anyway I wrote some specs, and here they are (or rather their output). If you want to check out the actual specs, or run them for yourself, head on over to [Github](https://github.com/darkhelmet/proc-block).
 
 <script src="https://gist.github.com/1224675.js?file=out.txt"></script>
 

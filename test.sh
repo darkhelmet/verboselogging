@@ -2,8 +2,9 @@
 set -e
 export GOPATH=$PWD
 
+IGNORE='verboselogging|gocheck'
 function go_packages() {
-    find . -iname '*.go' -exec dirname {} \; | sort | uniq | grep -v verboselogging
+    find . -iname '*.go' -exec dirname {} \; | sort | uniq | grep -v -E $IGNORE
 }
 
 (

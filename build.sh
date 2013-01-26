@@ -2,4 +2,4 @@
 set -e
 export GOPATH=$PWD
 go get -v verboselogging
-(cd src && go test -v *)
+(cd src && go test -v **)

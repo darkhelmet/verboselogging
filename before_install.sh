@@ -2,4 +2,4 @@
 set -e
 sudo apt-get update -qq
 sudo apt-get install -qq bzr
-go get launchpad.net/gocheck
+GOPATH=$PWD go get launchpad.net/gocheck

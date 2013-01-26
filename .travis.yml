@@ -1,8 +1,17 @@
 language: go
 branches:
-    only:
-        - master
+  only:
+      - master
 before_install:
     - sudo apt-get update -qq
     - sudo apt-get install -qq bzr
     - go get launchpad.net/gocheck
+after_success:
+    - ./deploy.sh
+env:
+  global:
+      - secure: ! 'VPPFUY9rjJIw59fSR5nxvA3SAEvnuxnInZaw7sOqT305re09aJTdVLzRi5/9
+
+          Zeom+nT43mQrUSPrsU1IHJQ4C1ZB2c7rKa8w7+SshN8ycNFPiB3JKvk4OuBb
+
+          2MjkY1hhVJcuWfTGni+94oCk06dbqDOAc6Cmvzd2f2Jk85JKhaI='

@@ -1,4 +1,4 @@
-package main
+package verboselogging
 
 import (
     "config"
@@ -19,7 +19,7 @@ import (
 )
 
 var (
-    logger        = log.New(os.Stdout, "[server] ", config.LogFlags)
+    logger        = log.New(os.Stdout, "[verboselogging] ", config.LogFlags)
     feedburner    = regexp.MustCompile("(?i)feedburner")
     feedburnerUrl = "http://feeds.feedburner.com/VerboseLogging"
     posts         = NewRepo("posts")
@@ -291,13 +291,14 @@ func notFound(req *web.Request) {
     })
 }
 
-func main() {
+func SetupHandler() http.Handler {
     staticOptions := &web.ServeFileOptions{
         Header: web.Header{
             web.HeaderCacheControl:              {"public, max-age=31536000"},
             web.HeaderAccessControllAllowOrigin: {"*"},
         },
     }
+
     router := web.NewRouter().
         Register("/", "GET", rootHandler).
         Register("/opensearch.xml", "GET", opensearchHandler).
@@ -320,11 +321,5 @@ func main() {
     handler = webutil.HerokuHandler{handler, logger}
     handler = webutil.CanonicalHostHandler{handler, config.CanonicalHost, "http"}
     handler = webutil.EnsureRequestBodyClosedHandler{handler}
-
-    http.Handle("/", handler)
-    logger.Printf("verboselogging is starting on 0.0.0.0:%d", config.Port)
-    err := http.ListenAndServe(fmt.Sprintf("0.0.0.0:%d", config.Port), nil)
-    if err != nil {
-        logger.Fatalf("Failed to serve: %s", err)
-    }
+    return handler
 }

@@ -1,1 +1,1 @@
-web: ./bin/verboselogging
+web: ./bin/server

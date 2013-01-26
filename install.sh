@@ -1,3 +1,5 @@
 #!/usr/bin/env bash
 set -e
-GOPATH=$PWD go get -v verboselogging
+export GOPATH=$PWD
+go get -v verboselogging
+go get -v launchpad.net/gocheck

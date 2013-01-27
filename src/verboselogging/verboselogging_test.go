@@ -26,7 +26,9 @@ func (ts *TestSuite) TestTimeZones(c *C) {
     repo := VL.NewRepo("posts")
     posts, _ := repo.FindLatest(repo.Len())
     for _, post := range posts {
-        _, offset := post.PublishedOn.Zone()
-        c.Assert(offset, Not(Equals), 0)
+        name, offset := post.PublishedOn.Zone()
+        if offset == 0 {
+            c.Errorf("got offset 0 in zone %s for %s, expected not 0", name, post.Title)
+        }
     }
 }

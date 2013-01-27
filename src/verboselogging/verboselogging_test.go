@@ -21,3 +21,12 @@ func (ts *TestSuite) TestPagesLoad(c *C) {
     VL.NewRepo("pages")
     c.Succeed()
 }
+
+func (ts *TestSuite) TestTimeZones(c *C) {
+    repo := VL.NewRepo("posts")
+    posts, _ := repo.FindLatest(repo.Len())
+    for _, post := range posts {
+        _, offset := post.PublishedOn.Zone()
+        c.Assert(offset, Not(Equals), 0)
+    }
+}

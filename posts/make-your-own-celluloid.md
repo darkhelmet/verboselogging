@@ -4,7 +4,7 @@ title: Make Your own Celluloid
 category: programming
 description: Want to build an actor module in ruby from scratch? Check this out.
 published: true
-publishedon: 11 Feb 2013 10:00 MDT
+publishedon: 11 Feb 2013 10:00 MST
 slugs: 
     - make-your-own-celluloid
 tags: 

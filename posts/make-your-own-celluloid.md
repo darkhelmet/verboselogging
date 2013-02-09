@@ -1,6 +1,6 @@
 --- 
 author: Daniel Huckstep
-title: Make Your own Celluloid
+title: Make Your Own Celluloid
 category: programming
 description: Want to build an actor module in ruby from scratch? Check this out.
 published: true

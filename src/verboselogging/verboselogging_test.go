@@ -24,7 +24,7 @@ func (ts *TestSuite) TestPagesLoad(c *C) {
 
 func (ts *TestSuite) TestTimeZones(c *C) {
     repo := VL.NewRepo("posts")
-    posts, _ := repo.FindLatest(repo.Len())
+    posts, _ := repo.All()
     for _, post := range posts {
         name, offset := post.PublishedOn.Zone()
         if offset == 0 {

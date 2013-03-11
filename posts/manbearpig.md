@@ -1,8 +1,8 @@
 --- 
 author: Daniel Huckstep
-title: manbearpig: Mutation Testing for Go
+title: "manbearpig: Mutation Testing for Go"
 category: programming
-description: Improve your tests with mutation test and manbearpig
+description: Improve your tests with mutation testing and manbearpig.
 published: true
 publishedon: 11 Mar 2013 10:00 MDT
 slugs: 
@@ -25,7 +25,7 @@ For my book [Go, The Standard Library](http://thestandardlibrary.com/go.html) I 
 
 ## manbearpig
 
-![manbearpig as seen in South Park]({{manbearpig.large}})
+![manbearpig as seen in South Park]({{.manbearpig.large}})
 
 Get start by installing `manbearpig`
 

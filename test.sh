@@ -13,7 +13,9 @@ test-packages() {
 
 (
     cd src
+    echo "Testing packages..."
     go-packages | test-packages
 )
 
+echo "Testing posts..."
 GOPATH=$PWD go test -c verboselogging && ./verboselogging.test

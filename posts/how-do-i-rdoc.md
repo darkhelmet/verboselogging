@@ -1,6 +1,6 @@
 --- 
 author: Daniel Huckstep
-title: How Do I RDoc? Documentating Ruby
+title: How Do I RDoc? Documenting Ruby
 category: programming
 description: How you can improve the Ruby Standard Library documentation.
 published: true

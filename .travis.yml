@@ -1,14 +1,16 @@
+---
 language: go
 branches:
   only:
-      - master
+  - master
 before_install: ./before_install.sh
 install: ./install.sh
 script: ./test.sh
 after_success: ./deploy.sh
 env:
   global:
-        - TZ: Canada/Mountain
-        - secure: ! 'VPPFUY9rjJIw59fSR5nxvA3SAEvnuxnInZaw7sOqT305re09aJTdVLzRi5/9
-            Zeom+nT43mQrUSPrsU1IHJQ4C1ZB2c7rKa8w7+SshN8ycNFPiB3JKvk4OuBb
-            2MjkY1hhVJcuWfTGni+94oCk06dbqDOAc6Cmvzd2f2Jk85JKhaI='
+  - TZ: Canada/Mountain
+  - secure: |-
+      LriZinLZcRTSwyK2WUNFuy/gjDwNGcmJ+c3mKHxCVUostXkiGQCUd5/9Taug
+      2/U35TnnHpBUXLSpVZ9qgS4IFTqr/+wV9O2JSrar08tok6+5Kk2nOw5G+kJw
+      fGq6wueB99PmiAhJ+FzHrDJwl+MEwccfDxDKpGINyU4ST8qqP50=

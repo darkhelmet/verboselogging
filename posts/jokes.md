@@ -12,6 +12,8 @@ tags:
 - humor
 - jokes
 ---
+There are a bunch of programming related jokes on the internets, these are some that I know of/found.
+
 ## Networking
 
 I could tell you a UDP joke, but you probably wouldn't get it...
@@ -35,3 +37,7 @@ A SQL query walks into a bar, approaches two tables and says "mind if I join you
 The two hardest problems in software are cache invalidation, naming things, and off by 1 errors.
 
 Knock Knock! Who's there? _a very long pause_ ...Java.
+
+## Your turn!
+
+Do you know some good programmer jokes? Share them!

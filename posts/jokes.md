@@ -29,3 +29,9 @@ These machine learning jokes write themselves...eventually.
 ## Databases
 
 A SQL query walks into a bar, approaches two tables and says "mind if I join you?"
+
+## Programming
+
+The two hardest problems in software are cache invalidation, naming things, and off by 1 errors.
+
+Knock Knock! Who's there? _a very long pause_ ...Java.
